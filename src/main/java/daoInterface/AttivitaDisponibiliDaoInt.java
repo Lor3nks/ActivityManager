@@ -9,5 +9,5 @@ public interface AttivitaDisponibiliDaoInt {
 	public void modifica(AttivitaDisponibili ad);
 	public void getAttivitaDisponibiliById(AttivitaDisponibili ad, String  id_disp);
 	public List<AttivitaDisponibili> getAllAttivitaDisponibili(AttivitaDisponibili ad);
-	public void modificaAbilitazione(AttivitaDisponibili ad);
+	public void modificaAbilitazione();
 }
