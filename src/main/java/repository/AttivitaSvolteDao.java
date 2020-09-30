@@ -32,7 +32,7 @@ public class AttivitaSvolteDao implements AttivitaSvolteDaoInt{
 
 	@Override
 	public int modifica(AttivitaSvolte as) {
-		String sql="update attivita_svolte set username?,id_disp=?,data_attivita=?,ora_inizio=?,ora_fine=?,note=?, where id_Trigg=?";
+		String sql="update attivita_svolte set username = ?,id_disp=?,data_attivita=?,ora_inizio=?,ora_fine=?,note=?, where id_Trigg=?";
 		 return jdbcTemplate.update(sql,new Object[] {as.getUsername(),as.getId_Disp(), as.getData_Attivita(), as.getOra_Inizio(),as.getOra_Fine() ,as.getNote(),as.getId_Trigg()});
 		
 	}
