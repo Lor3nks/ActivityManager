@@ -1,4 +1,4 @@
-package daoInterface;
+package repository;
 
 import domain.Amministratore;
 
