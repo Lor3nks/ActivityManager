@@ -1,5 +1,107 @@
 package domain;
 
-public class Impiegato {
+import java.io.Serializable;
+
+public class Impiegato implements Serializable {
+	
+	private static final long serialVersionUID = 7611569892498705160L;
+	private String username;
+	private String password;
+	private String email;
+	private String nome;
+	private String cognome;
+	private int dataNascita;
+	private boolean abilitazione;
+
+	public Impiegato() {
+		super();
+	}
+	
+	
+
+	public Impiegato(String password, String email, String nome, String cognome, int dataNascita,
+			boolean abilitazione) {
+		super();
+		this.password = password;
+		this.email = email;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.dataNascita = dataNascita;
+		this.abilitazione = abilitazione;
+	}
+
+
+
+	public Impiegato(String username, String password, String email, String nome, String cognome, int dataNascita,
+			boolean abilitazione) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.dataNascita = dataNascita;
+		this.abilitazione = abilitazione;
+	}
+
+
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCognome() {
+		return cognome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+	public int getDataNascita() {
+		return dataNascita;
+	}
+
+	public void setDataNascita(int dataNascita) {
+		this.dataNascita = dataNascita;
+	}
+
+	public boolean isAbilitazione() {
+		return abilitazione;
+	}
+
+	public void setAbilitazione(boolean abilitazione) {
+		this.abilitazione = abilitazione;
+	}
+	
+	
 
 }
