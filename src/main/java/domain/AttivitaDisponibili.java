@@ -4,7 +4,6 @@ public class AttivitaDisponibili {
 
 	private String id_Disp;
 	private String descrizione;
-	private boolean abilitazione;
 	
 
 	public AttivitaDisponibili() {
@@ -16,11 +15,10 @@ public class AttivitaDisponibili {
 		this.descrizione = descrizione;
 	}
 
-	public AttivitaDisponibili(String id_Disp, String descrizione, boolean abilitazione) {
+	public AttivitaDisponibili(String id_Disp, String descrizione) {
 		super();
 		this.id_Disp = id_Disp;
 		this.descrizione = descrizione;
-		this.abilitazione = abilitazione;
 	}
 
 	public String getid_Disp() {
@@ -39,13 +37,4 @@ public class AttivitaDisponibili {
 		this.descrizione = descrizione;
 	}
 
-	public boolean getAbilitazione() {
-		return abilitazione;
-	}
-
-	public void setAbilitazione(boolean abilitazione) {
-		this.abilitazione = abilitazione;
-	}
-	
-	
 }
