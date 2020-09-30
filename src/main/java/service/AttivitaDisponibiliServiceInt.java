@@ -4,7 +4,7 @@ import java.util.List;
 
 import domain.AttivitaDisponibili;
 
-public interface AttivitaDisponibiliServieInt {
+public interface AttivitaDisponibiliServiceInt {
 	public int salvaAttivitaDisponibili(AttivitaDisponibili ad);
 	public int modificaAttivitaDisponibili(AttivitaDisponibili ad);
 	public int modificaAbilitazioneAttivitaDisponibili(AttivitaDisponibili ad);
