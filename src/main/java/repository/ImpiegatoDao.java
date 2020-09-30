@@ -68,5 +68,6 @@ public class ImpiegatoDao implements ImpiegatoDaoInt {
 		String sql = "SELECT * FROM IMPIEGATO WHERE USERNAME=? AND PASSWORD=? ";
 		return jdbcTemplate.queryForObject(sql, new Object[] {username, password}, new BeanPropertyRowMapper<Impiegato>(Impiegato.class));
 	}
+	
 
 }
