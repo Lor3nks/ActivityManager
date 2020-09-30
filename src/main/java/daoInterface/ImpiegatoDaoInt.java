@@ -1,15 +1,17 @@
 package daoInterface;
 
-import java.sql.Connection;
-
 import domain.Impiegato;
 
 public interface ImpiegatoDaoInt {
 	
-	public int cancella (Connection con, Impiegato i);
-	public int inserisci (Connection con, Impiegato i);
-	public int modifica (Connection con, Impiegato i);
-	public int cambiaPwd (Connection con, Impiegato i);
+	public int inserisci (Impiegato i);
+	public int modifica (Impiegato i);
+	public int cambiaPwd (String username, String newPassword);
+	public int checkAbilitazione (Impiegato i);
+	public int getAllImpigati ();
+	public int getAllImpByUser (String username);
+	public int modificaAbilitazione(String username, boolean abilitazione);
+	public int checkLogin (String username, String password);
 	
 
 }
