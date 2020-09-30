@@ -10,7 +10,7 @@ import repository.ImpiegatoDao;
 
 
 @Service
-public class ImpegatoService implements ImpiegatoServiceInt{
+public class ImpiegatoService implements ImpiegatoServiceInt{
 	
 	@Autowired
 	ImpiegatoDao impiegatoDao;
