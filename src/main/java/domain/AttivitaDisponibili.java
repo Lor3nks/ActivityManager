@@ -4,6 +4,7 @@ public class AttivitaDisponibili {
 
 	private String id_Disp;
 	private String descrizione;
+	String ciao;
 
 	public AttivitaDisponibili() {
 
