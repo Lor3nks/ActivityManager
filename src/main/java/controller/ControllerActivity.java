@@ -5,11 +5,22 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import service.AmministratoreServiceInt;
+import service.AttivitaDisponibiliServiceInt;
+import service.AttivitaSvolteServiceInt;
+import service.ImpiegatoServiceInt;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class ControllerActivity {
 
-	//@Autowired
 	//dependency injection dei Services
-	//...ServiceInterface ...ServiceInterface
+	@Autowired
+	ImpiegatoServiceInt impiegatoServiceInt;
+	AttivitaSvolteServiceInt attivitaSvolteServiceInt;
+	AttivitaDisponibiliServiceInt attivitaDisponibiliServiceInt;
+	AmministratoreServiceInt amministratoreServiceInt;
+	
 	
 	private static final Log logger = LogFactory.getLog(ControllerActivity.class);
 	
@@ -20,5 +31,4 @@ public class ControllerActivity {
 	        return "";
 	    }
 
-	 
 }
