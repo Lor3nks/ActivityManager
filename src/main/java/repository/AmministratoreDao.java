@@ -9,7 +9,7 @@ import domain.Amministratore;
 
 
 @Repository
-public class AmministratoreDaoImplements implements AmministratoreDaoInt{
+public class AmministratoreDao implements AmministratoreDaoInt{
 	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired

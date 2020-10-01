@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import domain.Amministratore;
-import repository.AmministratoreDaoImplements;
+import repository.AmministratoreDao;
 import repository.ImpiegatoDao;
 
 @Service
@@ -13,7 +13,7 @@ public class AmministratoreService implements AmministratoreServiceInt{
 	ImpiegatoDao iDao = new ImpiegatoDao();
 	
 	@Autowired
-	AmministratoreDaoImplements AmministratoreDaoImplements;
+	AmministratoreDao AmministratoreDaoImplements;
 	
 	@Override
 	public Amministratore checkLoginAmministratore(String username, String password) {

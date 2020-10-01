@@ -11,7 +11,9 @@ import service.AttivitaSvolteServiceInt;
 import service.ImpiegatoServiceInt;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class ControllerActivity {
 
 	//dependency injection dei Services
