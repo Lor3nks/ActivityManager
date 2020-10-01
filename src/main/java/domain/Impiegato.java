@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Impiegato implements Serializable {
 	
@@ -10,7 +11,7 @@ public class Impiegato implements Serializable {
 	private String email;
 	private String nome;
 	private String cognome;
-	private int dataNascita;
+	private LocalDate dataNascita;
 	private boolean abilitazione;
 
 	public Impiegato() {
@@ -19,7 +20,7 @@ public class Impiegato implements Serializable {
 	
 	
 
-	public Impiegato(String password, String email, String nome, String cognome, int dataNascita,
+	public Impiegato(String password, String email, String nome, String cognome, LocalDate dataNascita,
 			boolean abilitazione) {
 		super();
 		this.password = password;
@@ -32,7 +33,7 @@ public class Impiegato implements Serializable {
 
 
 
-	public Impiegato(String username, String password, String email, String nome, String cognome, int dataNascita,
+	public Impiegato(String username, String password, String email, String nome, String cognome, LocalDate dataNascita,
 			boolean abilitazione) {
 		super();
 		this.username = username;
@@ -43,7 +44,6 @@ public class Impiegato implements Serializable {
 		this.dataNascita = dataNascita;
 		this.abilitazione = abilitazione;
 	}
-
 
 
 	public String getUsername() {
@@ -86,11 +86,11 @@ public class Impiegato implements Serializable {
 		this.cognome = cognome;
 	}
 
-	public int getDataNascita() {
+	public LocalDate getDataNascita() {
 		return dataNascita;
 	}
 
-	public void setDataNascita(int dataNascita) {
+	public void setDataNascita(LocalDate dataNascita) {
 		this.dataNascita = dataNascita;
 	}
 

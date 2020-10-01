@@ -9,10 +9,12 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import domain.AttivitaSvolte;
 import domain.Impiegato;
 
+@Repository
 public class AttivitaSvolteDao implements AttivitaSvolteDaoInt{
 
 	private JdbcTemplate jdbcTemplate;

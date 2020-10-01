@@ -12,6 +12,9 @@
 
 	<context:component-scan base-package="controller" />
     <context:component-scan base-package="formatter" />
+    <context:component-scan base-package="repository" />
+    <context:component-scan base-package="service" />
+    
 
 	<mvc:annotation-driven conversion-service="conversionService" />
 

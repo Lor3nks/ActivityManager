@@ -1,5 +1,6 @@
 package repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -7,9 +8,11 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import domain.Impiegato;
 
+@Repository
 public class ImpiegatoDao implements ImpiegatoDaoInt {
 	
 	private JdbcTemplate jdbcTemplate;
@@ -21,14 +24,14 @@ public class ImpiegatoDao implements ImpiegatoDaoInt {
 	
 	@Override
 	public int inserisci(Impiegato i) {
-		String sql = "INSERT INTO IMPIEGATO VALUES(?,?,?,?,?,?,?)";
-		return jdbcTemplate.update(sql, new Object[] {i.getUsername(), i.getPassword(), i.getEmail(), i.getNome(), i.getCognome(), i.getDataNascita(), i.isAbilitazione()});
+		String sql = "insert into impiegato(username,password,email,nome,cognome,data_nascita,abilitazione) values(?,?,?,?,?,?,?)";
+		return jdbcTemplate.update(sql, new Object[] {i.getUsername(), i.getPassword(), i.getEmail(), i.getNome(), i.getCognome(), Date.valueOf(i.getDataNascita()), i.isAbilitazione()});
 	}
 
 	@Override
 	public int modifica(Impiegato i) {
 		String sql = "UPDATE IMPIEGATO SET(PASSWORD=?, EMAIL=?, NOME=?, COGNOME=?, DATA_NASCITA=?, ABILITAZIONE=?) WHERE USERNAME=?";
-		return jdbcTemplate.update(sql, new Object[] {i.getPassword(), i.getEmail(), i.getNome(), i.getCognome(), i.getDataNascita(), i.isAbilitazione()});
+		return jdbcTemplate.update(sql, new Object[] {i.getPassword(), i.getEmail(), i.getNome(), i.getCognome(), Date.valueOf(i.getDataNascita()), i.isAbilitazione()});
 	}
 
 	@Override
