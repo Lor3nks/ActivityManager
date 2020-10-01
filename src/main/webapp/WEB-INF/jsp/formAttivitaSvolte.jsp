@@ -13,6 +13,7 @@
 
 <form:form modelAttribute="attivitaSvolte" action="salvaAttivitaS"  method="post">
 <fieldset>
+
 	<p>
 	    <label for="data_Attivita">Data attività: </label>
 	    <form:input type="text" id="data_Attivita" path="data_Attivita" autocomplete="off"/>
