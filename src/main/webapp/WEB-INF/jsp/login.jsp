@@ -22,7 +22,10 @@
 			</p>
 			<p>
 				<button type="submit" value="Login">Login</button>
+			
 		</fieldset>
 	</form:form>
+	
+	<button href=" " type="submit">Password dimenticata</button>
 </body>
 </html>
