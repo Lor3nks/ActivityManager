@@ -22,7 +22,7 @@ public class Impiegato implements Serializable {
 	}
 	
 	
-
+ 
 	public Impiegato(String password, String email, String nome, String cognome, LocalDate dataNascita,
 			boolean abilitazione, String ruolo,List<AttivitaDisponibili> attDisp) {
 		super();
