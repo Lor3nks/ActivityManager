@@ -190,7 +190,7 @@ public class ControllerActivity {
 		return "visualizzaAttivitaSvolte";
 	}
 	
-	
+ 	
 	@RequestMapping(value="/logout")
 	public String logout( HttpServletRequest request, HttpSession session) {
 		logger.info("-> logout chiamata");
