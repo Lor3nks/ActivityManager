@@ -14,26 +14,26 @@
 			<div class="col">
 			<h3>${errore}</h3>
 				<form:form modelAttribute="impiegato" action="registrazione" method="post">
-					<form:label path="username">Username</form:label>
-					<form:input path="username" type="text"/>
+					<p><form:label path="username">Username</form:label>
+					<form:input path="username" type="text"/></p>
 					
-					<form:label path="password">Password</form:label>
-					<form:input path="password" type="password"/>
+					<p><form:label path="password">Password</form:label>
+					<form:input path="password" type="password"/></p>
 					
-					<label>Conferma password</label>
-					<input type="password" name="confermaPassword">
+					<p><label>Conferma password</label>
+					<input type="password" name="confermaPassword"></p>
 					
-					<form:label path="email">Email</form:label>
-					<form:input path="email" type="text"/>
+					<p><form:label path="email">Email</form:label>
+					<form:input path="email" type="text"/></p>
 					
-					<form:label path="nome">Nome</form:label>
-					<form:input path="nome" type="text"/>
+					<p><form:label path="nome">Nome</form:label>
+					<form:input path="nome" type="text"/></p>
 					
-					<form:label path="cognome">Cognome</form:label>
-					<form:input path="cognome" type="text"/>
+					<p><form:label path="cognome">Cognome</form:label>
+					<form:input path="cognome" type="text"/></p>
 					
-					<form:label path="dataNascita">Data di nascita</form:label>
-					<form:input path="dataNascita" type="text" placeholder="GG/MM/AAAA"/>
+					<p><form:label path="dataNascita">Data di nascita</form:label>
+					<form:input path="dataNascita" type="text" placeholder="GG/MM/AAAA"/></p>
 					 <p class="error"><form:errors path="dataNascita" /></p>
 					
 					<form:hidden path="abilitazione" value="true"/>

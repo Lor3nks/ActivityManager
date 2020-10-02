@@ -21,7 +21,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInt {
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	
+	 
 	@Override
 	public int inserisci(Impiegato i) {
 		String sql = "INSERT INTO IMPIEGATO VALUES(?,?,?,?,?,?,?,?)";

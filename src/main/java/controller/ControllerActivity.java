@@ -81,7 +81,7 @@ public class ControllerActivity {
 			model.addAttribute("errore", errore);
 			return "formRegistrazione";
 		} else {
-			try {
+			try { 
 				impiegatoServiceInt.inserisciImpiegato(impiegato);
 			} catch (Exception e) {
 				String errore = "Non è stato possibile aggiungere il tuo acccount.";
