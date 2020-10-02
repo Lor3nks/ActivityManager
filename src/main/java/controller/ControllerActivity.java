@@ -127,4 +127,20 @@ public class ControllerActivity {
 		return "index";
 	}
 
+	@RequestMapping(value ="/visualizzaAttivitaSvolte")
+	public String visuailzzaAttivitaSvolte(Model model,
+			HttpServletRequest request) {
+		logger.info("-> visualizzaAttivitaSvolte chiamata");
+
+		return "visualizzaAttivitaSvolte";
+	}
+	
+	
+	@RequestMapping(value="/logout")
+	public String logout( HttpServletRequest request, HttpSession session) {
+		logger.info("-> logout chiamata");
+		session.invalidate();
+		return "logout";
+	} 	
+	
 }

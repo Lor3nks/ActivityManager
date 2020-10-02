@@ -5,10 +5,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Attività svolte</title>
 </head>
 <body>
 <%-- <p>${attivitaSvolte.data_Attivita}</p> --%>
+<p>Attività svolte</p>
 <p>${attivitaSvolte.ora_Inizio}</p>
 </body>
 </html>

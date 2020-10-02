@@ -31,14 +31,14 @@
 	
 	<p>
 		<label for="">Attività disponibili: </label>
-		<form:select path="id_Disp" id="id_Disp">
+		<form:select path="att_Disp" id="att_Disp">
 		  <form:option value="">Scegli...</form:option>
 		  <form:option value="PRG">Sviluppo</form:option>
 		  <form:option value="TST">Test</form:option>
 		  <form:option value="PRO">Progettazione</form:option>
 		  <form:option value="DOC">Documentazione</form:option>
 		</form:select>
-		<p class="error"><form:errors path="id_Disp" /></p>
+		<p class="error"><form:errors path="att_Disp" /></p>
 	</p>
 
 	<p>
