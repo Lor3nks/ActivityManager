@@ -2,6 +2,7 @@ package domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Impiegato implements Serializable {
 	
@@ -14,6 +15,7 @@ public class Impiegato implements Serializable {
 	private LocalDate dataNascita;
 	private boolean abilitazione;
 	private String ruolo;
+	private List<AttivitaDisponibili> attDisp;
 
 	public Impiegato() {
 		super();
@@ -22,7 +24,7 @@ public class Impiegato implements Serializable {
 	
 
 	public Impiegato(String password, String email, String nome, String cognome, LocalDate dataNascita,
-			boolean abilitazione, String ruolo) {
+			boolean abilitazione, String ruolo,List<AttivitaDisponibili> attDisp) {
 		super();
 		this.password = password;
 		this.email = email;
@@ -30,13 +32,14 @@ public class Impiegato implements Serializable {
 		this.cognome = cognome;
 		this.dataNascita = dataNascita;
 		this.abilitazione = abilitazione;
-		this.ruolo = ruolo; 
+		this.ruolo = ruolo;
+		this.attDisp=attDisp;
 	}
 
 
 
 	public Impiegato(String username, String password, String email, String nome, String cognome, LocalDate dataNascita,
-			boolean abilitazione, String ruolo) {
+			boolean abilitazione, String ruolo,List<AttivitaDisponibili> attDisp) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -46,6 +49,7 @@ public class Impiegato implements Serializable {
 		this.dataNascita = dataNascita;
 		this.abilitazione = abilitazione;
 		this.ruolo = ruolo;
+		this.attDisp=attDisp;
 	}
 
 
@@ -113,8 +117,12 @@ public class Impiegato implements Serializable {
 		this.ruolo = ruolo;
 	}
 	
-	
-	
-	
+	public List<AttivitaDisponibili> getAttDisp() {
+		return attDisp;
+	}
+
+	public void setAttDisp(List<AttivitaDisponibili> attDisp) {
+		this.attDisp = attDisp;
+	}
 
 }
