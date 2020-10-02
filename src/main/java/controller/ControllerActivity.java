@@ -33,7 +33,7 @@ public class ControllerActivity {
 
 	private static final Log logger = LogFactory.getLog(ControllerActivity.class);
 
-	@RequestMapping(value = { "/", "/formAttivitaSvolte" })
+	@RequestMapping(value = "/formAttivitaSvolte")
 	public String login(Model model) {
 		logger.info("-> formAttivitaSvolte chiamata");
 		model.addAttribute(new AttivitaSvolte());
