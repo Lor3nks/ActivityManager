@@ -9,23 +9,21 @@
 <title>Login</title>
 </head>
 <body>
-	<form:form  action="registrati"  method="post">
-		<fieldset>
-			<legend>Login</legend>
+	<form  action="login"  method="post">
+			
 			<p>
 				<label for="username">Username:</label>	
-				<form:input type="text"  path="username" autocomplete="off"/>
+				<input name="username" type="text"/>
 			</p>
 			<p>
 				<label for="password">Password:</label>	
-				<form:input type="text" path="password" autocomplete="off"/>
+				<input type="password" name="password"/>
 			</p>
 			<p>
-				<button type="submit" value="Login">Login</button>
-			
-		</fieldset>
-	</form:form>
+				<button type="submit">Login</button>
+	</form>
 	
-	<button href=" " type="submit">Password dimenticata</button>
+	<p><a href=" " type="submit">Password dimenticata</a></p>
+	<p>Se non sei ancora registrato<a href="formRegistrazione">registrati</a></p>
 </body>
 </html>
