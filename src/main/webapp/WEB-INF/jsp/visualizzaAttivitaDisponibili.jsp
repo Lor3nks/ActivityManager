@@ -27,6 +27,7 @@
           <th>${attivitaDisponibili.abilitazione}</th>
           <th><a href="">Modifica</a></th>
           <th><a href="">Cancella</a></th>
+          
         </tr>
      	
         
