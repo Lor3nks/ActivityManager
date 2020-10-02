@@ -21,6 +21,7 @@
 			</p>
 			<p>
 				<button type="submit">Login</button>
+			</p>
 	</form>
 	
 	<p><a href=" " type="submit">Password dimenticata</a></p>

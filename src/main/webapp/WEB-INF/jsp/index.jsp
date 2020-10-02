@@ -8,5 +8,6 @@
 </head>
 <body>
 <h1>Benvenuto</h1>
+<a href="login">Torna al login</a>
 </body>
 </html>
