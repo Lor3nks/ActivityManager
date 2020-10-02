@@ -1,6 +1,7 @@
 package controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
@@ -42,7 +43,7 @@ public class ControllerActivity {
 	}
 
 	@RequestMapping(value="/login")
-	public String login(Model model, HttpServletRequest request) {
+	public String login(Model model, HttpServletRequest request, HttpSession session) {
 		logger.info("-> login chiamata");
 		Impiegato i = new Impiegato();
 		String username = request.getParameter("username");
@@ -51,11 +52,13 @@ public class ControllerActivity {
 		if (i != null) {
 			if (i.getRuolo().equals("impiegato")) {
 				model.addAttribute("impiegato", i);
-				return "index";
+				session.setAttribute("impiegato", i);
+				return "menuImpiegato";
 			} else {
 				Amministratore a = new Amministratore();
+				session.setAttribute("aministratore", a);
 				model.addAttribute("amministratore", a);
-				return "index";
+				return "menuAmministratore";
 			}
 		} else {
 			String errore = "Utente non registrato.";

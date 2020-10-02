@@ -24,6 +24,6 @@
 	</form>
 	
 	<p><a href=" " type="submit">Password dimenticata</a></p>
-	<p>Se non sei ancora registrato<a href="formRegistrazione">registrati</a></p>
+	<p>Se non hai un account, <a href="formRegistrazione">registrati</a></p>
 </body>
 </html>

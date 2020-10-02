@@ -42,6 +42,9 @@
 					<button type="submit">Registrati</button>
 				</form:form>
 			</div>
+		</div>
+		<div class="row">
+			<p>Se sei già registrato, effettua il <a href="inputLogin">login</a></p>
 		</div>	
 	</div>
 </body>
