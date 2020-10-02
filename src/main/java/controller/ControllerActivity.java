@@ -11,6 +11,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import domain.Amministratore;
 import domain.AttivitaSvolte;
 import domain.Impiegato;
 import service.AmministratoreServiceInt;
@@ -33,6 +34,38 @@ public class ControllerActivity {
 
 	private static final Log logger = LogFactory.getLog(ControllerActivity.class);
 
+	
+	@RequestMapping(value= {"/", "/inputLogin"})
+	public String inputLogin() {
+		logger.info("-> inputLogin chiamata");
+		return "login";
+	}
+
+	@RequestMapping(value="/login")
+	public String login(Model model, HttpServletRequest request) {
+		logger.info("-> login chiamata");
+		Impiegato i = new Impiegato();
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		i = impiegatoServiceInt.checkLoginImpiegato(username, password);
+		if (i != null) {
+			if (i.getRuolo().equals("impiegato")) {
+				model.addAttribute("impiegato", i);
+				return "index";
+			} else {
+				Amministratore a = new Amministratore();
+				model.addAttribute("amministratore", a);
+				return "index";
+			}
+		} else {
+			String errore = "Utente non registrato.";
+			model.addAttribute("errore", errore);
+			model.addAttribute(new Impiegato());
+			return "formRegistrazione";
+		}
+	}
+	
+	
 	@RequestMapping(value = "/formAttivitaSvolte")
 	public String login(Model model) {
 		logger.info("-> formAttivitaSvolte chiamata");
