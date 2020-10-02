@@ -86,7 +86,6 @@ public class ControllerActivity {
 			return "formAttivitaSvolte";
 		} else {
 				try {
-					attivitaSvolte.setUsername("Usr01");
 					attivitaSvolteServiceInt.salvaAttivitaSvolte(attivitaSvolte);
 				} catch (Exception e) {
 					String errore = "Non è stato possibile aggiungere la tua attività";
