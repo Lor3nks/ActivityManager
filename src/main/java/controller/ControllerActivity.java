@@ -41,7 +41,7 @@ public class ControllerActivity {
 		logger.info("-> inputLogin chiamata");
 		return "login";
 	}
-
+ 
 	@RequestMapping(value="/login")
 	public String login(Model model, HttpServletRequest request, HttpSession session) {
 		logger.info("-> login chiamata");
