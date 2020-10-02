@@ -1,5 +1,7 @@
 package controller;
 
+import java.security.SecureRandom;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -22,6 +24,11 @@ import service.ImpiegatoServiceInt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import javax.mail.internet.MimeMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
  
 @Controller
 public class ControllerActivity {
@@ -32,8 +39,14 @@ public class ControllerActivity {
 	AttivitaSvolteServiceInt attivitaSvolteServiceInt;
 	AttivitaDisponibiliServiceInt attivitaDisponibiliServiceInt;
 	AmministratoreServiceInt amministratoreServiceInt;
+	
+	@Autowired
+	private JavaMailSender mailSenderObj;
 
 	private static final Log logger = LogFactory.getLog(ControllerActivity.class);
+	
+	private static String recipientMail;
+	private static final String senderMail = "activitytraker@yahoo.com";
 
 	
 	@RequestMapping(value= {"/", "/inputLogin"})
@@ -125,6 +138,48 @@ public class ControllerActivity {
 			}
 		}
 		return "index";
+	}
+	
+	@RequestMapping(value= "/visualizzaListaImpiegati")
+	public String visualizzaListaImpiegati() {
+		logger.info("-> visListaImpiegati chiamata");
+		return "visualizzaListaImpiegati";
+	}
+	
+	@RequestMapping(value = "/sendEmail")
+	public String sendEmail(@ModelAttribute Impiegato impiegato, Model model,
+			HttpServletRequest request) {
+		logger.info("-> sendEmail chiamata");
+
+		
+		String alph = new String("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+		int n = alph.length();
+
+		String newPassword = new String(); 
+		SecureRandom r = new SecureRandom();
+
+		for (int i=0; i<10; i++) {
+		    newPassword = newPassword + alph.charAt(r.nextInt(n));
+		}
+		
+		final String mailMessage = "La tua nuova password è "+newPassword;
+		
+		
+		recipientMail = request.getParameter("mailTo");
+		
+		mailSenderObj.send(new MimeMessagePreparator() {
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+
+				MimeMessageHelper mimeMsgHelperObj = new MimeMessageHelper(mimeMessage, true, "UTF-8");				
+				mimeMsgHelperObj.setTo(recipientMail);
+				mimeMsgHelperObj.setFrom(senderMail);				
+				mimeMsgHelperObj.setText(mailMessage);
+				mimeMsgHelperObj.setSubject("Reset Password");
+
+			}
+		});
+		
+		return "menuAmministratore";
 	}
 
 }
