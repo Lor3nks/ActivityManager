@@ -38,7 +38,7 @@
                 <bean class="formatter.LocalDateFormatter">
                     <constructor-arg type="java.lang.String" value="dd/MM/yyyy" />
                 </bean>
-               <bean class="formatter.LocalDateTimeFormatter">
+               <bean class="formatter.LocalTimeFormatter">
                 	<constructor-arg type="java.lang.String" value="HH:mm" />
                 </bean>
             </set>

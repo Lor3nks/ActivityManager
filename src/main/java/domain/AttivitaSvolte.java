@@ -2,7 +2,7 @@ package domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class AttivitaSvolte implements Serializable {
 
@@ -11,8 +11,8 @@ public class AttivitaSvolte implements Serializable {
 	private Impiegato imp;
 	private AttivitaDisponibili att_Disp;
 	private LocalDate data_Attivita;
-	private LocalDateTime ora_Inizio;
-	private LocalDateTime ora_Fine;
+	private LocalTime ora_Inizio;
+	private LocalTime ora_Fine;
 	private String note;
 	
 	public AttivitaSvolte() {
@@ -21,7 +21,7 @@ public class AttivitaSvolte implements Serializable {
 	}
 
 	public AttivitaSvolte(int id_Trigg, Impiegato imp, AttivitaDisponibili att_Disp, LocalDate data_Attivita,
-			LocalDateTime ora_Inizio, LocalDateTime ora_Fine, String note) {
+			LocalTime ora_Inizio, LocalTime ora_Fine, String note) {
 		super();
 		this.id_Trigg = id_Trigg;
 		this.imp = imp;
@@ -33,7 +33,7 @@ public class AttivitaSvolte implements Serializable {
 	}
 
 	public AttivitaSvolte(Impiegato imp, AttivitaDisponibili att_Disp, LocalDate data_Attivita,
-			LocalDateTime ora_Inizio, LocalDateTime ora_Fine, String note) {
+			LocalTime ora_Inizio, LocalTime ora_Fine, String note) {
 		super();
 		this.imp = imp;
 		this.att_Disp = att_Disp;
@@ -75,19 +75,19 @@ public class AttivitaSvolte implements Serializable {
 		this.data_Attivita = data_Attivita;
 	}
 
-	public LocalDateTime getOra_Inizio() {
+	public LocalTime getOra_Inizio() {
 		return ora_Inizio;
 	}
 
-	public void setOra_Inizio(LocalDateTime ora_Inizio) {
+	public void setOra_Inizio(LocalTime ora_Inizio) {
 		this.ora_Inizio = ora_Inizio;
 	}
 
-	public LocalDateTime getOra_Fine() {
+	public LocalTime getOra_Fine() {
 		return ora_Fine;
 	}
 
-	public void setOra_Fine(LocalDateTime ora_Fine) {
+	public void setOra_Fine(LocalTime ora_Fine) {
 		this.ora_Fine = ora_Fine;
 	}
 

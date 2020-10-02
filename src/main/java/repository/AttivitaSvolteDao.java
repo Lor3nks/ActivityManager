@@ -2,6 +2,8 @@ package repository;
 
 
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -26,8 +28,8 @@ public class AttivitaSvolteDao implements AttivitaSvolteDaoInt{
 	
 	@Override
 	public int salva(AttivitaSvolte as) {
-		String sql="insert into attivita_svolte(username,id_disp,data_Attivita,ora_inizio,ora_fine,note) values(?,?,?,?,?,?)";
-		return jdbcTemplate.update(sql,new Object[] { as.getImp().getUsername(),as.getAtt_Disp().getid_Disp(),as.getData_Attivita(), as.getOra_Inizio(),as.getOra_Fine(),as.getNote()});
+		String sql="insert into attivita_svolte values(?,?,?,?,?,?)";
+		return jdbcTemplate.update(sql,new Object[] { as.getImp().getUsername(),as.getAtt_Disp().getid_Disp(),Date.valueOf(as.getData_Attivita()), Time.valueOf(as.getOra_Inizio()), Time.valueOf(as.getOra_Fine()),as.getNote()});
 		
 	}
 	
@@ -35,7 +37,7 @@ public class AttivitaSvolteDao implements AttivitaSvolteDaoInt{
 	@Override
 	public int modifica(AttivitaSvolte as) {
 		String sql="update attivita_svolte set username = ?,id_disp=?,data_attivita=?,ora_inizio=?,ora_fine=?,note=?, where id_Trigg=?";
-		 return jdbcTemplate.update(sql,new Object[] {as.getImp().getUsername(),as.getAtt_Disp().getid_Disp(), as.getData_Attivita(), as.getOra_Inizio(),as.getOra_Fine() ,as.getNote(),as.getId_Trigg()});
+		 return jdbcTemplate.update(sql,new Object[] {as.getImp().getUsername(),as.getAtt_Disp().getid_Disp(), Date.valueOf(as.getData_Attivita()), Time.valueOf(as.getOra_Inizio()), Time.valueOf(as.getOra_Fine()) ,as.getNote(),as.getId_Trigg()});
 		
 	}
 
