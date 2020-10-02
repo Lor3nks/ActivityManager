@@ -10,7 +10,7 @@
 <title>Attività svolte</title>
 </head>
 <body>
-
+ 
 <form:form modelAttribute="attivitaSvolte" action="salvaAttivitaSvolte"  method="post">
 
 	<p>
