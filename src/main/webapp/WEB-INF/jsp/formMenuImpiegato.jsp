@@ -12,10 +12,10 @@
     <h1>MENU ATTIVITA</h1>
  	<form:form action="visualizzaMenu" method="post">
  	<ul>
- 	<li><a href=""></a>Visualizza Attività</a></li>
- 	<li><a href=""></a>Gestione Attività Svolte</a></li>
- 	<li><a href=""></a>Modifica Password</a></li>
- 	<li><a href=""></a>Logout</a></li>
+ 	<ol><a href=""></a>Visualizza Attività</a></ol>
+ 	<ol><a href=""></a>Gestione Attività Svolte</a></ol>
+ 	<ol><a href=""></a>Modifica Password</a></ol>
+ 	<ol><a href=""></a>Logout</a></ol>
  	</ul>
 </form:form>
 
