@@ -30,6 +30,7 @@ public class Impiegato implements Serializable {
 		this.cognome = cognome;
 		this.dataNascita = dataNascita;
 		this.abilitazione = abilitazione;
+		this.ruolo = ruolo;
 	}
 
 
@@ -44,6 +45,7 @@ public class Impiegato implements Serializable {
 		this.cognome = cognome;
 		this.dataNascita = dataNascita;
 		this.abilitazione = abilitazione;
+		this.ruolo = ruolo;
 	}
 
 

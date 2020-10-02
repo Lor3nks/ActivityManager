@@ -24,19 +24,19 @@ public class ImpiegatoDao implements ImpiegatoDaoInt {
 	
 	@Override
 	public int inserisci(Impiegato i) {
-		String sql = "insert into impiegato(username,password,email,nome,cognome,data_nascita,abilitazione) values(?,?,?,?,?,?,?)";
-		return jdbcTemplate.update(sql, new Object[] {i.getUsername(), i.getPassword(), i.getEmail(), i.getNome(), i.getCognome(), Date.valueOf(i.getDataNascita()), i.isAbilitazione()});
+		String sql = "INSERT INTO IMPIEGATO VALUES(?,?,?,?,?,?,?,?)";
+		return jdbcTemplate.update(sql, new Object[] {i.getUsername(), i.getPassword(), i.getEmail(), i.getNome(), i.getCognome(), Date.valueOf(i.getDataNascita()), i.isAbilitazione(), i.getRuolo()});
 	}
 
 	@Override
 	public int modifica(Impiegato i) {
-		String sql = "UPDATE IMPIEGATO SET(PASSWORD=?, EMAIL=?, NOME=?, COGNOME=?, DATA_NASCITA=?, ABILITAZIONE=?, RUOLO=?) WHERE USERNAME=?";
+		String sql = "UPDATE IMPIEGATO SET PASSWORD=?, EMAIL=?, NOME=?, COGNOME=?, DATA_NASCITA=?, ABILITAZIONE=?, RUOLO=? WHERE USERNAME=?";
 		return jdbcTemplate.update(sql, new Object[] {i.getPassword(), i.getEmail(), i.getNome(), i.getCognome(), Date.valueOf(i.getDataNascita()), i.isAbilitazione(), i.getRuolo()});
 	}
 
 	@Override
 	public int cambiaPwd(String username, String newPassword) {
-		String sql = "UPDATE IMPIEGATO SET(PASSWORD=?) WHERE USERNAME=?";
+		String sql = "UPDATE IMPIEGATO SET PASSWORD=? WHERE USERNAME=?";
 		return jdbcTemplate.update(sql, new Object[] {username, newPassword});
 	}
 

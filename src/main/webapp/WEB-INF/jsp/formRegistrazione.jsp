@@ -33,7 +33,7 @@
 					<form:input path="cognome" type="text"/>
 					
 					<form:label path="dataNascita">Data di nascita</form:label>
-					<form:input path="dataNascita" type="date"/>
+					<form:input path="dataNascita" type="text" placeholder="GG/MM/AAAA"/>
 					 <p class="error"><form:errors path="dataNascita" /></p>
 					
 					<form:hidden path="abilitazione" value="true"/>
