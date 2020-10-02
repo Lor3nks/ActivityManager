@@ -9,15 +9,15 @@
 <title>Portale Dell'Impiegato</title>
 </head>
 <body>
-    <h1>MENU ATTIVITA</h1>
- 	<form:form action="visualizzaMenu" method="post">
- 	<ul>
- 	<ol><a href=""></a>Visualizza Attività</a></ol>
- 	<ol><a href=""></a>Gestione Attività Svolte</a></ol>
- 	<ol><a href=""></a>Modifica Password</a></ol>
- 	<ol><a href=""></a>Logout</a></ol>
- 	</ul>
-</form:form>
+<h1>MENU ATTIVITA</h1>
+ <form >
+ <ol>
+ <li><a href="visualizzaAttivitaSvolte">Visualizza Attività</a></li>
+ <li><a href="formAttivitaSvolte">Gestione Attività Svolte</a></li>
+ <li><a href="">Modifica Password</a></li>
+ <li><a href="logout">Logout</a></li>
+ </ol>
+</form>
 
 </body>
 </html>
