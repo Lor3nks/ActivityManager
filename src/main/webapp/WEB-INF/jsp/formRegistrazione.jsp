@@ -37,6 +37,7 @@
 					 <p class="error"><form:errors path="dataNascita" /></p>
 					
 					<form:hidden path="abilitazione" value="true"/>
+					<form:hidden path="ruolo" value="impiegato"/>
 					
 					<button type="submit">Registrati</button>
 				</form:form>
