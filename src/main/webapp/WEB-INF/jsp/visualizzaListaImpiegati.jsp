@@ -8,10 +8,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Lista Impiegati</title>
 </head>
 <body>
-	
+
+<div>	
 <form:form modelAttribute="listaImpiegato" action="" method="post" >
  <table border="1" cellspacing="0" cellpadding="10">
 	
@@ -41,6 +42,16 @@
         </table>
    </form:form>
 <a href= "menuAmministratore" >Torna indietro</a>
-
+</div>
+<div style="border-top: 50px">
+	
+	<form id="sendEmailForm" method="post" action="sendEmail">
+		<label for="mailTo">Invia pwd a: </label>
+		<input id="mailTo" type="text" name="mailTo" size="60" placeholder="impiegato@mail.com"/>
+		<input id="sendEmailBtn" type="submit" value="Invia" />
+	
+	</form>
+	
+</div>
 </body>
 </html>
