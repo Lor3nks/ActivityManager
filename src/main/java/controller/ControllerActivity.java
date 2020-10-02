@@ -27,9 +27,9 @@ public class ControllerActivity {
 	// dependency injection dei Services
 	@Autowired
 	ImpiegatoServiceInt impiegatoServiceInt;
-//	AttivitaSvolteServiceInt attivitaSvolteServiceInt;
-//	AttivitaDisponibiliServiceInt attivitaDisponibiliServiceInt;
-//	AmministratoreServiceInt amministratoreServiceInt;
+	AttivitaSvolteServiceInt attivitaSvolteServiceInt;
+	AttivitaDisponibiliServiceInt attivitaDisponibiliServiceInt;
+	AmministratoreServiceInt amministratoreServiceInt;
 
 	private static final Log logger = LogFactory.getLog(ControllerActivity.class);
 
@@ -40,6 +40,27 @@ public class ControllerActivity {
 		return "formAttivitaSvolte";
 	}
 
+	@RequestMapping(value ="/salvaAttivitaSvolte")
+	public String salvaAttivitaSvolte(@ModelAttribute AttivitaSvolte attivitaSvolte, BindingResult bindingResult, Model model,
+			HttpServletRequest request) {
+		logger.info("-> salvaAttivitaSvolte chiamata");
+		if (bindingResult.hasErrors()) {
+			FieldError fieldError = bindingResult.getFieldError();
+			System.out.println("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
+			return "formAttivitaSvolte";
+		} else {
+				try {
+					attivitaSvolte.setUsername("Usr01");
+					attivitaSvolteServiceInt.salvaAttivitaSvolte(attivitaSvolte);
+				} catch (Exception e) {
+					String errore = "Non è stato possibile aggiungere la tua attività";
+					model.addAttribute("errore", errore);
+					return "formAttivitaSvolte";
+				}
+			}
+		return "index";
+	}
+	
 	@RequestMapping(value = "/formRegistrazione")
 	public String formRegistrazione(Model model) {
 		logger.info("-> form registrazione chiamata");
