@@ -7,10 +7,10 @@
 <title>Menù amministratore</title>
 </head>
 <body>
-	
+	<h1>Menu amministratore</h1>
 	<ul>
 	<li><a href="visualizzaListaImpiegati">Visualizza lista impiegati</a></li>
-	<li><a href="">Attività disponibili</a></li>
+	<li><a href="visualizzaAttivitaDisponibili">Attività disponibili</a></li>
 	<li><a href="logout">Logout</a></li>
 	</ul>
 </body>

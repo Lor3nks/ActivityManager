@@ -23,10 +23,23 @@
           <th>Cognome</th>
           <th>Data di Nascita</th>
           <th>Abilitazione</th>
+          <th>Ruolo</th>
+          <th>Modifica</th>
         </tr>
-     	
-     	<input id="submit" type="submit" value=""/>
-    </table>
-</form:form>
+        
+         <tr>
+          <th>${Impiegato.username} </th>
+          <th>${Impiegato.password}</th>
+          <th>${Impiegato.email}</th>
+          <th>${Impiegato.nome}</th>
+          <th>${Impiegato.cognome}</th>
+          <th>${Impiegato.data_nascita}</th>
+          <th>${Impiegato.abilitazione}</th>
+          <th>${Impiegato.ruolo}</th>
+          <th><a href="">Modifica</a></th>
+        </tr>
+        </table>
+   </form:form>
+<a href= "menuAmministratore" >Torna indietro</a>
 </body>
 </html>

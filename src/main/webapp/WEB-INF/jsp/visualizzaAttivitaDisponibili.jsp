@@ -29,13 +29,13 @@
           <th><a href="">Cancella</a></th>
         </tr>
      	
-         <input id="submit" type="submit" value=""/>
+        
        
     </table>
-    <br>
+  
 
     <button type="submit">Aggiungi</button>
 </form:form>
-
+<a href= "menuAmministratore" >Torna indietro</a>
 </body>
 </html>
