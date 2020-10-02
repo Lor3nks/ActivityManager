@@ -13,6 +13,7 @@ public class Impiegato implements Serializable {
 	private String cognome;
 	private LocalDate dataNascita;
 	private boolean abilitazione;
+	private String ruolo;
 
 	public Impiegato() {
 		super();
@@ -21,7 +22,7 @@ public class Impiegato implements Serializable {
 	
 
 	public Impiegato(String password, String email, String nome, String cognome, LocalDate dataNascita,
-			boolean abilitazione) {
+			boolean abilitazione, String ruolo) {
 		super();
 		this.password = password;
 		this.email = email;
@@ -34,7 +35,7 @@ public class Impiegato implements Serializable {
 
 
 	public Impiegato(String username, String password, String email, String nome, String cognome, LocalDate dataNascita,
-			boolean abilitazione) {
+			boolean abilitazione, String ruolo) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -101,6 +102,16 @@ public class Impiegato implements Serializable {
 	public void setAbilitazione(boolean abilitazione) {
 		this.abilitazione = abilitazione;
 	}
+
+	public String getRuolo() {
+		return ruolo;
+	}
+
+	public void setRuolo(String ruolo) {
+		this.ruolo = ruolo;
+	}
+	
+	
 	
 	
 

@@ -30,8 +30,8 @@ public class ImpiegatoDao implements ImpiegatoDaoInt {
 
 	@Override
 	public int modifica(Impiegato i) {
-		String sql = "UPDATE IMPIEGATO SET(PASSWORD=?, EMAIL=?, NOME=?, COGNOME=?, DATA_NASCITA=?, ABILITAZIONE=?) WHERE USERNAME=?";
-		return jdbcTemplate.update(sql, new Object[] {i.getPassword(), i.getEmail(), i.getNome(), i.getCognome(), Date.valueOf(i.getDataNascita()), i.isAbilitazione()});
+		String sql = "UPDATE IMPIEGATO SET(PASSWORD=?, EMAIL=?, NOME=?, COGNOME=?, DATA_NASCITA=?, ABILITAZIONE=?, RUOLO=?) WHERE USERNAME=?";
+		return jdbcTemplate.update(sql, new Object[] {i.getPassword(), i.getEmail(), i.getNome(), i.getCognome(), Date.valueOf(i.getDataNascita()), i.isAbilitazione(), i.getRuolo()});
 	}
 
 	@Override
