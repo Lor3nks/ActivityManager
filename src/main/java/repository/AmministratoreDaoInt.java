@@ -5,5 +5,6 @@ import domain.Amministratore;
 public interface AmministratoreDaoInt {
 	
 	public Amministratore checkLogin(String username, String password);
+	public Amministratore getAmministratoreByUser(String username);
 
 }

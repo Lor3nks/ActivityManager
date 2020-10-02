@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import domain.Amministratore;
+import domain.Impiegato;
 
 
 @Repository
@@ -23,6 +24,14 @@ public class AmministratoreDao implements AmministratoreDaoInt{
 		return jdbcTemplate.queryForObject(sql, new Object[] { username,password },new BeanPropertyRowMapper<Amministratore>(Amministratore.class)); 
 		
 	}
+
+	@Override
+	public Amministratore getAmministratoreByUser(String username) {
+		String sql = "SELECT * FROM IMPIEGATO WHERE USERNAME=? AND RUOLO='AMMINISTRATORE'";
+		return jdbcTemplate.queryForObject(sql, new Object[] {username}, new BeanPropertyRowMapper<Amministratore>(Amministratore.class));
+		
+	}
+
 		
 
 

@@ -43,11 +43,11 @@
    </form:form>
 <a href= "menuAmministratore" >Torna indietro</a>
 </div>
-<div style="border-top: 50px">
+<div style="margin-top: 50px">
 	
 	<form id="sendEmailForm" method="post" action="sendEmail">
 		<label for="mailTo">Invia pwd a: </label>
-		<input id="mailTo" type="text" name="mailTo" size="60" placeholder="impiegato@mail.com"/>
+		<input id="mailTo" type="text" name="mailTo" size="25" placeholder="impiegato@mail.com"/>
 		<input id="sendEmailBtn" type="submit" value="Invia" />
 	
 	</form>
