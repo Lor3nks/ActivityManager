@@ -9,4 +9,12 @@
 <body>
  <h1>Logout</h1>
 </body>
+
+<p>Hai effettuato con successo il logout </p>
+
+
+<p><a href="login" type="submit">Torna alla login </a></p>
+
+
+
 </html>
