@@ -59,7 +59,6 @@ public class ControllerActivity {
 	public String login(Model model, HttpServletRequest request, HttpSession session) {
 		logger.info("-> login chiamata");
 		Impiegato i = new Impiegato();
-		Amministratore a = new Amministratore();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		i = impiegatoServiceInt.checkLoginImpiegato(username, password);
@@ -69,7 +68,7 @@ public class ControllerActivity {
 				session.setAttribute("impiegato", i);
 				return "menuImpiegato";
 			} else {
-				a = amministratoreServiceInt.recuperaAmministratoreByUser(username);
+				Amministratore a = new Amministratore();
 				session.setAttribute("aministratore", a);
 				model.addAttribute("amministratore", a);
 				return "menuAmministratore";
