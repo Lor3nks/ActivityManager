@@ -9,7 +9,7 @@
 <meta charset="ISO-8859-1">
 <title>Attivita Disponibili</title>
 </head>
-<body>
+<body> 
 <form:form modelAttribute="attDisp" action="" method="post" >
  <table border="1" cellspacing="0" cellpadding="10">
 	
