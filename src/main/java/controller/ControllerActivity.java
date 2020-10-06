@@ -102,7 +102,7 @@ public class ControllerActivity {
 	}
  
 	@RequestMapping(value ="/salvaAttivitaSvolte")
-	public String salvaAttivitaSvolte(@ModelAttribute AttivitaSvolte attivitaSvolte, BindingResult bindingResult, Model model,
+	public String salvaAttivitaSvolte(@Valid @ModelAttribute AttivitaSvolte attivitaSvolte, BindingResult bindingResult, Model model,
 			HttpServletRequest request, HttpSession session) {
 		logger.info("-> salvaAttivitaSvolte chiamata");
 		if (bindingResult.hasErrors()) {

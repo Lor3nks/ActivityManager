@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
  
 public class AttivitaSvolte implements Serializable {
@@ -11,9 +13,14 @@ public class AttivitaSvolte implements Serializable {
 	private static final long serialVersionUID = 4261989059440444174L;
 	private int id_Trigg;
 	private Impiegato imp;
+	@NotNull
 	private AttivitaDisponibili att_Disp;
+	@Past
+	@NotNull
 	private LocalDate data_Attivita;
+	@NotNull
 	private String ora_Inizio;
+	@NotNull
 	private String ora_Fine;
 	private String note;
 	
