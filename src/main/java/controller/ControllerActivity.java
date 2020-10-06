@@ -265,7 +265,17 @@ public class ControllerActivity {
 		RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaSvolte");
 		rd.forward(request, response);
 		return "";		
-	}	
+	}
+	
+	@RequestMapping(value ="/visualizzaAttivitaDisponibili")
+	public String visuailzzaAttivitaDisponibili(Model model,HttpServletRequest request, HttpSession session) {
+		logger.info("-> visualizzaAttivitaDisponibili chiamata");
+		List<AttivitaDisponibili> attDisp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
+		model.addAttribute("attDisp", attDisp);
+		return "visualizzaAttivitaDisponibili";
+	}
+	
+	
 	
 	@RequestMapping(value="/logout")
 	public String logout( HttpServletRequest request, HttpSession session) {

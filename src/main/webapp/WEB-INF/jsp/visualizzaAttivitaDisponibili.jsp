@@ -10,7 +10,7 @@
 <title>Attivita Disponibili</title>
 </head>
 <body>
-<form:form modelAttribute="attivitaDisponibili" action="" method="post" >
+<form:form modelAttribute="attDisp" action="" method="post" >
  <table border="1" cellspacing="0" cellpadding="10">
 	
         <tr>
@@ -20,17 +20,17 @@
           <th>Modifica</th>
           <th>Cancella</th>
         </tr>
-
+	<c:forEach items="${attDisp}" var="attDisp">
         <tr>
-          <th>${attivitaDisponibili.id}</th>
-          <th>${attivitaDisponibili.descrizione}</th>
-          <th>${attivitaDisponibili.abilitazione}</th>
+          <th>${attDisp.id_Disp}</th>
+          <th>${attDisp.descrizione}</th>
+          <th>${attDisp.abilitazione}</th>
           <th><a href="">Modifica</a></th>
           <th><a href="">Cancella</a></th>
           
         </tr>
      	
-        
+        </c:forEach> 
        
     </table>
   

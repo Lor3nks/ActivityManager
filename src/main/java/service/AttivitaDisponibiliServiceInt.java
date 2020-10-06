@@ -9,6 +9,5 @@ public interface AttivitaDisponibiliServiceInt {
 	public int modificaAttivitaDisponibili(AttivitaDisponibili ad);
 	public int modificaAbilitazioneAttivitaDisponibili(AttivitaDisponibili ad);
 	public AttivitaDisponibili recuperaAttivitaDisponibiliById(String id_disp);
-	public List<AttivitaDisponibili>RecuperaAttivitaDisponibili();
-
+	public List<AttivitaDisponibili> RecuperaAttivitaDisponibili();	
 }
