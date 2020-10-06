@@ -200,8 +200,6 @@ public class ControllerActivity {
 		
 		return "menuAmministratore";
 	}
-
-	//@ModelAttribute AttivitaSvolte attivitaSvolte 
 	
 	@RequestMapping(value ="/visualizzaAttivitaSvolte")
 	public String visuailzzaAttivitaSvolte(Model model,HttpServletRequest request, HttpSession session) {
@@ -229,17 +227,45 @@ public class ControllerActivity {
 	}
 
 	@RequestMapping(value ="/aggiornaAttivitaSvolte")
-	public String aggiornaAttivitaSvolte(@RequestParam int id,@ModelAttribute AttivitaSvolte attSv,Model model,HttpServletRequest request, HttpSession session) {
+	public String aggiornaAttivitaSvolte(@RequestParam int id,@ModelAttribute AttivitaSvolte attivitaSvolte,Model model,HttpServletRequest request, HttpSession session) {
 		logger.info("-> aggiornaAttivitaSvolte chiamata");
-		attSv=attivitaSvolteServiceInt.recuperaAttivitaSvolteById(id);
-		String codAttDisp=attivitaSvolteServiceInt.getAttIdDispFromAttSvolte(attSv.getId_Trigg());
+		attivitaSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolteById(id);
+		String codAttDisp=attivitaSvolteServiceInt.getAttIdDispFromAttSvolte(attivitaSvolte.getId_Trigg());
 		AttivitaDisponibili attDispo=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(codAttDisp);
-		attSv.setAtt_Disp(attDispo);		
+		attivitaSvolte.setAtt_Disp(attDispo);		
 		List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
 		model.addAttribute("att_Disp",att_Disp);		
-		model.addAttribute("attSv",attSv);
+		model.addAttribute("attivitaSvolte",attivitaSvolte);
 		return "modificaAttivitaSvolte";
 		}
+	
+	@RequestMapping(value ="/aggiornaSuDBAttivitaSvolte")
+	public String aggiornaSuDBAttivitaSvolte(@ModelAttribute AttivitaSvolte attivitaSvolte, BindingResult bindingResult, 
+			Model model,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException  {
+		logger.info("-> aggiornaSuDBAttivitaSvolte chiamata");
+		if (bindingResult.hasErrors()) {
+			FieldError fieldError = bindingResult.getFieldError();
+			String errore="Code:" + fieldError.getCode() + ", field:" + fieldError.getField();
+			model.addAttribute("errore", errore);
+			List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
+			model.addAttribute("att_Disp",att_Disp);					
+			return "modificaAttivitaSvolte";
+		} else {
+				try {
+					attivitaSvolte.setImp((Impiegato)session.getAttribute("impiegato"));
+					attivitaSvolteServiceInt.modificaAttivitaSvolte(attivitaSvolte);
+				} catch (Exception e) {
+					String errore = "Non è stato possibile modificare la tua attività";
+					List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
+					model.addAttribute("att_Disp",att_Disp);					
+					model.addAttribute("errore", errore);
+					return "modificaAttivitaSvolte";
+				}
+			}
+		RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaSvolte");
+		rd.forward(request, response);
+		return "";		
+	}	
 	
 	@RequestMapping(value="/logout")
 	public String logout( HttpServletRequest request, HttpSession session) {

@@ -11,9 +11,10 @@
 </head>
 <body>
 <p>${errore}</p> 
-<form:form modelAttribute="attSv" action="salvaAttivitaSvolte"  method="post">
+<form:form modelAttribute="attivitaSvolte" action="aggiornaSuDBAttivitaSvolte"  method="post">
 	<p>
 	    <label for="data_Attivita">Data attività: </label>
+	    <form:input type="hidden" id="id_Trigg" path="id_Trigg" autocomplete="off"/>
 	    <form:input type="text" id="data_Attivita" path="data_Attivita" autocomplete="off"/>
 	    <!-- <p id="error" class="error"><form:errors path="data_Attivita" /></p>  -->	
 	</p>
