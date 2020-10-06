@@ -3,7 +3,7 @@ package service;
 import java.util.List;
 
 import domain.Impiegato;
-
+ 
 public interface ImpiegatoServiceInt {
 
 	public int inserisciImpiegato(Impiegato i);

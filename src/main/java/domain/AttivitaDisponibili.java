@@ -1,7 +1,7 @@
 package domain;
 
 import java.util.List;
-
+   
 public class AttivitaDisponibili {
  
 	private String id_Disp;

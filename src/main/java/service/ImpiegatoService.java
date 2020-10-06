@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import domain.Impiegato;
 import repository.ImpiegatoDao;
 
-
+ 
 @Service
 public class ImpiegatoService implements ImpiegatoServiceInt{
 	

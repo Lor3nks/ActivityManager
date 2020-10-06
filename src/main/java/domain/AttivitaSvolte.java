@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import javax.validation.constraints.Size;
-
+ 
 public class AttivitaSvolte implements Serializable {
 
 	private static final long serialVersionUID = 4261989059440444174L;

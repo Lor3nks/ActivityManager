@@ -13,7 +13,7 @@ import domain.AttivitaDisponibili;
 
 @Repository
 public class AttivitaDisponibiliDao implements AttivitaDisponibiliDaoInt {
-		
+ 		
 	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired

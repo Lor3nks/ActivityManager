@@ -3,7 +3,7 @@ package service;
 import java.util.List;
 
 import domain.AttivitaDisponibili;
-
+ 
 public interface AttivitaDisponibiliServiceInt {
 	public int salvaAttivitaDisponibili(AttivitaDisponibili ad);
 	public int modificaAttivitaDisponibili(AttivitaDisponibili ad);

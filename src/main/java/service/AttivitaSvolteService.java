@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import domain.AttivitaSvolte;
 import domain.Impiegato;
 import repository.AttivitaSvolteDaoInt;
-
+ 
 @Service
 public class AttivitaSvolteService implements AttivitaSvolteServiceInt {
 

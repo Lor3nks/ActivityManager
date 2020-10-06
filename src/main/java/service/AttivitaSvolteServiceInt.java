@@ -4,7 +4,7 @@ import java.util.List;
 
 import domain.AttivitaSvolte;
 import domain.Impiegato;
-
+ 
 public interface AttivitaSvolteServiceInt {
 	
 	public int salvaAttivitaSvolte(AttivitaSvolte as);

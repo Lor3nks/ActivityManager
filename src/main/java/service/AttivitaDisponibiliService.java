@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import domain.AttivitaDisponibili;
 import repository.AttivitaDisponibiliDao;
-
+ 
 @Service
 public class AttivitaDisponibiliService implements AttivitaDisponibiliServiceInt {
 

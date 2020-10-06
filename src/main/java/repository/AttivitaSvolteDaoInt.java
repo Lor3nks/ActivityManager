@@ -8,7 +8,7 @@ import domain.AttivitaDisponibili;
 import domain.AttivitaSvolte;
 import domain.Impiegato;
 
-
+ 
 
 public interface AttivitaSvolteDaoInt {
 	public int salva(AttivitaSvolte as);
