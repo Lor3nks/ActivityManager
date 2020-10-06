@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,26 +10,35 @@
 <title>Cambia Password</title>
 </head>
 <body>
-<h1>Cambia Password</h1>
-<form action="cambiaPassword" method="post">
-		
-		<p>
-			<label for="password"> Vecchia Password</label>
-			<input name="password" type="text"/>
+	<h1>Cambia Password</h1>
+	<form:form modelAttribute="impiegato" action="cambiaPassword"
+		method="post">
+
+		<label>
+			<p>${impiegato.nome}</p>
+		</label>
+
+		<label>
+			<p>${impiegato.cognome}</p>
+		</label>
+
+		<label>
+			<p>${impiegato.dataNascita}</p>
+
+		</label>
+		<label for="password"> Vecchia Password</label>
+		<input name="password" type="text" />
 		</p>
 		<p>
-			<label for="password"> Nuova Password</label>
-			<input name="password" type="text"/>
+			<label for="password"> Nuova Password</label> <input name="password"
+				type="text" />
 		</p>
 		<p>
-			<label for="password"> Conferma Password</label>
-			<input name="password" type="text"/>
+			<label for="password"> Conferma Password</label> <input
+				name="password" type="text" />
 		</p>
 		<p>
 			<button type="submit">Submit</button>
-
-
-</form>
-
+	</form:form>
 </body>
 </html>
