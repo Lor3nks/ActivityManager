@@ -9,7 +9,7 @@
 <meta charset="ISO-8859-1">
 <title>Attività svolte</title>
 </head>
-<body>
+<body> 
 <p>${errore}</p> 
 <form:form modelAttribute="attivitaSvolte" action="aggiornaSuDBAttivitaSvolte"  method="post">
 	<p>

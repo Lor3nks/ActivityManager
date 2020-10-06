@@ -100,7 +100,7 @@ public class ControllerActivity {
 		model.addAttribute(new AttivitaSvolte());
 		return "formAttivitaSvolte";
 	}
-
+ 
 	@RequestMapping(value ="/salvaAttivitaSvolte")
 	public String salvaAttivitaSvolte(@ModelAttribute AttivitaSvolte attivitaSvolte, BindingResult bindingResult, Model model,
 			HttpServletRequest request, HttpSession session) {

@@ -34,7 +34,7 @@ public class AttivitaSvolteDao implements AttivitaSvolteDaoInt{
 		//return jdbcTemplate.update(sql,new Object[] { as.getImp().getUsername(),as.getAtt_Disp().getid_Disp(),Date.valueOf(as.getData_Attivita()), as.getOra_Inizio().toString(), as.getOra_Fine().toString(),as.getNote()});
 		return jdbcTemplate.update(sql,new Object[] { as.getImp().getUsername(),as.getAtt_Disp().getid_Disp(),Date.valueOf(as.getData_Attivita()), as.getOra_Inizio(), as.getOra_Fine(),as.getNote()});
 	}
-	
+	 
 
 	@Override
 	public int modifica(AttivitaSvolte as) {
