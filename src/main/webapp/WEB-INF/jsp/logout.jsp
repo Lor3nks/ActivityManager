@@ -13,7 +13,7 @@
 <p>Hai effettuato con successo il logout </p>
 
 
-<p><a href="login" type="submit">Torna alla login </a></p>
+<p><a href="inputLogin" type="submit">Torna alla login </a></p>
 
 
 
