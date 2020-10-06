@@ -6,16 +6,18 @@ import java.time.LocalTime;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
  
 public class AttivitaSvolte implements Serializable {
 
 	private static final long serialVersionUID = 4261989059440444174L;
 	private int id_Trigg;
+	@NotNull
 	private Impiegato imp;
 	@NotNull
 	private AttivitaDisponibili att_Disp;
-	@Past
+	@PastOrPresent
 	@NotNull
 	private LocalDate data_Attivita;
 	@NotNull

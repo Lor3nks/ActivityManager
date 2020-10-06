@@ -12,7 +12,7 @@
 <h1>MENU ATTIVITA</h1>
  <form >
  <ol>
- <li><a href="visualizzaAttivitaSvolte">Visualizza Attività</a></li>
+ <li><a href="visualizzaAttivitaSvolteImpiegato">Visualizza Attività</a></li>
  <li><a href="formAttivitaSvolte">Gestione Attività Svolte</a></li>
  <li><a href="">Modifica Password</a></li>
  <li><a href="logout">Logout</a></li>

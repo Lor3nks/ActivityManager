@@ -1,12 +1,18 @@
 package domain;
 
 import java.util.List;
+
+import javax.validation.constraints.NotNull;
    
 public class AttivitaDisponibili {
  
+	@NotNull
 	private String id_Disp;
+	@NotNull
 	private String descrizione;
+	@NotNull
 	private int abilitazione;
+	@NotNull
 	private List<Impiegato> impiegato;
 	
 

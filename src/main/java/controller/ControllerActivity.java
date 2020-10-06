@@ -201,10 +201,11 @@ public class ControllerActivity {
 		return "menuAmministratore";
 	}
 	
+
 	@RequestMapping(value ="/visualizzaAttivitaSvolte")
 	public String visuailzzaAttivitaSvolte(Model model,HttpServletRequest request, HttpSession session) {
-		logger.info("-> visualizzaAttivitaSvolte chiamata");
-		List<AttivitaSvolte> attSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolteDaImpiegato((Impiegato)session.getAttribute("impiegato"));
+		logger.info("-> visualizzaAttivitaSvolteImpiegato chiamata");
+		List<AttivitaSvolte> attSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolte();
 		//Recupero oggetto AttDisponibili e lo inserisco in AttSvolte
 		for(AttivitaSvolte a: attSvolte) { 
 			logger.info("-> recupero attDisp");
@@ -215,6 +216,23 @@ public class ControllerActivity {
 		}
 		model.addAttribute("attSvolte",attSvolte);
 		return "visualizzaAttivitaSvolte";
+	}
+	
+	
+	@RequestMapping(value ="/visualizzaAttivitaSvolteImpiegato")
+	public String visuailzzaAttivitaSvolteImpiegato(Model model,HttpServletRequest request, HttpSession session) {
+		logger.info("-> visualizzaAttivitaSvolteImpiegato chiamata");
+		List<AttivitaSvolte> attSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolteDaImpiegato((Impiegato)session.getAttribute("impiegato"));
+		//Recupero oggetto AttDisponibili e lo inserisco in AttSvolte
+		for(AttivitaSvolte a: attSvolte) { 
+			logger.info("-> recupero attDisp");
+			String codAttDisp=attivitaSvolteServiceInt.getAttIdDispFromAttSvolte(a.getId_Trigg());
+			AttivitaDisponibili attDispo=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(codAttDisp);
+			//System.out.println(attDispo.getid_Disp()+" "+attDispo.getDescrizione());
+			a.setAtt_Disp(attDispo);
+		}
+		model.addAttribute("attSvolte",attSvolte);
+		return "visualizzaAttivitaSvolteImpiegato";
 	}
 	
 	@RequestMapping(value ="/cancellaAttivitaSvolte")
@@ -265,24 +283,13 @@ public class ControllerActivity {
 		RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaSvolte");
 		rd.forward(request, response);
 		return "";		
-	}
-	
-	@RequestMapping(value ="/visualizzaAttivitaDisponibili")
-	public String visuailzzaAttivitaDisponibili(Model model,HttpServletRequest request, HttpSession session) {
-		logger.info("-> visualizzaAttivitaDisponibili chiamata");
-		List<AttivitaDisponibili> attDisp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
-		model.addAttribute("attDisp", attDisp);
-		return "visualizzaAttivitaDisponibili";
-	}
-	
-	
-	
+	}	
 	
 	@RequestMapping(value="/logout")
 	public String logout( HttpServletRequest request, HttpSession session) {
 		logger.info("-> logout chiamata");
 		session.invalidate();
-		return "logout";  
+		return "logout";
 	} 	
 	
 }

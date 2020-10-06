@@ -4,16 +4,28 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+
 public class Impiegato implements Serializable {
 	
 	private static final long serialVersionUID = 7611569892498705160L;
+	@NotNull
 	private String username;
+	@NotNull
 	private String password;
+	@NotNull
 	private String email;
+	@NotNull
 	private String nome;
+	@NotNull
 	private String cognome;
+	@NotNull
+	@Past
 	private LocalDate dataNascita;
+	@NotNull
 	private boolean abilitazione;
+	@NotNull
 	private String ruolo;
 	private List<AttivitaDisponibili> attDisp;
 
