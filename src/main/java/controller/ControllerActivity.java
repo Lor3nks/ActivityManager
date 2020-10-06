@@ -282,7 +282,7 @@ public class ControllerActivity {
 	public String logout( HttpServletRequest request, HttpSession session) {
 		logger.info("-> logout chiamata");
 		session.invalidate();
-		return "logout";
+		return "logout";  
 	} 	
 	
 }
