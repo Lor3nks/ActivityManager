@@ -1,8 +1,13 @@
 package controller;
 
+import java.io.IOException;
 import java.security.SecureRandom;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -13,8 +18,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import domain.Amministratore;
+import domain.AttivitaDisponibili;
 import domain.AttivitaSvolte;
 import domain.Impiegato;
 import service.AmministratoreServiceInt;
@@ -36,8 +43,11 @@ public class ControllerActivity {
 	// dependency injection dei Services
 	@Autowired
 	ImpiegatoServiceInt impiegatoServiceInt;
+	@Autowired
 	AttivitaSvolteServiceInt attivitaSvolteServiceInt;
+	@Autowired
 	AttivitaDisponibiliServiceInt attivitaDisponibiliServiceInt;
+	@Autowired
 	AmministratoreServiceInt amministratoreServiceInt;
 	
 	@Autowired
@@ -85,28 +95,38 @@ public class ControllerActivity {
 	@RequestMapping(value = "/formAttivitaSvolte")
 	public String login(Model model) {
 		logger.info("-> formAttivitaSvolte chiamata");
+		List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
+		model.addAttribute("att_Disp",att_Disp);
 		model.addAttribute(new AttivitaSvolte());
 		return "formAttivitaSvolte";
 	}
 
 	@RequestMapping(value ="/salvaAttivitaSvolte")
 	public String salvaAttivitaSvolte(@ModelAttribute AttivitaSvolte attivitaSvolte, BindingResult bindingResult, Model model,
-			HttpServletRequest request) {
+			HttpServletRequest request, HttpSession session) {
 		logger.info("-> salvaAttivitaSvolte chiamata");
 		if (bindingResult.hasErrors()) {
 			FieldError fieldError = bindingResult.getFieldError();
-			System.out.println("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
+			//System.out.println("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
+			String errore="Code:" + fieldError.getCode() + ", field:" + fieldError.getField();
+			model.addAttribute("errore", errore);
+			List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
+			model.addAttribute("att_Disp",att_Disp);					
 			return "formAttivitaSvolte";
 		} else {
 				try {
+					attivitaSvolte.setImp((Impiegato)session.getAttribute("impiegato"));
 					attivitaSvolteServiceInt.salvaAttivitaSvolte(attivitaSvolte);
 				} catch (Exception e) {
 					String errore = "Non è stato possibile aggiungere la tua attività";
+					e.printStackTrace();
+					List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
+					model.addAttribute("att_Disp",att_Disp);					
 					model.addAttribute("errore", errore);
 					return "formAttivitaSvolte";
 				}
 			}
-		return "index";
+		return "menuImpiegato";
 	}
 	
 	@RequestMapping(value = "/formRegistrazione")
@@ -175,22 +195,52 @@ public class ControllerActivity {
 				mimeMsgHelperObj.setFrom(senderMail);				
 				mimeMsgHelperObj.setText(mailMessage);
 				mimeMsgHelperObj.setSubject("Reset Password");
-
 			}
 		});
 		
 		return "menuAmministratore";
 	}
 
+	//@ModelAttribute AttivitaSvolte attivitaSvolte 
+	
 	@RequestMapping(value ="/visualizzaAttivitaSvolte")
-	public String visuailzzaAttivitaSvolte(Model model,
-			HttpServletRequest request) {
+	public String visuailzzaAttivitaSvolte(Model model,HttpServletRequest request, HttpSession session) {
 		logger.info("-> visualizzaAttivitaSvolte chiamata");
-
+		List<AttivitaSvolte> attSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolteDaImpiegato((Impiegato)session.getAttribute("impiegato"));
+		//Recupero oggetto AttDisponibili e lo inserisco in AttSvolte
+		for(AttivitaSvolte a: attSvolte) { 
+			logger.info("-> recupero attDisp");
+			String codAttDisp=attivitaSvolteServiceInt.getAttIdDispFromAttSvolte(a.getId_Trigg());
+			AttivitaDisponibili attDispo=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(codAttDisp);
+			//System.out.println(attDispo.getid_Disp()+" "+attDispo.getDescrizione());
+			a.setAtt_Disp(attDispo);
+		}
+		model.addAttribute("attSvolte",attSvolte);
 		return "visualizzaAttivitaSvolte";
 	}
 	
- 	
+	@RequestMapping(value ="/cancellaAttivitaSvolte")
+	public void cancellaAttivitaSvolte(@RequestParam int id,Model model,
+			HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		logger.info("-> cancellaAttivitaSvolte chiamata");	
+		attivitaSvolteServiceInt.eliminaAttivitaSvolte(id);
+		RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaSvolte");
+		rd.forward(request, response);
+	}
+
+	@RequestMapping(value ="/aggiornaAttivitaSvolte")
+	public String aggiornaAttivitaSvolte(@RequestParam int id,@ModelAttribute AttivitaSvolte attSv,Model model,HttpServletRequest request, HttpSession session) {
+		logger.info("-> aggiornaAttivitaSvolte chiamata");
+		attSv=attivitaSvolteServiceInt.recuperaAttivitaSvolteById(id);
+		String codAttDisp=attivitaSvolteServiceInt.getAttIdDispFromAttSvolte(attSv.getId_Trigg());
+		AttivitaDisponibili attDispo=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(codAttDisp);
+		attSv.setAtt_Disp(attDispo);		
+		List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
+		model.addAttribute("att_Disp",att_Disp);		
+		model.addAttribute("attSv",attSv);
+		return "modificaAttivitaSvolte";
+		}
+	
 	@RequestMapping(value="/logout")
 	public String logout( HttpServletRequest request, HttpSession session) {
 		logger.info("-> logout chiamata");

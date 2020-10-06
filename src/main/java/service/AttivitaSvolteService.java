@@ -35,4 +35,19 @@ public class AttivitaSvolteService implements AttivitaSvolteServiceInt {
 		return attivitaSvolteDaoInt.getAllAttivitaSvolte();
 	}
 
+	@Override
+	public String getAttIdDispFromAttSvolte(int idSv) {
+		return attivitaSvolteDaoInt.getIdAttivitaDisponibili(idSv);
+	}
+
+	@Override
+	public int eliminaAttivitaSvolte(int idSv) {
+		return attivitaSvolteDaoInt.cancellaAttivitaSvolte(idSv);
+	}
+
+	@Override
+	public AttivitaSvolte recuperaAttivitaSvolteById(int idSv) {	
+		return attivitaSvolteDaoInt.leggiAttivitaSvolteById(idSv);
+	}
+
 }

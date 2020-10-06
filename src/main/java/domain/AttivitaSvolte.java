@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.validation.constraints.Size;
+
 public class AttivitaSvolte implements Serializable {
 
 	private static final long serialVersionUID = 4261989059440444174L;
@@ -11,8 +13,8 @@ public class AttivitaSvolte implements Serializable {
 	private Impiegato imp;
 	private AttivitaDisponibili att_Disp;
 	private LocalDate data_Attivita;
-	private LocalTime ora_Inizio;
-	private LocalTime ora_Fine;
+	private String ora_Inizio;
+	private String ora_Fine;
 	private String note;
 	
 	public AttivitaSvolte() {
@@ -21,7 +23,7 @@ public class AttivitaSvolte implements Serializable {
 	}
 
 	public AttivitaSvolte(int id_Trigg, Impiegato imp, AttivitaDisponibili att_Disp, LocalDate data_Attivita,
-			LocalTime ora_Inizio, LocalTime ora_Fine, String note) {
+			String ora_Inizio, String ora_Fine, String note) {
 		super();
 		this.id_Trigg = id_Trigg;
 		this.imp = imp;
@@ -33,7 +35,7 @@ public class AttivitaSvolte implements Serializable {
 	}
 
 	public AttivitaSvolte(Impiegato imp, AttivitaDisponibili att_Disp, LocalDate data_Attivita,
-			LocalTime ora_Inizio, LocalTime ora_Fine, String note) {
+			String ora_Inizio, String ora_Fine, String note) {
 		super();
 		this.imp = imp;
 		this.att_Disp = att_Disp;
@@ -75,19 +77,19 @@ public class AttivitaSvolte implements Serializable {
 		this.data_Attivita = data_Attivita;
 	}
 
-	public LocalTime getOra_Inizio() {
+	public String getOra_Inizio() {
 		return ora_Inizio;
 	}
 
-	public void setOra_Inizio(LocalTime ora_Inizio) {
+	public void setOra_Inizio(String ora_Inizio) {
 		this.ora_Inizio = ora_Inizio;
 	}
 
-	public LocalTime getOra_Fine() {
+	public String getOra_Fine() {
 		return ora_Fine;
 	}
 
-	public void setOra_Fine(LocalTime ora_Fine) {
+	public void setOra_Fine(String ora_Fine) {
 		this.ora_Fine = ora_Fine;
 	}
 
@@ -102,12 +104,6 @@ public class AttivitaSvolte implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
-	
-
-
-	
 	
 	
 }

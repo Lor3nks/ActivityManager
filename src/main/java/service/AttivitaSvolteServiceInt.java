@@ -11,5 +11,8 @@ public interface AttivitaSvolteServiceInt {
 	public int modificaAttivitaSvolte(AttivitaSvolte as);
 	public List<AttivitaSvolte> recuperaAttivitaSvolteDaImpiegato(Impiegato i);
 	public List<AttivitaSvolte> recuperaAttivitaSvolte();
+	public String getAttIdDispFromAttSvolte(int idSv);
+	public int eliminaAttivitaSvolte(int idSv);
+	public AttivitaSvolte recuperaAttivitaSvolteById(int idSv);
 	
 }

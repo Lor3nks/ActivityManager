@@ -11,7 +11,7 @@
 </head>
 <body>
 <p>${errore}</p> 
-<form:form modelAttribute="attivitaSvolte" action="salvaAttivitaSvolte"  method="post">
+<form:form modelAttribute="attSv" action="salvaAttivitaSvolte"  method="post">
 	<p>
 	    <label for="data_Attivita">Data attività: </label>
 	    <form:input type="text" id="data_Attivita" path="data_Attivita" autocomplete="off"/>
@@ -27,14 +27,14 @@
 	    <form:input type="text" id="ora_Fine" path="ora_Fine" autocomplete="off"/>
 	    <!-- <p class="error"><form:errors path="ora_Fine" /></p>	 -->
 	</p>
-	
+	 
 	<p>
 		<label for="att_Disp">Attività disponibili: </label>
 		<form:select  id="att_Disp" path="att_Disp.id_Disp" items="${att_Disp}" itemValue="id_Disp" itemLabel="descrizione" >
 		</form:select>
 		<!-- <p class="error"><form:errors path="att_Disp.id_Disp" /></p>  -->
-	</p>
-
+	</p>  
+	
 	<p>
 	<label for="ora_Fine">Note:</label>
 	<form:textarea id="note" path="note" rows="4" cols="50"></form:textarea>

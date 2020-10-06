@@ -20,7 +20,7 @@ public class AttivitaDisponibiliDao implements AttivitaDisponibiliDaoInt {
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	
+	 
 
 	@Override
 	public int salva(AttivitaDisponibili ad) {
@@ -42,9 +42,9 @@ public class AttivitaDisponibiliDao implements AttivitaDisponibiliDaoInt {
 	}
 
 	@Override
-	public AttivitaDisponibili getAttivitaDisponibiliById(String id_disp) {
-		String sql = "SELECT * FROM ATTIVITA_DISPONIBILI WHERE ID=?";
-		return jdbcTemplate.queryForObject(sql, new Object[] {id_disp}, new BeanPropertyRowMapper<AttivitaDisponibili>(AttivitaDisponibili.class));
+	public AttivitaDisponibili getAttivitaDisponibiliById(String id_Disp) {
+		String sql = "SELECT * FROM ATTIVITA_DISPONIBILI WHERE ID_DISP=?";
+		return jdbcTemplate.queryForObject(sql, new Object[] {id_Disp}, new BeanPropertyRowMapper<AttivitaDisponibili>(AttivitaDisponibili.class));
 	}
 
 	@Override

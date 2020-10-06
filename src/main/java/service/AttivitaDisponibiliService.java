@@ -9,6 +9,7 @@ import repository.AttivitaDisponibiliDao;
 
 @Service
 public class AttivitaDisponibiliService implements AttivitaDisponibiliServiceInt {
+
 	@Autowired
 	AttivitaDisponibiliDao attivitaDisponibiliDao;
 	

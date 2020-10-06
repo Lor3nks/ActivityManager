@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import domain.AttivitaDisponibili;
 import domain.AttivitaSvolte;
 import domain.Impiegato;
 
@@ -28,9 +29,10 @@ public class AttivitaSvolteDao implements AttivitaSvolteDaoInt{
 	
 	@Override
 	public int salva(AttivitaSvolte as) {
-		String sql="insert into attivita_svolte values(?,?,?,?,?,?)";
-		return jdbcTemplate.update(sql,new Object[] { as.getImp().getUsername(),as.getAtt_Disp().getid_Disp(),Date.valueOf(as.getData_Attivita()), Time.valueOf(as.getOra_Inizio()), Time.valueOf(as.getOra_Fine()),as.getNote()});
-		
+		String sql="insert into attivita_svolte (USERNAME,ID_DISP,DATA_ATTIVITA,ORA_INIZIO,ORA_FINE,NOTE) values(?,?,?,?,?,?)";
+		//return jdbcTemplate.update(sql,new Object[] { as.getImp().getUsername(),as.getAtt_Disp().getid_Disp(),Date.valueOf(as.getData_Attivita()), Time.valueOf(as.getOra_Inizio()), Time.valueOf(as.getOra_Fine()),as.getNote()});
+		//return jdbcTemplate.update(sql,new Object[] { as.getImp().getUsername(),as.getAtt_Disp().getid_Disp(),Date.valueOf(as.getData_Attivita()), as.getOra_Inizio().toString(), as.getOra_Fine().toString(),as.getNote()});
+		return jdbcTemplate.update(sql,new Object[] { as.getImp().getUsername(),as.getAtt_Disp().getid_Disp(),Date.valueOf(as.getData_Attivita()), as.getOra_Inizio(), as.getOra_Fine(),as.getNote()});
 	}
 	
 
@@ -43,7 +45,6 @@ public class AttivitaSvolteDao implements AttivitaSvolteDaoInt{
 
 	@Override
 	public List<AttivitaSvolte> getAllAttivitaSvolte() {
-		
 			String sql="select * from attivita_svolte";
 			return jdbcTemplate.query(sql, new BeanPropertyRowMapper<AttivitaSvolte>(AttivitaSvolte.class));
 		}
@@ -53,6 +54,24 @@ public class AttivitaSvolteDao implements AttivitaSvolteDaoInt{
 		String sql="select * from attivita_svolte where username=?";
 		return jdbcTemplate.query(sql,new BeanPropertyRowMapper<AttivitaSvolte>(AttivitaSvolte.class),i.getUsername()); 
 		
+	}
+
+	@Override
+	public String getIdAttivitaDisponibili(int idSv) {
+		String sql = "SELECT ID_DISP FROM ATTIVITA_SVOLTE WHERE ID_TRIGG=?";
+		return jdbcTemplate.queryForObject(sql, String.class, idSv);		
+	}
+
+	@Override
+	public int cancellaAttivitaSvolte(int idSv) {
+		String sql="DELETE FROM ATTIVITA_SVOLTE WHERE ID_TRIGG=?";
+		return jdbcTemplate.update(sql,new Object[] {idSv});
+	}
+
+	@Override
+	public AttivitaSvolte leggiAttivitaSvolteById(int idSv) {
+		String sql="SELECT * FROM ATTIVITA_SVOLTE WHERE ID_TRIGG=?";
+		return jdbcTemplate.queryForObject(sql, new Object[] { idSv },new BeanPropertyRowMapper<AttivitaSvolte>(AttivitaSvolte.class));
 	}
 		
 }

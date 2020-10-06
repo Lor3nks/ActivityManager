@@ -6,7 +6,7 @@ public class AttivitaDisponibili {
  
 	private String id_Disp;
 	private String descrizione;
-	private String abilitazione;
+	private int abilitazione;
 	private List<Impiegato> impiegato;
 	
 
@@ -20,7 +20,14 @@ public class AttivitaDisponibili {
 		this.descrizione = descrizione;
 	}
 
-	public AttivitaDisponibili(String id_Disp, String descrizione, String abilitazione,List<Impiegato> impiegato) {
+	public AttivitaDisponibili(String id_Disp, String descrizione, int abilitazione) {
+		super();
+		this.id_Disp = id_Disp;
+		this.descrizione = descrizione;
+		this.abilitazione = abilitazione;
+	}	
+	
+	public AttivitaDisponibili(String id_Disp, String descrizione, int abilitazione,List<Impiegato> impiegato) {
 		super();
 		this.id_Disp = id_Disp;
 		this.descrizione = descrizione;
@@ -44,11 +51,11 @@ public class AttivitaDisponibili {
 		this.descrizione = descrizione;
 	}
 
-	public String getAbilitazione() {
+	public int getAbilitazione() {
 		return abilitazione;
 	}
 
-	public void setAbilitazione(String abilitazione) {
+	public void setAbilitazione(int abilitazione) {
 		this.abilitazione = abilitazione;
 	}
 
@@ -62,6 +69,4 @@ public class AttivitaDisponibili {
 		this.impiegato = impiegato;
 	}
 
-	
-	
 }
