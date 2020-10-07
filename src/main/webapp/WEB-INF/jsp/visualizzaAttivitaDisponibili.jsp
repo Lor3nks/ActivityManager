@@ -17,7 +17,8 @@
           <th>Id</th>
           <th>Descrizione</th>
           <th>Abilitazione</th>
-          <th>Modifica</th>
+          <th>Modifica Abilitazione</th>
+           <th>Modifica Attività</th>
           <th>Cancella</th>
         </tr>
 	<c:forEach items="${attDisp}" var="attDisp">
