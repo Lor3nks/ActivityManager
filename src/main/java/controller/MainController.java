@@ -368,7 +368,7 @@ public class MainController {
 		return "visualizzaAttivitaSvolteImpiegato";
 	}
 	
-	
+	  
 
 	@RequestMapping(value= "/visualizzaListaImpiegati")
 	public String visualizzaListaImpiegati(Model model) {
@@ -390,6 +390,13 @@ public class MainController {
 		rd.forward(request, response);
 	}
 	
+	@RequestMapping(value= "/modificaDatiImpStep1")
+	public void modificaDatiImpStep1(@RequestParam String userName,Model model,HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		logger.info("-> modificaDatiImpStep1 chiamata");
+	
+	
+	}	
 	
 	@RequestMapping(value = "/sendEmail")
 	public String sendEmail(@ModelAttribute Impiegato impiegato, Model model,
