@@ -39,6 +39,11 @@ public class AttivitaDisponibiliService implements AttivitaDisponibiliServiceInt
 		return attivitaDisponibiliDao.getAllAttivitaDisponibili();
 	}
 
+	@Override
+	public int cancellaAttivitaDisponibili(String idAd) {
+	    return attivitaDisponibiliDao.cancellaAttivitaDisponibili(idAd);
+	}
+
 	
 
 }

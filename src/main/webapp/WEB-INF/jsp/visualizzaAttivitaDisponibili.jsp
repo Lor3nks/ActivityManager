@@ -28,7 +28,7 @@
           <th>${attDisp.abilitazione}</th>
           <th><a href="aggiornaAbilitazioneAttivitaDisponibili?id=${attDisp.id_Disp}">Abilita/Disabilita</a></th>
           <th><a href="">Modifica</a></th>
-          <th><a href="">Cancella</a></th>
+  <th><a type="submit "href="cancellaAttivitaDisponibili?id=${attDisp.id_Trigg}">Cancella</a></th>
           
         </tr>
      	

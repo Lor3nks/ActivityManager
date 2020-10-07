@@ -53,5 +53,12 @@ public class AttivitaDisponibiliDao implements AttivitaDisponibiliDaoInt {
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<AttivitaDisponibili>(AttivitaDisponibili.class));		
 	}
 
+
+	@Override
+	public int cancellaAttivitaDisponibili(String idAd) {
+		String sql="DELETE FROM ATTIVITA_DISPONIBILI WHERE ID_DISP=?";
+		return jdbcTemplate.update(sql,new Object[] {idAd});
+	}
+
 	
 }
