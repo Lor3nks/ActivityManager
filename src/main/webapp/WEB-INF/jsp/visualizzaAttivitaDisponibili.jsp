@@ -39,6 +39,6 @@
 
     <button type="submit">Aggiungi</button>
 </form:form>
-<a href= "menuAmministratore" >Torna indietro</a>
+<a href= "menuAmministratore" ><button>Menu</button></a>
 </body>
 </html>
