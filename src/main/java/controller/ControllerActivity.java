@@ -292,4 +292,11 @@ public class ControllerActivity {
 		return "logout";
 	} 	
 	
+	
+	@RequestMapping(value="/cambiaPassword")
+	public String cambiaPassword(@ModelAttribute Impiegato impiegato, Model model,
+			HttpServletRequest request){
+		logger.info("-> cambiaPassword chiamata");
+		return "cambiaPassword";
+	}
 }

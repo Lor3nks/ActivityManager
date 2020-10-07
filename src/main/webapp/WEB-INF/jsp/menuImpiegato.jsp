@@ -14,7 +14,7 @@
  <ol>
  <li><a href="visualizzaAttivitaSvolteImpiegato">Visualizza Attività</a></li>
  <li><a href="formAttivitaSvolte">Gestione Attività Svolte</a></li>
- <li><a href="">Modifica Password</a></li>
+ <li><a href="cambiaPassword">Modifica Password</a></li>
  <li><a href="logout">Logout</a></li>
  </ol>
 </form>
