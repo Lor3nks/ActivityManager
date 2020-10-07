@@ -58,7 +58,7 @@ public class MainController {
 	@Autowired
 	private JavaMailSender mailSender;
 
-	private static final Log logger = LogFactory.getLog(ControllerActivity.class);
+	private static final Log logger = LogFactory.getLog(MainController.class);
 	
 	private static String recipientMail;
 	private static final String senderMail = "activitytraker@yahoo.com";
