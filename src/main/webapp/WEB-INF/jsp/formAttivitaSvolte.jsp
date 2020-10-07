@@ -15,17 +15,17 @@
 	<p>
 	    <label for="data_Attivita">Data attività: </label>
 	    <form:input type="text" id="data_Attivita" path="data_Attivita" autocomplete="off"/>
-	    <!-- <p id="error" class="error"><form:errors path="data_Attivita" /></p>  -->	
+	    <p id="error" class="error"><form:errors path="data_Attivita" /></p>	
 	</p>
 	<p>
 	    <label for="ora_Inizio">Ora inizio: </label>
 	    <form:input type="text" id="ora_Inizio" path="ora_Inizio" autocomplete="off"/>
-	    <!-- <p class="error"><form:errors path="ora_Inizio" /></p> -->
+	    <p class="error"><form:errors path="ora_Inizio" /></p>
 	</p>
 	<p>
 	    <label for="ora_Fine">Ora fine: </label>
 	    <form:input type="text" id="ora_Fine" path="ora_Fine" autocomplete="off"/>
-	    <!-- <p class="error"><form:errors path="ora_Fine" /></p>	 -->
+	    <p class="error"><form:errors path="ora_Fine" /></p>
 	</p>
 	
 	<p>

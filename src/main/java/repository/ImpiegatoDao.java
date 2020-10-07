@@ -63,8 +63,8 @@ public class ImpiegatoDao implements ImpiegatoDaoInt {
 
 	@Override
 	public int modificaAbilitazione(String username, boolean abilitazione) {
-		String sql = "UPDATE ABILITAZIONE FROM IMPIEGATO WHERE USERNAME=?";
-		return jdbcTemplate.update(sql, new Object[] {username, abilitazione});
+		String sql = "UPDATE IMPIEGATO SET ABILITAZIONE=? WHERE USERNAME=?";
+		return jdbcTemplate.update(sql, new Object[] {abilitazione,username});
 	}
 
 	@Override

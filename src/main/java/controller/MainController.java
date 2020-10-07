@@ -280,7 +280,8 @@ public class MainController {
 	@RequestMapping(value ="/visualizzaAttivitaSvolte")
 	public String visuailzzaAttivitaSvolte(Model model,HttpServletRequest request, HttpSession session) {
 		logger.info("-> visualizzaAttivitaSvolteImpiegato chiamata");
-		List<AttivitaSvolte> attSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolte();
+		Impiegato imp=(Impiegato)session.getAttribute("impiegato");
+		List<AttivitaSvolte> attSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolteDaImpiegato(imp);
 		//Recupero oggetto AttDisponibili e lo inserisco in AttSvolte
 		for(AttivitaSvolte a: attSvolte) { 
 			logger.info("-> recupero attDisp");
@@ -292,8 +293,6 @@ public class MainController {
 		model.addAttribute("attSvolte",attSvolte);
 		return "visualizzaAttivitaSvolte";
 	}
-	
-	
 	
 	
 	
@@ -320,7 +319,7 @@ public class MainController {
 					return "modificaAttivitaSvolte";
 				}
 			}
-		RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaSvolte");
+		RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaSvolteImpiegato");
 		rd.forward(request, response);
 		return "";		
 	}
@@ -332,8 +331,6 @@ public class MainController {
 		model.addAttribute("attDisp", attDisp);
 		return "visualizzaAttivitaDisponibili";
 	}
-	
-	
 	
 	
 	
@@ -355,7 +352,7 @@ public class MainController {
 		return "visualizzaAttivitaSvolteImpiegato";
 	}
 	
-
+	
 
 	@RequestMapping(value= "/visualizzaListaImpiegati")
 	public String visualizzaListaImpiegati(Model model) {
@@ -365,7 +362,17 @@ public class MainController {
 		return "visualizzaListaImpiegati";
 	}
 	
-	
+	@RequestMapping(value= "/modificaAbilitazioneImp")
+	public void modificaAbilitazioneImp(@RequestParam String userName,Model model,HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		logger.info("-> modificaAbilitazioneImp chiamata");
+		Impiegato imp=new Impiegato();
+		boolean impBoolAbil=impiegatoServiceInt.recuperaImpiegatoByUser(userName).isAbilitazione();
+		if(impBoolAbil) impiegatoServiceInt.modificaAbilitazioneImpiegato(userName, false);
+		else impiegatoServiceInt.modificaAbilitazioneImpiegato(userName, true);
+		RequestDispatcher rd=request.getRequestDispatcher("visualizzaListaImpiegati");
+		rd.forward(request, response);
+	}
 	
 	
 	@RequestMapping(value = "/sendEmail")

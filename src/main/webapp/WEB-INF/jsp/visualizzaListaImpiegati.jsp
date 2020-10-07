@@ -12,12 +12,10 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<form:form modelAttribute="listaImpiegato" action="" method="post">
 				<table class="table table-hover table-striped">
 					<thead>
 						<tr>
 							<th>Username</th>
-							<th>Password</th>
 							<th>E-mail</th>
 							<th>Nome</th>
 							<th>Cognome</th>
@@ -28,20 +26,29 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach items="${listaImpiegati}" var="impiegato">
 						<tr>
-							<th>${impiegato.username}</th>
-							<th>${impiegato.password}</th>
-							<th>${impiegato.email}</th>
-							<th>${impiegato.nome}</th>
-							<th>${impiegato.cognome}</th>
-							<th>${impiegato.dataNascita}</th>
-							<th>${impiegato.abilitazione}</th>
-							<th>${impiegato.ruolo}</th>
-							<th><a href="">Modifica</a></th>
+							<td>${impiegato.username}</td>
+							<td>${impiegato.email}</td>
+							<td>${impiegato.nome}</td>
+							<td>${impiegato.cognome}</td>
+							<td>${impiegato.dataNascita}</td>
+							<c:choose>
+							<c:when test="${impiegato.abilitazione==true}">
+							<td>Abilitato</td>
+							</c:when>
+							<c:otherwise>
+							<td>Disabilitato</td>
+							</c:otherwise>
+							</c:choose>
+							<td>${impiegato.ruolo}</td>
+							<td><a href="">Modifica</a></td>
+							<td><a href="modificaAbilitazioneImp?userName=${impiegato.username}">Abilita Si/No</a></td>
 						</tr>
+						</c:forEach>
 					</tbody>
 				</table>
-			</form:form>
+	
 		</div>
 		<div class="row">
 			<a href="menuAmministratore">Torna indietro</a>
