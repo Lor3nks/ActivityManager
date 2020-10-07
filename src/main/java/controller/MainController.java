@@ -302,7 +302,7 @@ public class MainController {
 	public void cancellaAttivitaDisponibili(@RequestParam String id,Model model,
 			HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		logger.info("-> cancellaAttivitaDisponibili chiamata");	
-		attivitaDisponibiliServiceInt.cancellaAttivitaD1isponibili(id);
+		attivitaDisponibiliServiceInt.cancellaAttivitaDisponibili(id);
 		RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaDisponibili");
 		rd.forward(request, response);
 	}
