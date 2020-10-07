@@ -25,8 +25,8 @@ public class AttivitaDisponibiliService implements AttivitaDisponibiliServiceInt
 	}
 
 	@Override
-	public int modificaAbilitazioneAttivitaDisponibili(AttivitaDisponibili ad) {
-		return attivitaDisponibiliDao.modificaAbilitazione(ad);
+	public int modificaAbilitazioneAttivitaDisponibili(AttivitaDisponibili ad, boolean ab) {
+		return attivitaDisponibiliDao.modificaAbilitazione(ad, ab);
 	}
 
 	@Override
