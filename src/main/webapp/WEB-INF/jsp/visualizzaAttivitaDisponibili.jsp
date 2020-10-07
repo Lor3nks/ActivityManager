@@ -25,6 +25,7 @@
           <th>${attDisp.id_Disp}</th>
           <th>${attDisp.descrizione}</th>
           <th>${attDisp.abilitazione}</th>
+          <th><a href="aggiornaAbilitazioneAttivitaDisponibili?id=${attDisp.id_Disp}">Abilita/Disabilita</a></th>
           <th><a href="">Modifica</a></th>
           <th><a href="">Cancella</a></th>
           

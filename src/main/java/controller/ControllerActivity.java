@@ -299,4 +299,14 @@ public class ControllerActivity {
 		logger.info("-> cambiaPassword chiamata");
 		return "cambiaPassword";
 	}
+	
+	@RequestMapping(value ="/visualizzaAttivitaDisponibili")
+	public String visuailzzaAttivitaDisponibili(Model model,HttpServletRequest request, HttpSession session) {
+		logger.info("-> visualizzaAttivitaDisponibili chiamata");
+		List<AttivitaDisponibili> attDisp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
+		model.addAttribute("attDisp", attDisp);
+		return "visualizzaAttivitaDisponibili";
+	}
+	
+	
 }
