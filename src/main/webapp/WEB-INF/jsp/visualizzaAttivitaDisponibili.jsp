@@ -19,7 +19,7 @@
           <th>Abilitazione</th>
           <th>Modifica Abilitazione</th>
            <th>Modifica Attività</th>
-          <th>Cancella</th>
+          
         </tr>
 	<c:forEach items="${attDisp}" var="attDisp">
         <tr>
@@ -27,8 +27,8 @@
           <th>${attDisp.descrizione}</th>
           <th>${attDisp.abilitazione}</th>
           <th><a href="aggiornaAbilitazioneAttivitaDisponibili?id=${attDisp.id_Disp}">Abilita/Disabilita</a></th>
-          <th><a href="">Modifica</a></th>
-  <th><a type="submit "href="cancellaAttivitaDisponibili?id=${attDisp.id_Trigg}">Cancella</a></th>
+          <th><a href="modificaAttivitaDisponibili">Modifica</a></th>
+  
           
         </tr>
      	

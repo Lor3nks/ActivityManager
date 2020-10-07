@@ -332,6 +332,22 @@ public class MainController {
 		return "visualizzaAttivitaDisponibili";
 	}
 	
+	@RequestMapping(value ="/aggiornaAbilitazioneAttivitaDisponibili")
+	public void aggiornaAbilitazioneAttivitaDisponibili(@RequestParam String id,@ModelAttribute AttivitaDisponibili attivitaDisponibili, Model model,HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		logger.info("-> aggiornaAbilitazioneAttivitaDisponibili chiamata");
+		AttivitaDisponibili attDisp =attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(id);
+		attDisp.getAbilitazione();
+		if(attDisp.getAbilitazione()==1) {
+			attivitaDisponibiliServiceInt.modificaAbilitazioneAttivitaDisponibili(attDisp, false);
+			 
+			
+		}else {
+			attivitaDisponibiliServiceInt.modificaAbilitazioneAttivitaDisponibili(attDisp, true);
+		}
+		RequestDispatcher rd= request.getRequestDispatcher("visualizzaAttivitaDisponibili");
+		rd.forward(request, response);
+		}
+	
 	
 	
 //////////////////////////////////////// IMPIEGATI /////////////////////////////////////

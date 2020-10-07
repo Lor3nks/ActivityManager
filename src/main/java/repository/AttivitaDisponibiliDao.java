@@ -36,9 +36,9 @@ public class AttivitaDisponibiliDao implements AttivitaDisponibiliDaoInt {
 	}
 	
 	@Override
-	public int modificaAbilitazione(AttivitaDisponibili ad) {
+	public int modificaAbilitazione(AttivitaDisponibili ad, boolean ab) {
 		String sql = "UPDATE ATTIVITA_DISPONIBILI SET ABILITAZIONE=? WHERE ID_DISP=?";
-		return jdbcTemplate.update(sql,new Object[] {ad.getAbilitazione(), ad.getid_Disp() });
+		return jdbcTemplate.update(sql,new Object[] {ab, ad.getid_Disp() });
 	}
 
 	@Override
@@ -59,6 +59,9 @@ public class AttivitaDisponibiliDao implements AttivitaDisponibiliDaoInt {
 		String sql="DELETE FROM ATTIVITA_DISPONIBILI WHERE ID_DISP=?";
 		return jdbcTemplate.update(sql,new Object[] {idAd});
 	}
+
+
+	
 
 	
 }
