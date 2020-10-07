@@ -11,6 +11,13 @@
 <body>
 	<form  action="login"  method="post">
 			
+			<c:if test="${not empty error}">
+			<div class="error">${error}</div>
+		</c:if>
+		<c:if test="${not empty msg}">
+			<div class="msg">${msg}</div>
+		</c:if>
+			
 			<p>
 				<label for="username">Username:</label>	
 				<input name="username" type="text"/>
@@ -22,6 +29,10 @@
 			<p>
 				<button type="submit">Login</button>
 			</p>
+			
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />   
+			
 	</form>
 	
 	<p><a href=" " type="submit">Password dimenticata</a></p>
