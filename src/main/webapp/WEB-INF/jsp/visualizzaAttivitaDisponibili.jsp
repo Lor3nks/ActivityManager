@@ -38,7 +38,7 @@
   
 
     <button type="submit">Aggiungi</button>
+    <a href= "menuAmministratore" ><button>Menu</button></a>
 </form:form>
-<a href= "menuAmministratore" ><button>Menu</button></a>
 </body>
 </html>
