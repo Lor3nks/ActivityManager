@@ -69,22 +69,50 @@ public class MainController {
 		return "login";
 	}
 	
-	@RequestMapping(value = {"/placeholder", "/login"}, method = RequestMethod.GET)
-	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
-			@RequestParam(value = "logout", required = false) String logout) {
-
-		ModelAndView model = new ModelAndView();
+	@RequestMapping(value = "/login")
+	public String login(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout, Model model, HttpServletRequest request, HttpSession session) {
+		logger.info("-> Login chiamata");
+		
+		Impiegato i = new Impiegato();
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		i = impiegatoServiceInt.recuperaImpiegatoByUser(username);
+		System.out.println(i.getUsername());
+//		System.out.println(i.getUsername());		
+//		ModelAndView modelAndView = new ModelAndView();
 		if (error != null) {
-			model.addObject("error", "Invalid username and password!");
+//			modelAndView.addObject("error", "Username o password non validi");
+			model.addAttribute("error", "Username o password non validi.");
 		}
 
 		if (logout != null) {
-			model.addObject("msg", "You've been logged out successfully.");
+//			modelAndView.addObject("msg", "You've been logged out successfully.");
+			model.addAttribute("msg", "Hai effettuato il logout.");
 		}
-		model.setViewName("menuImpiegato");
+		
+		
+		if (i != null) {
+			if (i.getRuolo().equals("impiegato")) {
+				model.addAttribute("impiegato", i);
+				session.setAttribute("impiegato", i);
+//				modelAndView.setViewName("menuImpiegato");
+//				return modelAndView;
+				return "menuImpiegato";
+			} else {
+				session.setAttribute("amministratore", i);
+				model.addAttribute("amministratore", i);
+//				modelAndView.setViewName("menuAmministratore");
+//				return modelAndView;
+				return "menuAmministratore";
+			}
 
-		return model;
+//		return modelAndView;
 	}
+		return password;
+		
+	}
+	
 	
 		
 	@RequestMapping(value = {"/placeholder", "/formRegistrazione"})
@@ -136,9 +164,6 @@ public class MainController {
 		logger.info("-> cambiaPassword chiamata");
 		return "cambiaPassword";
 	}
-	
-
-	
 	
 	
 	
