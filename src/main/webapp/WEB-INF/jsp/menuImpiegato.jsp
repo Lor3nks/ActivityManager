@@ -9,7 +9,15 @@
 <title>Portale Dell'Impiegato</title>
 </head>
 <body>
-<h1>MENU ATTIVITA</h1>
+<h1>Menu Attivita</h1>
+<h2>Title : ${title}</h2>
+	<h2>Message : ${message}</h2>
+
+	<c:url value="/logout" var="logoutUrl" />
+	<form action="${logoutUrl}" method="post" id="logoutForm">
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+	</form>
  <form >
  <ol>
  <li><a href="visualizzaAttivitaSvolteImpiegato">Visualizza Attività</a></li>

@@ -33,11 +33,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import service.AmministratoreServiceInt;
 import service.AttivitaDisponibiliServiceInt;
 import service.AttivitaSvolteServiceInt;
 import service.ImpiegatoServiceInt;
-import domain.Amministratore;
 import domain.AttivitaDisponibili;
 import domain.AttivitaSvolte;
 import domain.Impiegato;
@@ -53,8 +51,7 @@ public class MainController {
 	@Autowired
 	AttivitaDisponibiliServiceInt attivitaDisponibiliServiceInt;
 	@Autowired
-	AmministratoreServiceInt amministratoreServiceInt;
-	
+    PasswordEncoder passwordEncoder;
 	@Autowired
 	private JavaMailSender mailSender;
 
@@ -64,6 +61,7 @@ public class MainController {
 	private static final String senderMail = "activitytraker@yahoo.com";
 	
 	
+/////////////////////////////////////////// ACCESSO /////////////////////////////////////////////////
 	
 	@RequestMapping(value= {"/", "/inputLogin"})
 	public String inputLogin() {
@@ -71,31 +69,126 @@ public class MainController {
 		return "login";
 	}
 	
-	@RequestMapping(value="/login")
-	public String login(Model model, HttpServletRequest request, HttpSession session) {
-		logger.info("-> login chiamata");
-		Impiegato i = new Impiegato();
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		i = impiegatoServiceInt.checkLoginImpiegato(username, password);
-		if (i != null) {
-			if (i.getRuolo().equals("impiegato")) {
-				model.addAttribute("impiegato", i);
-				session.setAttribute("impiegato", i);
-				return "menuImpiegato";
-			} else {
-				Amministratore a = new Amministratore();
-				session.setAttribute("aministratore", a);
-				model.addAttribute("amministratore", a);
-				return "menuAmministratore";
-			}
-		} else {
-			String errore = "Utente non registrato.";
-			model.addAttribute("errore", errore);
-			model.addAttribute(new Impiegato());
-			return "formRegistrazione";
+	@RequestMapping(value = {"/placeholder", "/login"}, method = RequestMethod.GET)
+	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout) {
+
+		ModelAndView model = new ModelAndView();
+		if (error != null) {
+			model.addObject("error", "Invalid username and password!");
 		}
+
+		if (logout != null) {
+			model.addObject("msg", "You've been logged out successfully.");
+		}
+		model.setViewName("menuImpiegato");
+
+		return model;
 	}
+	
+		
+	@RequestMapping(value = {"/placeholder", "/formRegistrazione"})
+	public String formRegistrazione(Model model) {
+		model.addAttribute(new Impiegato());
+		return "formRegistrazione";
+	}
+	
+	@RequestMapping(value = "/registrazione")
+	public String registrazione(@ModelAttribute Impiegato impiegato, BindingResult bindingResult, Model model,
+			HttpServletRequest request) {
+		
+		if (bindingResult.hasErrors()) {
+			FieldError fieldError = bindingResult.getFieldError();
+			System.out.println("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
+			return "formRegistrazione";
+		} else if (!impiegato.getPassword().equals(request.getParameter("confermaPassword"))) {
+			String errore = "Le password non coincidono.";
+			model.addAttribute("errore", errore);
+			return "formRegistrazione";
+		} else {
+			try {
+				String encrPwd = passwordEncoder.encode(impiegato.getPassword());
+				impiegato.setPassword(encrPwd);	
+				impiegatoServiceInt.inserisciImpiegato(impiegato);
+			} catch (Exception e) {
+				String errore = "Non è stato possibile aggiungere il tuo acccount.";
+				model.addAttribute("errore", errore);
+				return "formRegistrazione";
+			}
+		}
+		model.addAttribute("title", "Registrazione Riuscita");
+		model.addAttribute("message", "Benvenuto, "+impiegato.getUsername()+"!");
+		return "menuImpiegato";
+	}
+
+	
+	@RequestMapping(value="/logout")
+	public String logout( HttpServletRequest request, HttpSession session) {
+		logger.info("-> logout chiamata");
+		session.invalidate();
+		return "logout";
+	} 	
+	
+	
+	@RequestMapping(value="/cambiaPassword")
+	public String cambiaPassword(@ModelAttribute Impiegato impiegato, Model model,
+			HttpServletRequest request){
+		logger.info("-> cambiaPassword chiamata");
+		return "cambiaPassword";
+	}
+	
+
+	
+	
+	
+	
+
+	@RequestMapping(value = "/welcome**", method = RequestMethod.GET)
+	public ModelAndView defaultPage() {
+
+		ModelAndView model = new ModelAndView();
+		model.addObject("title", "Spring Security Login Form - Database Authentication");
+		model.addObject("message", "This is default page!");
+		model.setViewName("hello");
+		return model;
+
+	}
+
+	@RequestMapping(value = "/admin**", method = RequestMethod.GET)
+	public ModelAndView adminPage() {
+
+		ModelAndView model = new ModelAndView();
+		model.addObject("title", "Spring Security Login Form - Database Authentication");
+		model.addObject("message", "Pagina visibile solo all'AMMINISTRATORE");
+		model.setViewName("admin");
+
+		return model;
+
+	}
+
+	
+	//for 403 access denied page
+	@RequestMapping(value = "/403", method = RequestMethod.GET)
+	public ModelAndView accesssDenied() {
+
+		ModelAndView model = new ModelAndView();
+		
+		//check if user is login
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			UserDetails userDetail = (UserDetails) auth.getPrincipal();
+			System.out.println(userDetail);
+		
+			model.addObject("username", userDetail.getUsername());
+			
+		}
+		
+		model.setViewName("403");
+		return model;
+	}
+	
+	
+////////////////////////////////// ATTIVTA' SVOLTE E DISPONIBILI ////////////////////////////////////////
 	
 	@RequestMapping(value = "/formAttivitaSvolte")
 	public String login(Model model) {
@@ -134,77 +227,29 @@ public class MainController {
 		return "menuImpiegato";
 	}
 	
-	@RequestMapping(value = "/formRegistrazione")
-	public String formRegistrazione(Model model) {
-		logger.info("-> form registrazione chiamata");
-		model.addAttribute(new Impiegato());
-		return "formRegistrazione";
-	}
-
-	@RequestMapping(value = "/registrazione")
-	public String registrazione(@ModelAttribute Impiegato impiegato, BindingResult bindingResult, Model model,
-			HttpServletRequest request) {
-		logger.info("-> registrazione chiamata");
-		if (bindingResult.hasErrors()) {
-			FieldError fieldError = bindingResult.getFieldError();
-			System.out.println("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
-			return "formRegistrazione";
-		} else if (!impiegato.getPassword().equals(request.getParameter("confermaPassword"))) {
-			String errore = "Le password non coincidono.";
-			model.addAttribute("errore", errore);
-			return "formRegistrazione";
-		} else {
-			try { 
-				impiegatoServiceInt.inserisciImpiegato(impiegato);
-			} catch (Exception e) {
-				String errore = "Non è stato possibile aggiungere il tuo acccount.";
-				model.addAttribute("errore", errore);
-				return "formRegistrazione";
-			}
-		}
-		return "index";
-	}
 	
-	@RequestMapping(value= "/visualizzaListaImpiegati")
-	public String visualizzaListaImpiegati() {
-		logger.info("-> visListaImpiegati chiamata");
-		return "visualizzaListaImpiegati";
+	@RequestMapping(value ="/cancellaAttivitaSvolte")
+	public void cancellaAttivitaSvolte(@RequestParam int id,Model model,
+			HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		logger.info("-> cancellaAttivitaSvolte chiamata");	
+		attivitaSvolteServiceInt.eliminaAttivitaSvolte(id);
+		RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaSvolte");
+		rd.forward(request, response);
 	}
+
 	
-	@RequestMapping(value = "/sendEmail")
-	public String sendEmail(@ModelAttribute Impiegato impiegato, Model model,
-			HttpServletRequest request) {
-		logger.info("-> sendEmail chiamata");
-
-		
-		String alph = new String("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
-		int n = alph.length();
-
-		String newPassword = new String(); 
-		SecureRandom r = new SecureRandom();
-
-		for (int i=0; i<10; i++) {
-		    newPassword = newPassword + alph.charAt(r.nextInt(n));
+	@RequestMapping(value ="/aggiornaAttivitaSvolte")
+	public String aggiornaAttivitaSvolte(@RequestParam int id,@ModelAttribute AttivitaSvolte attivitaSvolte,Model model,HttpServletRequest request, HttpSession session) {
+		logger.info("-> aggiornaAttivitaSvolte chiamata");
+		attivitaSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolteById(id);
+		String codAttDisp=attivitaSvolteServiceInt.getAttIdDispFromAttSvolte(attivitaSvolte.getId_Trigg());
+		AttivitaDisponibili attDispo=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(codAttDisp);
+		attivitaSvolte.setAtt_Disp(attDispo);		
+		List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
+		model.addAttribute("att_Disp",att_Disp);		
+		model.addAttribute("attivitaSvolte",attivitaSvolte);
+		return "modificaAttivitaSvolte";
 		}
-		
-		final String mailMessage = "La tua nuova password è "+newPassword;
-		
-		
-		recipientMail = request.getParameter("mailTo");
-		
-		mailSender.send(new MimeMessagePreparator() {
-			public void prepare(MimeMessage mimeMessage) throws Exception {
-
-				MimeMessageHelper mimeMsgHelperObj = new MimeMessageHelper(mimeMessage, true, "UTF-8");				
-				mimeMsgHelperObj.setTo(recipientMail);
-				mimeMsgHelperObj.setFrom(senderMail);				
-				mimeMsgHelperObj.setText(mailMessage);
-				mimeMsgHelperObj.setSubject("Reset Password");
-			}
-		});
-		
-		return "menuAmministratore";
-	}
 	
 
 	@RequestMapping(value ="/visualizzaAttivitaSvolte")
@@ -224,43 +269,8 @@ public class MainController {
 	}
 	
 	
-	@RequestMapping(value ="/visualizzaAttivitaSvolteImpiegato")
-	public String visuailzzaAttivitaSvolteImpiegato(Model model,HttpServletRequest request, HttpSession session) {
-		logger.info("-> visualizzaAttivitaSvolteImpiegato chiamata");
-		List<AttivitaSvolte> attSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolteDaImpiegato((Impiegato)session.getAttribute("impiegato"));
-		//Recupero oggetto AttDisponibili e lo inserisco in AttSvolte
-		for(AttivitaSvolte a: attSvolte) { 
-			logger.info("-> recupero attDisp");
-			String codAttDisp=attivitaSvolteServiceInt.getAttIdDispFromAttSvolte(a.getId_Trigg());
-			AttivitaDisponibili attDispo=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(codAttDisp);
-			//System.out.println(attDispo.getid_Disp()+" "+attDispo.getDescrizione());
-			a.setAtt_Disp(attDispo);
-		}
-		model.addAttribute("attSvolte",attSvolte);
-		return "visualizzaAttivitaSvolteImpiegato";
-	}
 	
-	@RequestMapping(value ="/cancellaAttivitaSvolte")
-	public void cancellaAttivitaSvolte(@RequestParam int id,Model model,
-			HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		logger.info("-> cancellaAttivitaSvolte chiamata");	
-		attivitaSvolteServiceInt.eliminaAttivitaSvolte(id);
-		RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaSvolte");
-		rd.forward(request, response);
-	}
-
-	@RequestMapping(value ="/aggiornaAttivitaSvolte")
-	public String aggiornaAttivitaSvolte(@RequestParam int id,@ModelAttribute AttivitaSvolte attivitaSvolte,Model model,HttpServletRequest request, HttpSession session) {
-		logger.info("-> aggiornaAttivitaSvolte chiamata");
-		attivitaSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolteById(id);
-		String codAttDisp=attivitaSvolteServiceInt.getAttIdDispFromAttSvolte(attivitaSvolte.getId_Trigg());
-		AttivitaDisponibili attDispo=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(codAttDisp);
-		attivitaSvolte.setAtt_Disp(attDispo);		
-		List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
-		model.addAttribute("att_Disp",att_Disp);		
-		model.addAttribute("attivitaSvolte",attivitaSvolte);
-		return "modificaAttivitaSvolte";
-		}
+	
 	
 	@RequestMapping(value ="/aggiornaSuDBAttivitaSvolte")
 	public String aggiornaSuDBAttivitaSvolte(@ModelAttribute AttivitaSvolte attivitaSvolte, BindingResult bindingResult, 
@@ -298,109 +308,125 @@ public class MainController {
 		return "visualizzaAttivitaDisponibili";
 	}
 	
-	@RequestMapping(value ="/cancellaAttivitaDisponibili")
-	public void cancellaAttivitaDisponibili(@RequestParam String id,Model model,
-			HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		logger.info("-> cancellaAttivitaDisponibili chiamata");	
-		attivitaDisponibiliServiceInt.cancellaAttivitaDisponibili(id);
-		RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaDisponibili");
-		rd.forward(request, response);
-	}
-	
-	@RequestMapping(value="/logout")
-	public String logout( HttpServletRequest request, HttpSession session) {
-		logger.info("-> logout chiamata");
-		session.invalidate();
-		return "logout";
-	} 	
-	
-	
-	@RequestMapping(value="/cambiaPassword")
-	public String cambiaPassword(@ModelAttribute Impiegato impiegato, Model model,
-			HttpServletRequest request){
-		logger.info("-> cambiaPassword chiamata");
-		return "cambiaPassword";
-	}
 	
 	
 	
 	
+//////////////////////////////////////// IMPIEGATI /////////////////////////////////////
 	
-
-	@RequestMapping(value = "/welcome**", method = RequestMethod.GET)
-	public ModelAndView defaultPage() {
-
-		ModelAndView model = new ModelAndView();
-		model.addObject("title", "Spring Security Login Form - Database Authentication");
-		model.addObject("message", "This is default page!");
-		model.setViewName("hello");
-		return model;
-
-	}
-
-	@RequestMapping(value = "/admin**", method = RequestMethod.GET)
-	public ModelAndView adminPage() {
-
-		ModelAndView model = new ModelAndView();
-		model.addObject("title", "Spring Security Login Form - Database Authentication");
-		model.addObject("message", "Pagina visibile al solo AMMINISTRATORE");
-		model.setViewName("admin");
-
-		return model;
-
-	}
-
-	@RequestMapping(value = {"/", "/2login"}, method = RequestMethod.GET)
-	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
-			@RequestParam(value = "logout", required = false) String logout) {
-
-		ModelAndView model = new ModelAndView();
-		if (error != null) {
-			model.addObject("error", "Invalid username and password!");
+	@RequestMapping(value ="/visualizzaAttivitaSvolteImpiegato")
+	public String visuailzzaAttivitaSvolteImpiegato(Model model,HttpServletRequest request, HttpSession session) {
+		logger.info("-> visualizzaAttivitaSvolteImpiegato chiamata");
+		List<AttivitaSvolte> attSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolteDaImpiegato((Impiegato)session.getAttribute("impiegato"));
+		//Recupero oggetto AttDisponibili e lo inserisco in AttSvolte
+		for(AttivitaSvolte a: attSvolte) { 
+			logger.info("-> recupero attDisp");
+			String codAttDisp=attivitaSvolteServiceInt.getAttIdDispFromAttSvolte(a.getId_Trigg());
+			AttivitaDisponibili attDispo=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(codAttDisp);
+			//System.out.println(attDispo.getid_Disp()+" "+attDispo.getDescrizione());
+			a.setAtt_Disp(attDispo);
 		}
-
-		if (logout != null) {
-			model.addObject("msg", "You've been logged out successfully.");
-		}
-		model.setViewName("login");
-
-		return model;
-
+		model.addAttribute("attSvolte",attSvolte);
+		return "visualizzaAttivitaSvolteImpiegato";
 	}
 	
-	//for 403 access denied page
-	@RequestMapping(value = "/403", method = RequestMethod.GET)
-	public ModelAndView accesssDenied() {
 
-		ModelAndView model = new ModelAndView();
+
+	@RequestMapping(value= "/visualizzaListaImpiegati")
+	public String visualizzaListaImpiegati(Model model) {
+		logger.info("-> visListaImpiegati chiamata");
+		List<Impiegato> lista = impiegatoServiceInt.recuperaImpiegati();
+		model.addAttribute("listaImpiegati", lista);
+		return "visualizzaListaImpiegati";
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "/sendEmail")
+	public String sendEmail(@ModelAttribute Impiegato impiegato, Model model,
+			HttpServletRequest request) {
+		logger.info("-> sendEmail chiamata");
+
 		
-		//check if user is login
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (!(auth instanceof AnonymousAuthenticationToken)) {
-			UserDetails userDetail = (UserDetails) auth.getPrincipal();
-			System.out.println(userDetail);
-		
-			model.addObject("username", userDetail.getUsername());
-			
+		String alph = new String("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+		int n = alph.length();
+
+		String newPassword = new String(); 
+		SecureRandom r = new SecureRandom();
+
+		for (int i=0; i<10; i++) {
+		    newPassword = newPassword + alph.charAt(r.nextInt(n));
 		}
 		
-		model.setViewName("403");
-		return model;
+		final String mailMessage = "La tua nuova password è "+newPassword;
+		
+		
+		recipientMail = request.getParameter("mailTo");
+		
+		mailSender.send(new MimeMessagePreparator() {
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+
+				MimeMessageHelper mimeMsgHelperObj = new MimeMessageHelper(mimeMessage, true, "UTF-8");				
+				mimeMsgHelperObj.setTo(recipientMail);
+				mimeMsgHelperObj.setFrom(senderMail);				
+				mimeMsgHelperObj.setText(mailMessage);
+				mimeMsgHelperObj.setSubject("Reset Password");
+			}
+		});
+		
+		return "menuAmministratore";
 	}
 	
-	@Autowired
-    PasswordEncoder passwordEncoder;
 	
-//	@RequestMapping(value = {"/placeholder", "/formRegistrazione"})
+//	@RequestMapping(value ="/cancellaAttivitaDisponibili")
+//	public void cancellaAttivitaDisponibili(@RequestParam String id,Model model,
+//			HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+//		logger.info("-> cancellaAttivitaDisponibili chiamata");	
+//		attivitaDisponibiliServiceInt.cancellaAttivitaDisponibili(id);
+//		RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaDisponibili");
+//		rd.forward(request, response);
+//	}
+
+	
+//////////////////////////////////////////LOGIN VECCHIA	
+//	@RequestMapping(value="/login")
+//	public String login(Model model, HttpServletRequest request, HttpSession session) {
+//		logger.info("-> login chiamata");
+//		Impiegato i = new Impiegato();
+//		String username = request.getParameter("username");
+//		String password = request.getParameter("password");
+//		i = impiegatoServiceInt.checkLoginImpiegato(username, password);
+//		if (i != null) {
+//			if (i.getRuolo().equals("impiegato")) {
+//				model.addAttribute("impiegato", i);
+//				session.setAttribute("impiegato", i);
+//				return "menuImpiegato";
+//			} else {
+//				session.setAttribute("amministratore", i);
+//				model.addAttribute("amministratore", i);
+//				return "menuAmministratore";
+//			}
+//		} else {
+//			String errore = "Utente non registrato.";
+//			model.addAttribute("errore", errore);
+//			model.addAttribute(new Impiegato());
+//			return "formRegistrazione";
+//		}
+//	}
+	
+	
+//	@RequestMapping(value = "/formRegistrazione")
 //	public String formRegistrazione(Model model) {
+//		logger.info("-> form registrazione chiamata");
 //		model.addAttribute(new Impiegato());
 //		return "formRegistrazione";
 //	}
-//	
-//	@RequestMapping(value = "/2registrazione")
+//
+//	@RequestMapping(value = "/registrazione")
 //	public String registrazione(@ModelAttribute Impiegato impiegato, BindingResult bindingResult, Model model,
 //			HttpServletRequest request) {
-//		
+//		logger.info("-> registrazione chiamata");
 //		if (bindingResult.hasErrors()) {
 //			FieldError fieldError = bindingResult.getFieldError();
 //			System.out.println("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
@@ -408,11 +434,9 @@ public class MainController {
 //		} else if (!impiegato.getPassword().equals(request.getParameter("confermaPassword"))) {
 //			String errore = "Le password non coincidono.";
 //			model.addAttribute("errore", errore);
-//			return "register";
+//			return "formRegistrazione";
 //		} else {
-//			try {
-//				String encrPwd = passwordEncoder.encode(impiegato.getPassword());
-//				impiegato.setPassword(encrPwd);	
+//			try { 
 //				impiegatoServiceInt.inserisciImpiegato(impiegato);
 //			} catch (Exception e) {
 //				String errore = "Non è stato possibile aggiungere il tuo acccount.";
@@ -420,9 +444,6 @@ public class MainController {
 //				return "formRegistrazione";
 //			}
 //		}
-//		model.addAttribute("title", "Registrazione Riuscita");
-//		model.addAttribute("message", "Benvenuto, "+impiegato.getUsername()+"!");
-//		return "hello";
+//		return "menuImpiegato";
 //	}
-
 }
