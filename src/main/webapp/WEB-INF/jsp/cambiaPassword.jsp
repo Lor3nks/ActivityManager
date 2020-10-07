@@ -39,6 +39,7 @@
 		</p>
 		<p>
 			<button type="submit">Submit</button>
+			<a href=""><button>Menu</button></a> 
 	</form:form>
 </body>
 </html>
