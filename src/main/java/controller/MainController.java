@@ -70,9 +70,11 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/login")
-	public String login(@RequestParam(value = "error", required = false) String error,
-			@RequestParam(value = "logout", required = false) String logout, Model model, HttpServletRequest request, HttpSession session) {
+	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout, HttpServletRequest request, HttpSession session) {
 		logger.info("-> Login chiamata");
+		
+		ModelAndView model = new ModelAndView();
 		
 		Impiegato i = new Impiegato();
 		String username = request.getParameter("username");
@@ -83,34 +85,28 @@ public class MainController {
 //		ModelAndView modelAndView = new ModelAndView();
 		if (error != null) {
 //			modelAndView.addObject("error", "Username o password non validi");
-			model.addAttribute("error", "Username o password non validi.");
+			model.addObject("error", "Username o password non validi.");
 		}
 
 		if (logout != null) {
 //			modelAndView.addObject("msg", "You've been logged out successfully.");
-			model.addAttribute("msg", "Hai effettuato il logout.");
+			model.addObject("msg", "Hai effettuato il logout.");
 		}
-		
 		
 		if (i != null) {
 			if (i.getRuolo().equals("impiegato")) {
-				model.addAttribute("impiegato", i);
+				model.addObject("impiegato", i);
 				session.setAttribute("impiegato", i);
-//				modelAndView.setViewName("menuImpiegato");
-//				return modelAndView;
-				return "menuImpiegato";
+				model.setViewName("menuImpiegato");
+
 			} else {
 				session.setAttribute("amministratore", i);
-				model.addAttribute("amministratore", i);
-//				modelAndView.setViewName("menuAmministratore");
-//				return modelAndView;
-				return "menuAmministratore";
-			}
+				model.addObject("amministratore", i);
+				model.setViewName("menuAmministratore");
 
-//		return modelAndView;
-	}
-		return password;
-		
+			}
+		}		
+		return model;
 	}
 	
 	
@@ -396,7 +392,7 @@ public class MainController {
 		logger.info("-> modificaDatiImpStep1 chiamata");
 	
 	
-	}	
+	}
 	
 	@RequestMapping(value = "/sendEmail")
 	public String sendEmail(@ModelAttribute Impiegato impiegato, Model model,
@@ -416,6 +412,9 @@ public class MainController {
 		
 		final String mailMessage = "La tua nuova password è "+newPassword;
 		
+		String encNewPwd = passwordEncoder.encode(newPassword);
+		
+//		impiegato.setPassword(encNewPwd);
 		
 		recipientMail = request.getParameter("mailTo");
 		
@@ -433,6 +432,7 @@ public class MainController {
 		return "menuAmministratore";
 	}
 	
+//	
 	
 //	@RequestMapping(value ="/cancellaAttivitaDisponibili")
 //	public void cancellaAttivitaDisponibili(@RequestParam String id,Model model,

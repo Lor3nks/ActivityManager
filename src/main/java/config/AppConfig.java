@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -65,30 +64,13 @@ public class AppConfig implements WebMvcConfigurer{
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.ssl.enable", "true");
         props.put("mail.smtp.starttls.enable", "false");
         props.put("mail.debug", "true");
-        props.put("mail.smtp.socketFactory.port", "javax.net.ssl.SSLSocketFactory");
-        props.put("mail.smtp.socketFactory.port", "465");
           
         return mailSender;
     }
 	
-//	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-//    <property name="host" value="smtp.mail.yahoo.com" />
-//    <property name="port" value="465" />
-//    <property name="username" value="activitytraker@yahoo.com" />
-//    <property name="password" value="cgzyyswbkkmhmcos" />
-//    <property name="javaMailProperties">
-//        <props>
-//            <prop key="mail.smtp.auth">true</prop>
-//            <prop key="mail.debug">true</prop>
-//            <prop key="mail.transport.protocol">smtp</prop>
-//            <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
-//            <prop key="mail.smtp.socketFactory.port">465</prop>
-//            <prop key="mail.smtp.starttls.enable">false</prop>
-//        </props>
-//    </property>
-//</bean>
 	
 	@Override
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
