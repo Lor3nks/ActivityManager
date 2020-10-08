@@ -71,8 +71,22 @@
 <body>
 <div class="container">
 	<div class="row">
-	<h3>Elenco delle attività svolte</h3>
-	
+		<h3>Elenco delle attività svolte</h3>
+	</div>
+	<div class="row">
+		<p>${error}</p>
+	</div>
+	<div class="row">
+		<form action="aggiornaListaIntervallo" method="get">
+			<label for="dataInizio">Da: </label>
+			<input type="date" name="dataInizio"/>
+			<label for="dataFine">a: </label>
+			<input type="date" name="dataFine"/>
+			<button type="submit" class="btn btn-success">Aggiorna</button>
+		</form>
+		<button id="exportButton" class="btn btn-sm btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> Stampa PDF</button>
+	</div>
+	<div class="row">
 	<table id="exportTable" class="table table-hover table-striped">
 	<thead>
 		<tr>
@@ -82,7 +96,7 @@
 		<tbody>
 		<c:forEach items="${attSvolte}" var="attSv">
 		<tr>
-		<td>${impiegato.username}</td>
+		<td>${attSv.imp.username}</td>
 		<td>${attSv.data_Attivita}</td>
 		<td>${attSv.ora_Inizio}</td>
 		<td>${attSv.ora_Fine}</td>
@@ -95,7 +109,6 @@
 		</tbody> 
 	</table>
 	</div>
-<button id="exportButton" class="btn btn-sm btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> Stampa PDF</button>
-</div>
+	</div>
 </body>
 </html>

@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.security.SecureRandom;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -257,11 +259,18 @@ public class MainController {
 	
 	@RequestMapping(value ="/cancellaAttivitaSvolte")
 	public void cancellaAttivitaSvolte(@RequestParam int id,Model model,
-			HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		logger.info("-> cancellaAttivitaSvolte chiamata");	
 		attivitaSvolteServiceInt.eliminaAttivitaSvolte(id);
-		RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaSvolte");
-		rd.forward(request, response);
+		if (session.getAttribute("amministratore") == null) {
+			RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaSvolteImpiegato");
+			rd.forward(request, response);
+			return;
+		} else {
+			RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaSvolte");
+			rd.forward(request, response);
+			return;
+		}
 	}
 
 	
@@ -276,26 +285,77 @@ public class MainController {
 		model.addAttribute("att_Disp",att_Disp);		
 		model.addAttribute("attivitaSvolte",attivitaSvolte);
 		return "modificaAttivitaSvolte";
-		}
+	}
 	
 
 	@RequestMapping(value ="/visualizzaAttivitaSvolte")
 	public String visuailzzaAttivitaSvolte(Model model,HttpServletRequest request, HttpSession session) {
 		logger.info("-> visualizzaAttivitaSvolteImpiegato chiamata");
-		Impiegato imp=(Impiegato)session.getAttribute("impiegato");
-		List<AttivitaSvolte> attSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolteDaImpiegato(imp);
-		//Recupero oggetto AttDisponibili e lo inserisco in AttSvolte
+		List<AttivitaSvolte> attSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolte();
 		for(AttivitaSvolte a: attSvolte) { 
 			logger.info("-> recupero attDisp");
 			String codAttDisp=attivitaSvolteServiceInt.getAttIdDispFromAttSvolte(a.getId_Trigg());
-			AttivitaDisponibili attDispo=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(codAttDisp);
-			//System.out.println(attDispo.getid_Disp()+" "+attDispo.getDescrizione());
-			a.setAtt_Disp(attDispo);
+			String usernameAttDisp = attivitaSvolteServiceInt.getUsernameFromAttSvolte(a.getId_Trigg());
+			AttivitaDisponibili attDisponibile=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(codAttDisp);
+			Impiegato i = impiegatoServiceInt.recuperaImpiegatoByUser(usernameAttDisp);
+			a.setAtt_Disp(attDisponibile);
+			a.setImp(i);
 		}
 		model.addAttribute("attSvolte",attSvolte);
 		return "visualizzaAttivitaSvolte";
 	}
 	
+	
+	@RequestMapping(value="/aggiornaListaIntervallo")
+	public String aggiornaListaIntervallo(Model model, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		logger.info("-> aggiornaListaIntervallo chiamata");
+		String dInizio = request.getParameter("dataInizio");
+		String dFine = request.getParameter("dataFine");
+		List<AttivitaSvolte> attSvolte = new ArrayList<>();
+		
+		if (!dInizio.equals("") && !dFine.equals("")) {
+			LocalDate dataInizio = null;
+			try {
+				dataInizio = LocalDate.parse(dInizio);
+			} catch (DateTimeParseException e) {
+				String error = "Data non valida.";
+				model.addAttribute("error", error);
+			}
+			LocalDate dataFine = null;
+			try{
+				dataFine = LocalDate.parse(dFine);
+			} catch (DateTimeParseException e) {
+				String error = "Data non valida.";
+				model.addAttribute("error", error);
+			}
+			
+			
+			if (dataFine.isAfter(LocalDate.now()) || dataInizio.isAfter(LocalDate.now())) {
+				String error = "Inserire una data precedente o uguale a quella odierna.";
+				model.addAttribute("error", error);
+				attSvolte = attivitaSvolteServiceInt.recuperaAttivitaSvolte();
+			} else if (dataInizio.isAfter(dataFine) && dataFine.isBefore(dataInizio)) {
+				String error = "Date inserite non valide.";
+				model.addAttribute("error", error);
+				attSvolte = attivitaSvolteServiceInt.recuperaAttivitaSvolte();
+			} else {
+				attSvolte = attivitaSvolteServiceInt.recuperaAttivitaSvolteDaA(dataInizio, dataFine);
+			}
+		} else {
+			attSvolte = attivitaSvolteServiceInt.recuperaAttivitaSvolte();
+		}
+		for(AttivitaSvolte a: attSvolte) { 
+			logger.info("-> recupero attDispDaA");
+			String codAttDisp=attivitaSvolteServiceInt.getAttIdDispFromAttSvolte(a.getId_Trigg());
+			String usernameAttDisp = attivitaSvolteServiceInt.getUsernameFromAttSvolte(a.getId_Trigg());
+			AttivitaDisponibili attDisponibile=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(codAttDisp);
+			Impiegato i = impiegatoServiceInt.recuperaImpiegatoByUser(usernameAttDisp);
+			a.setAtt_Disp(attDisponibile);
+			a.setImp(i);
+		}
+		model.addAttribute("attSvolte", attSvolte);
+		return "visualizzaAttivitaSvolte";
+	}
 	
 	
 	@RequestMapping(value ="/aggiornaSuDBAttivitaSvolte")
@@ -310,21 +370,47 @@ public class MainController {
 			model.addAttribute("att_Disp",att_Disp);			
 			return "modificaAttivitaSvolte";
 		} else {
-				try {
-					attivitaSvolte.setImp((Impiegato)session.getAttribute("impiegato"));
-					attivitaSvolteServiceInt.modificaAttivitaSvolte(attivitaSvolte);
-				} catch (Exception e) {
-					String errore = "Non è stato possibile modificare la tua attività";
-					List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
-					model.addAttribute("att_Disp",att_Disp);					
-					model.addAttribute("errore", errore);
-					return "modificaAttivitaSvolte";
-				}
+			try {
+				attivitaSvolteServiceInt.modificaAttivitaSvolte(attivitaSvolte);
+			} catch (Exception e) {
+				String errore = "Non è stato possibile modificare la tua attività";
+				List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
+				model.addAttribute("att_Disp",att_Disp);					
+				model.addAttribute("errore", errore);
+				return "modificaAttivitaSvolte";
 			}
-		RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaSvolteImpiegato");
-		rd.forward(request, response);
-		return "";		
+		}
+	
+	if (session.getAttribute("amministratore") == null) {
+		System.out.println("IMPIEGATO");
+		List<AttivitaSvolte> attSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolteDaImpiegato((Impiegato)session.getAttribute("impiegato"));
+		for(AttivitaSvolte a: attSvolte) { 
+			logger.info("-> recupero attDisp");
+			String codAttDisp=attivitaSvolteServiceInt.getAttIdDispFromAttSvolte(a.getId_Trigg());
+			String usernameAttDisp = attivitaSvolteServiceInt.getUsernameFromAttSvolte(a.getId_Trigg());
+			AttivitaDisponibili attDisponibile=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(codAttDisp);
+			Impiegato i = impiegatoServiceInt.recuperaImpiegatoByUser(usernameAttDisp);
+			a.setAtt_Disp(attDisponibile);
+			a.setImp(i);
+		}
+			model.addAttribute("attSvolte",attSvolte);
+		return "visualizzaAttivitaSvolteImpiegato";
+	} else {
+		System.out.println("ADMIN");
+		List<AttivitaSvolte> attSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolte();
+		for(AttivitaSvolte a: attSvolte) { 
+			logger.info("-> recupero attDisp");
+			String codAttDisp=attivitaSvolteServiceInt.getAttIdDispFromAttSvolte(a.getId_Trigg());
+			String usernameAttDisp = attivitaSvolteServiceInt.getUsernameFromAttSvolte(a.getId_Trigg());
+			AttivitaDisponibili attDisponibile=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(codAttDisp);
+			Impiegato i = impiegatoServiceInt.recuperaImpiegatoByUser(usernameAttDisp);
+			a.setAtt_Disp(attDisponibile);
+			a.setImp(i);
+		}
+			model.addAttribute("attSvolte",attSvolte);
+		return "visualizzaAttivitaSvolte";
 	}
+}
 
 	
 	@RequestMapping(value ="/visualizzaAttivitaDisponibili")

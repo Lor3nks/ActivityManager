@@ -1,5 +1,6 @@
 package service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,11 @@ public class AttivitaSvolteService implements AttivitaSvolteServiceInt {
 	public String getAttIdDispFromAttSvolte(int idSv) {
 		return attivitaSvolteDaoInt.getIdAttivitaDisponibili(idSv);
 	}
+	
+	@Override
+	public String getUsernameFromAttSvolte(int idSv) {
+		return attivitaSvolteDaoInt.getUsernameImpiegato(idSv);
+	}
 
 	@Override
 	public int eliminaAttivitaSvolte(int idSv) {
@@ -50,4 +56,8 @@ public class AttivitaSvolteService implements AttivitaSvolteServiceInt {
 		return attivitaSvolteDaoInt.leggiAttivitaSvolteById(idSv);
 	}
 
+	@Override
+	public List<AttivitaSvolte> recuperaAttivitaSvolteDaA(LocalDate dataInizio, LocalDate dataFine) {
+		return attivitaSvolteDaoInt.getAttivitaSvolteFromTo(dataInizio, dataFine);
+	}
 }
