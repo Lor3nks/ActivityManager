@@ -37,9 +37,11 @@
 			<label for="password"> Conferma Password</label> <input
 				name="password" type="text" />
 		</p>
-		<p>
-			<button type="submit">Submit</button>
-			<a href=""><button>Menu</button></a> 
 	</form:form>
+			<span><button type="submit">Submit</button></span>
+			
+			<a href="tornaIndietro"><button>Torna Al Menu</button></a> 
+	
 </body>
+
 </html>
