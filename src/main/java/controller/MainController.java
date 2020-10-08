@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.internet.MimeMessage;
@@ -404,12 +405,50 @@ public class MainController {
 	}
 	
 	@RequestMapping(value= "/modificaDatiImpStep1")
-	public void modificaDatiImpStep1(@RequestParam String userName,Model model,HttpServletRequest request,
+	public String modificaDatiImpStep1(@RequestParam String userName, @ModelAttribute Impiegato impiegato, Model model,HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		logger.info("-> modificaDatiImpStep1 chiamata");
-	
-	
+		Impiegato imp=impiegatoServiceInt.recuperaImpiegatoByUser(userName);
+		List<String> ruoloList=new ArrayList<>();
+		ruoloList.add("amministratore");
+		ruoloList.add("impiegato");
+		model.addAttribute("ruoloList",ruoloList);
+		model.addAttribute("impiegato", imp);
+		return "modificaImpAmm";
 	}
+
+	@RequestMapping(value= "/modificaDatiImpStep2")
+	public String modificaDatiImpStep2(@ModelAttribute Impiegato impiegato,BindingResult bindingResult, Model model,HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		logger.info("-> modificaDatiImpStep2 chiamata");
+		if (bindingResult.hasErrors()) {
+			FieldError fieldError = bindingResult.getFieldError();
+			String errore="Code:" + fieldError.getCode() + ", field:" + fieldError.getField();
+			List<String> ruoloList=new ArrayList<>();
+			ruoloList.add("amministratore");
+			ruoloList.add("impiegato");
+			model.addAttribute("ruoloList",ruoloList);
+			model.addAttribute("errore", errore);
+			return "modificaImpAmm";
+		} else {
+				try {
+					//attivitaSvolte.setImp((Impiegato)session.getAttribute("impiegato"));
+					//attivitaSvolteServiceInt.modificaAttivitaSvolte(attivitaSvolte);
+					impiegatoServiceInt.modificaImpiegato(impiegato);
+				} catch (Exception e) {
+					String errore = "Non è stato possibile modificare i dati dell'impiegato";
+					List<String> ruoloList=new ArrayList<>();
+					ruoloList.add("amministratore");
+					ruoloList.add("impiegato");
+					model.addAttribute("ruoloList",ruoloList);
+					model.addAttribute("errore", errore);
+					return "modificaImpAmm";
+				}
+			}		
+		RequestDispatcher rd=request.getRequestDispatcher("visualizzaListaImpiegati");
+		rd.forward(request, response);		
+		return "";
+	}	
 	
 	@RequestMapping(value = "/sendEmail")
 	public String sendEmail(@ModelAttribute Impiegato impiegato, Model model,
