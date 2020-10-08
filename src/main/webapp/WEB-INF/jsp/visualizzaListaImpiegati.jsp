@@ -57,9 +57,9 @@
 			<div style="margin-top: 50px">
 
 				<form id="sendEmailForm" method="post" action="sendEmail">
-					<label for="mailTo">Invia pwd a: </label> <input id="mailTo"
-						type="text" name="mailTo" size="25"
-						placeholder="impiegato@mail.com" /> <input id="sendEmailBtn"
+					<label for="resetTo">Reset password dell'utente: </label> <input id="resetTo"
+						type="text" name="resetTo" size="25"
+						placeholder="Username" /> <input id="sendEmailBtn"
 						type="submit" value="Invia" />
 
 				</form>

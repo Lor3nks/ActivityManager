@@ -593,11 +593,12 @@ public class MainController {
 		
 		final String mailMessage = "La tua nuova password è "+newPassword;
 		
-		String encNewPwd = passwordEncoder.encode(newPassword);
+		String user = request.getParameter("resetTo");
+		Impiegato imp = impiegatoServiceInt.recuperaImpiegatoByUser(user);
 		
-//		impiegato.setPassword(encNewPwd);
+		recipientMail = imp.getEmail();
 		
-		recipientMail = request.getParameter("mailTo");
+		impiegatoServiceInt.cambiaPwdImpiegato(user, newPassword);
 		
 		mailSender.send(new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
