@@ -159,8 +159,15 @@ public class MainController {
 		return "cambiaPassword";
 	}
 	
-	
-	
+	@RequestMapping(value="/tornaIndietro")
+	public String tornaIndietro(@ModelAttribute Impiegato impiegato,Model model,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		
+		
+		//RequestDispatcher rd=request.getRequestDispatcher("menuImpiegato");
+	//	rd.forward(request, response);
+		return "menuImpiegato";
+		
+	}
 
 	@RequestMapping(value = "/welcome**", method = RequestMethod.GET)
 	public ModelAndView defaultPage() {
