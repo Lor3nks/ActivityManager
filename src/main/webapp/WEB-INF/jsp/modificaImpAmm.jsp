@@ -21,16 +21,19 @@
 														
 					<p><form:label path="nome">Nome</form:label>
 					<form:input path="nome" type="text"/></p>
+					<p id="error" class="error"><form:errors path="nome" /></p>
 					
 					<p><form:label path="cognome">Cognome</form:label>
 					<form:input path="cognome" type="text"/></p>
+					<p id="error" class="error"><form:errors path="cognome" /></p>
 					
 					<p><form:label path="dataNascita">Data di nascita</form:label>
 					<form:input path="dataNascita" type="text" placeholder="GG/MM/AAAA"/></p>
 					 <p class="error"><form:errors path="dataNascita" /></p>
 					
 					<p><form:label path="email">Email</form:label>
-					<form:input path="email" type="text"/></p>					
+					<form:input path="email" type="text"/></p>
+					<p id="error" class="error"><form:errors path="email" /></p>					
 
 					<p>
 						<label for="ruolo">Ruolo: </label>
@@ -47,7 +50,6 @@
 						</c:forEach>
 						</form:select>
 
-						<!-- <p class="error"><form:errors path="ruolo" /></p>  -->
 					</p>
 
 					<button type="submit">Salva modifiche</button>

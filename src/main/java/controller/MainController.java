@@ -299,7 +299,7 @@ public class MainController {
 	
 	
 	@RequestMapping(value ="/aggiornaSuDBAttivitaSvolte")
-	public String aggiornaSuDBAttivitaSvolte(@ModelAttribute AttivitaSvolte attivitaSvolte, BindingResult bindingResult, 
+	public String aggiornaSuDBAttivitaSvolte(@Valid @ModelAttribute AttivitaSvolte attivitaSvolte, BindingResult bindingResult, 
 			Model model,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException  {
 		logger.info("-> aggiornaSuDBAttivitaSvolte chiamata");
 		if (bindingResult.hasErrors()) {
@@ -307,7 +307,7 @@ public class MainController {
 			String errore="Code:" + fieldError.getCode() + ", field:" + fieldError.getField();
 			model.addAttribute("errore", errore);
 			List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
-			model.addAttribute("att_Disp",att_Disp);					
+			model.addAttribute("att_Disp",att_Disp);			
 			return "modificaAttivitaSvolte";
 		} else {
 				try {
@@ -325,6 +325,7 @@ public class MainController {
 		rd.forward(request, response);
 		return "";		
 	}
+
 	
 	@RequestMapping(value ="/visualizzaAttivitaDisponibili")
 	public String visuailzzaAttivitaDisponibili(Model model,HttpServletRequest request, HttpSession session) {
@@ -425,7 +426,7 @@ public class MainController {
 	}
 
 	@RequestMapping(value= "/modificaDatiImpStep2")
-	public String modificaDatiImpStep2(@ModelAttribute Impiegato impiegato,BindingResult bindingResult, Model model,HttpServletRequest request,
+	public String modificaDatiImpStep2(@Valid @ModelAttribute Impiegato impiegato,BindingResult bindingResult, Model model,HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		logger.info("-> modificaDatiImpStep2 chiamata");
 		if (bindingResult.hasErrors()) {
