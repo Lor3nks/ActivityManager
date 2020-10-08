@@ -36,11 +36,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		String[] resources = new String[]{
-				  "/loginPage",
-				  "/login",
-				  "/formRegistrazione",
-				  "/menuImpiegato",
-				  "/menuAmministratore",
+				  "/",
+				  "/loginPage", "/login",
+				  "/menuImpiegato", "/menuAmministratore",
+				  "/formRegistrazione", "/formResetPassword",
+				  "/cambiaPassword",
+				  "/formAttivitaDisponibili", "/formAttivitaSvolte",
+				  "/modificaAttivitaSvolte",
+				  "/visualizzaAttivitaDisponibili", "/visualizzaAttivitaSvolte",
+				  "/visualizzaAttivitaSvolteImpiegato",
+				  "/visualizzaListaImpiegati",
 				  "/logout"
 		};		  
 		
