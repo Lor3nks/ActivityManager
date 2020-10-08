@@ -20,6 +20,13 @@
 	    <label for="desc_Attivita">Descrizione Attività: </label>
 	    <form:input type="text" id="desc_Attivita" path="desc_Attivita" autocomplete="off"/>
 	</p>
+	<div>
+	<p>Abilitazione: </p>
+		<input type="radio" id="sì" name="abilitazione" value="1">
+		<label for="sì">Sì</label><br>
+		<input type="radio" id="no" name="gender" value="0">
+		<label for="no">No</label><br>
+	</div>
 	
 	
 	<p id="buttons">
