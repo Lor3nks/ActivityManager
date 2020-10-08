@@ -63,7 +63,7 @@ public class MainController {
 	
 /////////////////////////////////////////// ACCESSO /////////////////////////////////////////////////
 	
-	@RequestMapping(value= "/loginPage")
+	@RequestMapping(value= {"/","/loginPage"})
 	public ModelAndView inputLogin() {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("loginPage");
