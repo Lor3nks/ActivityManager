@@ -5,6 +5,7 @@ import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.mail.internet.MimeMessage;
@@ -23,6 +24,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -66,51 +69,90 @@ public class MainController {
 	
 /////////////////////////////////////////// ACCESSO /////////////////////////////////////////////////
 	
-	@RequestMapping(value= {"/","/loginPage"})
-	public ModelAndView inputLogin() {
-		ModelAndView model = new ModelAndView();
-		model.setViewName("loginPage");
-		return model;
-	}
 	
-	@RequestMapping(value = "/login")
+	
+	@RequestMapping(value = {"/", "/login"})
 	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "logout", required = false) String logout, HttpServletRequest request, HttpSession session) {
-		logger.info("-> Login chiamata");
+		
+		ModelAndView model = new ModelAndView();
+		
+		if (error != null) {
+			model.addObject("error", "Username o password errati!");
+		}
+
+		if (logout != null) {
+			model.addObject("msg", "Logout riuscito!");
+		}
+		model.setViewName("login");
+
+		return model;
+
+	}
+	
+	// VECCHIO LOGIN //
+//	@RequestMapping(value = "/login")
+//	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
+//			@RequestParam(value = "logout", required = false) String logout, HttpServletRequest request, HttpSession session) {
+//		logger.info("-> Login chiamata");
+//		
+//		ModelAndView model = new ModelAndView();
+//		
+//		Impiegato i = new Impiegato();
+//		String username = request.getParameter("username");
+//		String password = request.getParameter("password");
+//		i = impiegatoServiceInt.recuperaImpiegatoByUser(username);
+//		System.out.println(i.getUsername());
+//		if (error != null) {
+//
+//			model.addObject("error", "Username o password non validi.");
+//		}
+//
+//		if (logout != null) {
+//			model.addObject("msg", "Hai effettuato il logout.");
+//		}
+//		
+//		if (i != null) {
+//			if (i.getRuolo().equals("impiegato")) {
+//				model.addObject("impiegato", i);
+//				session.setAttribute("impiegato", i);
+//				model.setViewName("menuImpiegato");
+//
+//			} else {
+//				session.setAttribute("amministratore", i);
+//				model.addObject("amministratore", i);
+//				model.setViewName("menuAmministratore");
+//
+//			}
+//		}		
+//		return model;
+//	}
+	
+	@RequestMapping(value = "/mainMenu")
+	public ModelAndView mainMenu(HttpServletRequest request, HttpSession session) {
 		
 		ModelAndView model = new ModelAndView();
 		
 		Impiegato i = new Impiegato();
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		i = impiegatoServiceInt.recuperaImpiegatoByUser(username);
-		System.out.println(i.getUsername());
-		if (error != null) {
-
-			model.addObject("error", "Username o password non validi.");
-		}
-
-		if (logout != null) {
-			model.addObject("msg", "Hai effettuato il logout.");
-		}
 		
-		if (i != null) {
-			if (i.getRuolo().equals("impiegato")) {
-				model.addObject("impiegato", i);
-				session.setAttribute("impiegato", i);
-				model.setViewName("menuImpiegato");
-
-			} else {
-				session.setAttribute("amministratore", i);
-				model.addObject("amministratore", i);
-				model.setViewName("menuAmministratore");
-
-			}
-		}		
-		return model;
+		// controllo ruolo dell'utente loggato
+		Collection<? extends GrantedAuthority> authorities = 
+				SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		
+		boolean isAdmin = authorities.contains(new SimpleGrantedAuthority("amministratore"));
+		
+		String username = request.getParameter("username");
+		i = impiegatoServiceInt.recuperaImpiegatoByUser(username);
+		
+		if(isAdmin) {
+			session.setAttribute("amministratore", i);
+			model.setViewName("menuAmministratore");
+		} else {
+			session.setAttribute("impiegato", i);
+			model.setViewName("menuImpiegato");
+		}
+	    return model;
 	}
-	
-	
 		
 	@RequestMapping(value = {"/placeholder", "/formRegistrazione"})
 	public String formRegistrazione(Model model) {
@@ -170,17 +212,6 @@ public class MainController {
 	//	rd.forward(request, response);
 		return "menuImpiegato";
 		
-	}
-
-	@RequestMapping(value = "/welcome**", method = RequestMethod.GET)
-	public ModelAndView defaultPage() {
-
-		ModelAndView model = new ModelAndView();
-		model.addObject("title", "Spring Security Login Form - Database Authentication");
-		model.addObject("message", "This is default page!");
-		model.setViewName("hello");
-		return model;
-
 	}
 
 	@RequestMapping(value = "/admin**", method = RequestMethod.GET)

@@ -9,10 +9,10 @@
 <title>Login</title>
 </head>
 <body>
-	<form  action="login"  method="post">
+	<form action="login" method="post">
 			
-			<c:if test="${not empty error}">
-			<div class="error">${error}</div>
+		<c:if test="${not empty error}">
+		<div class="error">${error}</div>
 		</c:if>
 		<c:if test="${not empty msg}">
 			<div class="msg">${msg}</div>
@@ -20,7 +20,7 @@
 			
 			<p>
 				<label for="username">Username:</label>	
-				<input name="username" type="text"/>
+				<input name="username" type="text" autofocus/>
 			</p>
 			<p>
 				<label for="password">Password:</label>	
@@ -29,9 +29,6 @@
 			<p>
 				<button type="submit">Login</button>
 			</p>
-			
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />   
 			
 	</form>
 	
