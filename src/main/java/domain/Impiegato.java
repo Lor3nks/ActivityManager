@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 public class Impiegato implements Serializable {
-	
+	 
 	private static final long serialVersionUID = 7611569892498705160L;
 	@NotEmpty(message = "Campo obbligatorio")
 	private String username;

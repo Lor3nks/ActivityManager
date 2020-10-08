@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
    
 public class AttivitaDisponibili {
- 
+  
 	@NotEmpty
 	private String id_Disp;
 	@NotEmpty

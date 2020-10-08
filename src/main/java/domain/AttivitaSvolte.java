@@ -11,7 +11,7 @@ import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
- 
+  
 public class AttivitaSvolte implements Serializable {
 
 	private static final long serialVersionUID = 4261989059440444174L;
