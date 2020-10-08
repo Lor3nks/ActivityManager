@@ -4,25 +4,28 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
  
 public class AttivitaSvolte implements Serializable {
 
 	private static final long serialVersionUID = 4261989059440444174L;
 	private int id_Trigg;
-	@NotNull
 	private Impiegato imp;
-	@NotNull
 	private AttivitaDisponibili att_Disp;
-	@PastOrPresent
-	@NotNull
+	@PastOrPresent(message = "Inserire data del giorno o antecendente")
+	@NotNull(message = "Data inizio attività obbligatoria")
 	private LocalDate data_Attivita;
-	@NotNull
+	@NotEmpty(message = "Ora inizio attività obbligatoria")
+	@Pattern(message ="Formattazione errata",regexp ="(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?")
 	private String ora_Inizio;
-	@NotNull
+	@NotEmpty(message = "Ora fine attività obbligatoria")
+	@Pattern(message ="Formattazione errata",regexp ="(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?")
 	private String ora_Fine;
 	private String note;
 	
