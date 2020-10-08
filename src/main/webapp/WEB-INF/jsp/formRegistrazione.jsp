@@ -12,25 +12,29 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-			<h3>${errore}</h3>
 				<form:form modelAttribute="impiegato" action="registrazione" method="post">
 					<p><form:label path="username">Username</form:label>
 					<form:input path="username" type="text"/></p>
+					<p id="error" class="error"><form:errors path="username" /></p>
 					
 					<p><form:label path="password">Password</form:label>
 					<form:input path="password" type="password"/></p>
+					<p id="error" class="error"><form:errors path="password" /></p>
 					
 					<p><label>Conferma password</label>
 					<input type="password" name="confermaPassword"></p>
 					
 					<p><form:label path="email">Email</form:label>
 					<form:input path="email" type="text"/></p>
+					<p id="error" class="error"><form:errors path="email" /></p>
 					
 					<p><form:label path="nome">Nome</form:label>
 					<form:input path="nome" type="text"/></p>
+					<p id="error" class="error"><form:errors path="nome" /></p>
 					
 					<p><form:label path="cognome">Cognome</form:label>
 					<form:input path="cognome" type="text"/></p>
+					<p id="error" class="error"><form:errors path="cognome" /></p>
 					
 					<p><form:label path="dataNascita">Data di nascita</form:label>
 					<form:input path="dataNascita" type="text" placeholder="GG/MM/AAAA"/></p>

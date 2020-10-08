@@ -42,7 +42,7 @@
 							</c:otherwise>
 							</c:choose>
 							<td>${impiegato.ruolo}</td>
-							<td><a href="">Modifica</a></td>
+							<td><a href="modificaDatiImpStep1?userName=${impiegato.username}">Modifica</a></td>
 							<td><a href="modificaAbilitazioneImp?userName=${impiegato.username}">Abilita Si/No</a></td>
 						</tr>
 						</c:forEach>

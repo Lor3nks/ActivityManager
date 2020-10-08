@@ -4,26 +4,28 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 public class Impiegato implements Serializable {
 	
 	private static final long serialVersionUID = 7611569892498705160L;
-	@NotNull
+	@NotEmpty(message = "Campo obbligatorio")
 	private String username;
-	@NotNull
+	@NotEmpty(message = "Campo obbligatorio")
 	private String password;
-	@NotNull
+	@NotEmpty(message = "Campo obbligatorio")
+	@Email(message = "Email non in formato corretto.")
 	private String email;
-	@NotNull
+	@NotEmpty(message = "Campo obbligatorio")
 	private String nome;
-	@NotNull
+	@NotEmpty(message = "Campo obbligatorio")
 	private String cognome;
-	@NotNull
-	@Past
+	@NotNull(message = "Campo obbligatorio")
+	@Past(message = "Inserire data corrente o antecedente")
 	private LocalDate dataNascita;
-	@NotNull
 	private boolean abilitazione;
 	@NotNull
 	private String ruolo;
