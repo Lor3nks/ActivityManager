@@ -34,12 +34,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
+		
+		String[] resources = new String[]{
+				  "/loginPage",
+				  "/login",
+				  "/formRegistrazione",
+				  "/menuImpiegato",
+				  "/menuAmministratore",
+				  "/logout"
+		};		  
+		
+		http
+			.csrf().disable()
+			.authorizeRequests().antMatchers(resources).permitAll()
 			.anyRequest().authenticated()
-			.and().httpBasic()
-			.and().csrf().disable();
+			.and()
+			.formLogin().loginPage("/loginPage");
 	}
-	
 
 //	@Override
 //	protected void configure(HttpSecurity http) throws Exception {

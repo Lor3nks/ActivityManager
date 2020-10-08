@@ -63,10 +63,11 @@ public class MainController {
 	
 /////////////////////////////////////////// ACCESSO /////////////////////////////////////////////////
 	
-	@RequestMapping(value= {"/", "/inputLogin"})
-	public String inputLogin() {
-		logger.info("-> inputLogin chiamata");
-		return "login";
+	@RequestMapping(value= "/loginPage")
+	public ModelAndView inputLogin() {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("loginPage");
+		return model;
 	}
 	
 	@RequestMapping(value = "/login")
@@ -81,15 +82,12 @@ public class MainController {
 		String password = request.getParameter("password");
 		i = impiegatoServiceInt.recuperaImpiegatoByUser(username);
 		System.out.println(i.getUsername());
-//		System.out.println(i.getUsername());		
-//		ModelAndView modelAndView = new ModelAndView();
 		if (error != null) {
-//			modelAndView.addObject("error", "Username o password non validi");
+
 			model.addObject("error", "Username o password non validi.");
 		}
 
 		if (logout != null) {
-//			modelAndView.addObject("msg", "You've been logged out successfully.");
 			model.addObject("msg", "Hai effettuato il logout.");
 		}
 		
