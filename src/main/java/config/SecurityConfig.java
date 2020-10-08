@@ -42,7 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				  "/formRegistrazione", "/formResetPassword",
 				  "/cambiaPassword",
 				  "/formAttivitaDisponibili", "/formAttivitaSvolte",
-				  "/modificaAttivitaSvolte",
+				  "/modificaAttivitaSvolte", "/salvaAttivitaSvolte",
+				  "/cancellaAttivitaSvolte", "/aggiornaAttivitaSvolte",
+				  "/aggiornaSuDBAttivitaSvolte",
 				  "/visualizzaAttivitaDisponibili", "/visualizzaAttivitaSvolte",
 				  "/visualizzaAttivitaSvolteImpiegato",
 				  "/visualizzaListaImpiegati",
@@ -51,7 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http
 			.csrf().disable()
-			.authorizeRequests().antMatchers(resources).permitAll()
+//			.authorizeRequests().antMatchers(resources).permitAll()
+			.authorizeRequests().antMatchers("/*").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.formLogin().loginPage("/loginPage");

@@ -342,6 +342,25 @@ public class MainController {
 		rd.forward(request, response);
 		}
 	
+	@RequestMapping(value ="/modificaAttivitaDisponibili1")
+	public String modificaAttivitaDisponibili(@RequestParam String id,@ModelAttribute AttivitaDisponibili attivitaDisponibili,Model model,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		logger.info("-> modificaAttivitaDisponibili1 chiamata");
+		AttivitaDisponibili attDisp=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(id);
+		//attDisp.setDescrizione(request.getParameter("descrizione"));
+		model.addAttribute("attDisp",attDisp);
+		return "modificaAttivitaDisponibili1";
+		}
+	
+	@RequestMapping(value ="/modificaAttivitaDisponibili2")
+	public String modificaAttivitaDisponibili2( @ModelAttribute AttivitaDisponibili attivitaDisponibili,
+			Model model,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		logger.info("-> modificaAttivitaDisponibili1 chiamata");
+		attivitaDisponibiliServiceInt.modificaAttivitaDisponibili(attivitaDisponibili);
+		RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaDisponibili");
+		rd.forward(request, response);
+		return "";
+		}
+	
 	
 	
 //////////////////////////////////////// IMPIEGATI /////////////////////////////////////
