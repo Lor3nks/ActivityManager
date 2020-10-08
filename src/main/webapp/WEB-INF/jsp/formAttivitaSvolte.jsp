@@ -40,12 +40,13 @@
 	<form:textarea id="note" path="note" rows="4" cols="50"></form:textarea>
 	</p>
 			
-	 <p id="buttons">
+	  <span> <a href="menuImpiegato"><button>Menu</button></a> </span>
+    
+	 <span id="buttons">
 		<!-- <a href="salvaAttivitaS"><input type="button" value="Salva" style="color:black" /></a>  -->
-		<input id="submit" type="submit" value="Salva"/>
-	</p>
-
+        <input id="submit" type="submit" value="Salva"/> 
+	 </span>
 </form:form>
-<a href=""><button>Menu</button></a> 
+
 </body>
 </html>
