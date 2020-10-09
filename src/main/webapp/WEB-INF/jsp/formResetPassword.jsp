@@ -10,7 +10,14 @@
 <title>Reset Password</title>
 </head>
 <body>
-
+	
+	<c:if test="${not empty error}">
+		<div class="error">${error}</div>
+		</c:if>
+		<c:if test="${not empty msg}">
+			<div class="msg">${msg}</div>
+		</c:if>
+	
 	<form action="sendEmail" method="post">
 		<label for="resetTo">Username</label>
 		<input name="resetTo" type="text"/>
