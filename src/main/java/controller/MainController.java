@@ -114,7 +114,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/registrazione")
-	public String registrazione(@ModelAttribute Impiegato impiegato, BindingResult bindingResult, Model model,
+	public String registrazione(@Valid @ModelAttribute Impiegato impiegato, BindingResult bindingResult, Model model,
 			HttpServletRequest request) {
 		
 		if (bindingResult.hasErrors()) {
@@ -130,7 +130,7 @@ public class MainController {
 				impiegato.setPassword(impiegato.getPassword());	
 				impiegatoServiceInt.inserisciImpiegato(impiegato);
 			} catch (Exception e) {
-				String errore = "Non è stato possibile aggiungere il tuo acccount.";
+				String errore = "Non è stato possibile aggiungere il tuo acccount.\nUsername esistente!";
 				model.addAttribute("errore", errore);
 				return "formRegistrazione";
 			}
