@@ -197,11 +197,37 @@ public class MainController {
 	} 	
 	
 	
-	@RequestMapping(value="/cambiaPassword")
-	public String cambiaPassword(@ModelAttribute Impiegato impiegato, Model model,
-			HttpServletRequest request){
+
+@RequestMapping(value = "/cambiaPassword")
+
+	public String cambiaPassword(@ModelAttribute Impiegato impiegato, BindingResult bindingResult, Model model,
+			HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		logger.info("-> cambiaPassword chiamata");
+		String password = request.getParameter("password");
+		String nuovaPassword = request.getParameter("nuovaPassword");
+		String confermaPassword = request.getParameter("confermaPassword");
+		Impiegato i = (Impiegato) session.getAttribute("impiegato");
+		String passwordDB = i.getPassword();
+
+		
+		 if(!password.equals("") && password.equals(passwordDB)){
+			 if(!nuovaPassword.equals("") && !nuovaPassword.equals(password)) {	
+				 if(!confermaPassword.equals("") && confermaPassword.equals(nuovaPassword)) {
+						impiegatoServiceInt.cambiaPwdImpiegato(i.getUsername(), nuovaPassword);		
+				 }}}else {
+			String errore = "i campi inseriti non sono corretti";
+			model.addAttribute("errore", errore);
+			return "cambiaPassword";
+		
+		}
+		 
+		model.addAttribute("errore", "Password cambiata correttamente");
 		return "cambiaPassword";
+	}
+	
+	@RequestMapping(value="/formCambiaPassword")
+	public String formCambiaPassword() {
+	return "cambiaPassword";
 	}
 	
 	@RequestMapping(value="/tornaIndietro")
