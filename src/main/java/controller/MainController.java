@@ -302,7 +302,6 @@ public class MainController {
 		System.out.println(imp.getUsername());
 		if (bindingResult.hasErrors()) {
 			FieldError fieldError = bindingResult.getFieldError();
-			//System.out.println("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
 			String errore="Code:" + fieldError.getCode() + ", field:" + fieldError.getField();
 			model.addAttribute("errore", errore);
 			List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
@@ -310,8 +309,18 @@ public class MainController {
 			return "formAttivitaSvolte";
 		} else {
 				try {
-					attivitaSvolte.setImp((Impiegato)session.getAttribute("impiegato"));
-					attivitaSvolteServiceInt.salvaAttivitaSvolte(attivitaSvolte);
+					String oraInizio = request.getParameter("ora_Inizio");
+					String oraFine = request.getParameter("ora_Fine");
+					if(!verificaOre(oraInizio,oraFine)) {
+						String errore="La data di inzio deve essere antecedente alla data di fine!";
+						List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
+						model.addAttribute("errore", errore);
+						model.addAttribute("att_Disp",att_Disp);					
+						return "formAttivitaSvolte";						
+					}else {
+						attivitaSvolte.setImp((Impiegato)session.getAttribute("impiegato"));
+						attivitaSvolteServiceInt.salvaAttivitaSvolte(attivitaSvolte);
+					}
 				} catch (Exception e) {
 					String errore = "Non è stato possibile aggiungere la tua attività";
 					e.printStackTrace();
@@ -441,7 +450,17 @@ public class MainController {
 			return "modificaAttivitaSvolte";
 		} else {
 			try {
+				String oraInizio = request.getParameter("ora_Inizio");
+				String oraFine = request.getParameter("ora_Fine");
+				if(!verificaOre(oraInizio,oraFine)) {
+					String errore="La data di inzio deve essere antecedente alla data di fine!";
+					List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
+					model.addAttribute("errore", errore);
+					model.addAttribute("att_Disp",att_Disp);					
+					return "modificaAttivitaSvolte";						
+				}else {
 				attivitaSvolteServiceInt.modificaAttivitaSvolte(attivitaSvolte);
+				}
 			} catch (Exception e) {
 				String errore = "Non è stato possibile modificare la tua attività";
 				List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
@@ -678,6 +697,20 @@ public class MainController {
 		});
 		
 		return "menuAmministratore";
+	}
+	
+	private boolean verificaOre(String oraInzio, String oraFine) {
+		int oraInizioNum=0;
+		int oraFineNum=0;
+		String oraInizioL="0";
+		String oraFineL="0";
+		boolean ctrlOra=false;
+		if(!oraInzio.equals("")) oraInizioL = oraInzio.replace(":", "");
+		if(!oraFine.equals("")) oraFineL = oraFine.replace(":", "");
+		oraInizioNum=Integer.parseInt(oraInizioL);
+		oraFineNum=Integer.parseInt(oraFineL);
+		if(oraFineNum>oraInizioNum) ctrlOra=true;
+		return ctrlOra;
 	}
 	
 //	

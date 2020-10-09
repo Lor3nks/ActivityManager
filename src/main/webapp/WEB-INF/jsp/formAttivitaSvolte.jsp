@@ -10,6 +10,7 @@
 <title>Attività svolte</title>
 </head>
 <body>
+<p>${errore}</p>
 <form:form modelAttribute="attivitaSvolte" action="salvaAttivitaSvolte"  method="post">
 	<p>
 	    <label for="data_Attivita">Data attività: </label>
