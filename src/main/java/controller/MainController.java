@@ -81,7 +81,6 @@ public class MainController {
 			model.addAttribute("msg", "Logout riuscito!");
 		}
 		return "login";
-
 	}
 	
 	
@@ -128,9 +127,16 @@ public class MainController {
 		} else {
 			try {
 				impiegato.setPassword(impiegato.getPassword());	
-				impiegatoServiceInt.inserisciImpiegato(impiegato);
+				Impiegato im=impiegatoServiceInt.recuperaImpiegatoByUser(impiegato.getUsername());
+				if(im==null) {
+					impiegatoServiceInt.inserisciImpiegato(impiegato);
+				}else {
+					String errore = "Username esistente!";
+					model.addAttribute("errore", errore);
+					return "formRegistrazione";					
+				}
 			} catch (Exception e) {
-				String errore = "Non è stato possibile aggiungere il tuo acccount.\nUsername esistente!";
+				String errore = "Non è stato possibile aggiungere il tuo acccount!";
 				model.addAttribute("errore", errore);
 				return "formRegistrazione";
 			}
@@ -648,13 +654,12 @@ public class MainController {
 		String oraInizioL="0";
 		String oraFineL="0";
 		boolean ctrlOra=false;
-		if(!oraInzio.equals("")) oraInizioL = oraInzio.replace(":", "");
-		if(!oraFine.equals("")) oraFineL = oraFine.replace(":", "");
+		if(!oraInzio.equals("")) oraInizioL = oraInzio.replace(":","");
+		if(!oraFine.equals("")) oraFineL = oraFine.replace(":","");
 		oraInizioNum=Integer.parseInt(oraInizioL);
 		oraFineNum=Integer.parseInt(oraFineL);
 		if(oraFineNum>oraInizioNum) ctrlOra=true;
 		return ctrlOra;
 	}
 	
-
 }

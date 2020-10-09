@@ -56,8 +56,12 @@ public class ImpiegatoDao implements ImpiegatoDaoInt {
 
 	@Override
 	public Impiegato getImpiegatoByUser(String username) {
-		String sql = "SELECT * FROM IMPIEGATO WHERE USERNAME=?";
-		return jdbcTemplate.queryForObject(sql, new Object[] {username}, new BeanPropertyRowMapper<Impiegato>(Impiegato.class));
+		try {
+			String sql = "SELECT * FROM IMPIEGATO WHERE USERNAME=?";
+			return jdbcTemplate.queryForObject(sql, new Object[] {username}, new BeanPropertyRowMapper<Impiegato>(Impiegato.class));
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 
 	@Override
