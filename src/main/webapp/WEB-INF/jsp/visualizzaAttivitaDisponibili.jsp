@@ -30,8 +30,7 @@
         </tr>
      </c:forEach>       
     </table>
-  
-    <button type="submit">Aggiungi</button>
+    <a href="aggiungiAttivitaDisponibili1">Aggiungi</a>
 </form:form>
 <a href= "menuAmministratore" >Torna indietro</a>
 </body>

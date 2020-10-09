@@ -44,6 +44,4 @@ public class AttivitaDisponibiliService implements AttivitaDisponibiliServiceInt
 	    return attivitaDisponibiliDao.cancellaAttivitaDisponibili(idAd);
 	}
 
-	
-
 }

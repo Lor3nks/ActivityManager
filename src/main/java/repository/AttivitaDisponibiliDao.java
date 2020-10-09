@@ -5,11 +5,13 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import domain.AttivitaDisponibili;
+import domain.Impiegato;
 
 @Repository
 public class AttivitaDisponibiliDao implements AttivitaDisponibiliDaoInt {
@@ -43,8 +45,12 @@ public class AttivitaDisponibiliDao implements AttivitaDisponibiliDaoInt {
 
 	@Override
 	public AttivitaDisponibili getAttivitaDisponibiliById(String id_Disp) {
-		String sql = "SELECT * FROM ATTIVITA_DISPONIBILI WHERE ID_DISP=?";
-		return jdbcTemplate.queryForObject(sql, new Object[] {id_Disp}, new BeanPropertyRowMapper<AttivitaDisponibili>(AttivitaDisponibili.class));
+		try {
+			String sql = "SELECT * FROM ATTIVITA_DISPONIBILI WHERE ID_DISP=?";
+			return jdbcTemplate.queryForObject(sql,new Object[] {id_Disp}, new BeanPropertyRowMapper<AttivitaDisponibili>(AttivitaDisponibili.class));
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 
 	@Override
@@ -60,8 +66,8 @@ public class AttivitaDisponibiliDao implements AttivitaDisponibiliDaoInt {
 		return jdbcTemplate.update(sql,new Object[] {idAd});
 	}
 
-
 	
+
 
 	
 }

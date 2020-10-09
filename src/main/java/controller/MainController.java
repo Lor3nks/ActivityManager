@@ -523,6 +523,32 @@ public class MainController {
 		return "";
 		}
 	
+	@RequestMapping(value ="/aggiungiAttivitaDisponibili1")
+	public String aggiungiAttivitaDisponibili1(@ModelAttribute AttivitaDisponibili attivitaDisponibili,Model model,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		logger.info("-> aggiungiAttivitaDisponibili1 chiamata");
+		model.addAttribute("attDisp",new AttivitaDisponibili());
+		return "aggiungiAttivitaDisponibili"; 
+		}
+	
+	@RequestMapping(value ="/aggiungiAttivitaDisponibili2")
+	public String aggiungiAttivitaDisponibili2( 
+			@ModelAttribute AttivitaDisponibili attivitaDisponibili,
+			Model model,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		logger.info("-> aggiungiAttivitaDisponibili2 chiamata");
+		AttivitaDisponibili attD=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(attivitaDisponibili.getid_Disp());
+		if(attD==null) {
+			attivitaDisponibiliServiceInt.salvaAttivitaDisponibili(attivitaDisponibili);
+			RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaDisponibili");
+			rd.forward(request, response);
+		}else {
+			String errore="Codice attività già presente";			
+			model.addAttribute("errore", errore);
+			model.addAttribute("attDisp", attivitaDisponibili);
+			return "aggiungiAttivitaDisponibili";	
+		}
+		return "";
+		}
+	
 	
 	
 //////////////////////////////////////// IMPIEGATI /////////////////////////////////////
