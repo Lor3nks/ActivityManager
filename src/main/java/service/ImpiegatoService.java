@@ -29,7 +29,7 @@ public class ImpiegatoService implements ImpiegatoServiceInt{
 	@Override
 	public int cambiaPwdImpiegato(String username, String newPassword) {
 		
-		return impiegatoDao.cambiaPwd(username, newPassword);
+		return impiegatoDao.cambiaPwd(newPassword, username);
 	}
 
 	@Override
