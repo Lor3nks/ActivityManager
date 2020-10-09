@@ -69,26 +69,39 @@ public class MainController {
 	
 /////////////////////////////////////////// ACCESSO /////////////////////////////////////////////////
 	
-	
-	
 	@RequestMapping(value = {"/", "/login"})
-	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
-			@RequestParam(value = "logout", required = false) String logout, HttpServletRequest request, HttpSession session) {
-		
-		ModelAndView model = new ModelAndView();
+	public String login(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout, HttpServletRequest request, HttpSession session, Model model) {
 		
 		if (error != null) {
-			model.addObject("error", "Username o password errati!");
+			model.addAttribute("error", "Username o password errati!");
 		}
 
 		if (logout != null) {
-			model.addObject("msg", "Logout riuscito!");
+			model.addAttribute("msg", "Logout riuscito!");
 		}
-		model.setViewName("login");
-
-		return model;
+		return "login";
 
 	}
+	
+//	@RequestMapping(value = {"/", "/login"})
+//	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
+//			@RequestParam(value = "logout", required = false) String logout, HttpServletRequest request, HttpSession session) {
+//		
+//		ModelAndView model = new ModelAndView();
+//		
+//		if (error != null) {
+//			model.addObject("error", "Username o password errati!");
+//		}
+//
+//		if (logout != null) {
+//			model.addObject("msg", "Logout riuscito!");
+//		}
+//		model.setViewName("login");
+//
+//		return model;
+//
+//	}
 	
 	// VECCHIO LOGIN //
 //	@RequestMapping(value = "/login")
@@ -129,29 +142,25 @@ public class MainController {
 //	}
 	
 	@RequestMapping(value = "/mainMenu")
-	public ModelAndView mainMenu(HttpServletRequest request, HttpSession session) {
-		
-		ModelAndView model = new ModelAndView();
-		
-		Impiegato i = new Impiegato();
-		
+	public String mainMenu(Model model, HttpServletRequest request, HttpSession session) {		
 		// controllo ruolo dell'utente loggato
 		Collection<? extends GrantedAuthority> authorities = 
 				SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-		
+		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		boolean isAdmin = authorities.contains(new SimpleGrantedAuthority("amministratore"));
-		
-		String username = request.getParameter("username");
-		i = impiegatoServiceInt.recuperaImpiegatoByUser(username);
-		
+		String username = ((UserDetails) o).getUsername();  
+
+		Impiegato i = impiegatoServiceInt.recuperaImpiegatoByUser(username);
+		model.addAttribute("impiegato", i);
+		session = request.getSession();
 		if(isAdmin) {
 			session.setAttribute("amministratore", i);
-			model.setViewName("menuAmministratore");
+			return "menuAmministratore";
 		} else {
 			session.setAttribute("impiegato", i);
-			model.setViewName("menuImpiegato");
+			i = (Impiegato) session.getAttribute("impiegato");
+			return "menuImpiegato";
 		}
-	    return model;
 	}
 		
 	@RequestMapping(value = {"/placeholder", "/formRegistrazione"})
@@ -206,11 +215,7 @@ public class MainController {
 	
 	@RequestMapping(value="/tornaIndietro")
 	public String tornaIndietro(@ModelAttribute Impiegato impiegato,Model model,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
-		
-		
-		//RequestDispatcher rd=request.getRequestDispatcher("menuImpiegato");
-	//	rd.forward(request, response);
-		return "menuImpiegato";
+		return "mainMenu";
 		
 	}
 
@@ -251,8 +256,11 @@ public class MainController {
 ////////////////////////////////// ATTIVTA' SVOLTE E DISPONIBILI ////////////////////////////////////////
 	
 	@RequestMapping(value = "/formAttivitaSvolte")
-	public String login(Model model) {
+	public String login(Model model, HttpSession session, HttpServletRequest request) {
 		logger.info("-> formAttivitaSvolte chiamata");
+		session = request.getSession();
+		Impiegato imp = (Impiegato)session.getAttribute("impiegato");
+		System.out.println(imp.getUsername());
 		List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
 		model.addAttribute("att_Disp",att_Disp);
 		model.addAttribute(new AttivitaSvolte());
@@ -263,6 +271,8 @@ public class MainController {
 	public String salvaAttivitaSvolte(@Valid @ModelAttribute AttivitaSvolte attivitaSvolte, BindingResult bindingResult, Model model,
 			HttpServletRequest request, HttpSession session) {
 		logger.info("-> salvaAttivitaSvolte chiamata");
+		Impiegato imp = (Impiegato)session.getAttribute("impiegato");
+		System.out.println(imp.getUsername());
 		if (bindingResult.hasErrors()) {
 			FieldError fieldError = bindingResult.getFieldError();
 			//System.out.println("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
@@ -510,8 +520,10 @@ public class MainController {
 	  
 
 	@RequestMapping(value= "/visualizzaListaImpiegati")
-	public String visualizzaListaImpiegati(Model model) {
+	public String visualizzaListaImpiegati(Model model, HttpSession session) {
 		logger.info("-> visListaImpiegati chiamata");
+		Impiegato imp = (Impiegato)session.getAttribute("amministratore");
+		System.out.println(imp.getUsername());
 		List<Impiegato> lista = impiegatoServiceInt.recuperaImpiegati();
 		model.addAttribute("listaImpiegati", lista);
 		return "visualizzaListaImpiegati";
@@ -521,7 +533,6 @@ public class MainController {
 	public void modificaAbilitazioneImp(@RequestParam String userName,Model model,HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		logger.info("-> modificaAbilitazioneImp chiamata");
-		Impiegato imp=new Impiegato();
 		boolean impBoolAbil=impiegatoServiceInt.recuperaImpiegatoByUser(userName).isAbilitazione();
 		if(impBoolAbil) impiegatoServiceInt.modificaAbilitazioneImpiegato(userName, false);
 		else impiegatoServiceInt.modificaAbilitazioneImpiegato(userName, true);

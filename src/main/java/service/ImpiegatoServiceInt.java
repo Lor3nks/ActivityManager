@@ -13,5 +13,4 @@ public interface ImpiegatoServiceInt {
 	public List<Impiegato> recuperaImpiegati();
 	public Impiegato recuperaImpiegatoByUser(String username);
 	public int modificaAbilitazioneImpiegato(String username,boolean abilitazione);
-	public Impiegato checkLoginImpiegato(String username,String password);
 }

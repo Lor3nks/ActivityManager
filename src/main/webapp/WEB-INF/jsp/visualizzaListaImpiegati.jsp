@@ -51,7 +51,7 @@
 	
 		</div>
 		<div class="row">
-			<a href="menuAmministratore"><button>Menu</button></a>
+			<a href="tornaIndetro"><button>Torna al menù</button></a>
 		</div>
 		<div class="row">
 			<div style="margin-top: 50px">

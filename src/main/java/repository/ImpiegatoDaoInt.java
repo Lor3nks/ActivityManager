@@ -13,9 +13,4 @@ public interface ImpiegatoDaoInt {
 	public List <Impiegato> getAllImpiegati ();
 	public Impiegato getImpiegatoByUser (String username);
 	public int modificaAbilitazione(String username, boolean abilitazione);
-	public Impiegato checkLogin (String username, String password);
-	
-	
-	
-	
 }

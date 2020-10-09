@@ -109,6 +109,9 @@
 		</tbody> 
 	</table>
 	</div>
+	<div class="row">
+			<a href="tornaIndetro"><button>Torna al menù</button></a>
+		</div>
 	</div>
 </body>
 </html>

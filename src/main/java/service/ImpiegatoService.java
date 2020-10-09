@@ -54,12 +54,4 @@ public class ImpiegatoService implements ImpiegatoServiceInt{
 		
 		return impiegatoDao.modificaAbilitazione(username, abilitazione);
 	}
-
-	@Override
-	public Impiegato checkLoginImpiegato(String username, String password) {
-		
-		return impiegatoDao.checkLogin(username, password);
-	}
-
-	
 }

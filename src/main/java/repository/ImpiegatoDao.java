@@ -56,12 +56,8 @@ public class ImpiegatoDao implements ImpiegatoDaoInt {
 
 	@Override
 	public Impiegato getImpiegatoByUser(String username) {
-		try {
 		String sql = "SELECT * FROM IMPIEGATO WHERE USERNAME=?";
 		return jdbcTemplate.queryForObject(sql, new Object[] {username}, new BeanPropertyRowMapper<Impiegato>(Impiegato.class));
-		}catch (EmptyResultDataAccessException e) {
-			return null;
-		}
 	}
 
 	@Override
@@ -69,16 +65,4 @@ public class ImpiegatoDao implements ImpiegatoDaoInt {
 		String sql = "UPDATE IMPIEGATO SET ABILITAZIONE=? WHERE USERNAME=?";
 		return jdbcTemplate.update(sql, new Object[] {abilitazione,username});
 	}
-
-	@Override
-	public Impiegato checkLogin(String username, String password) {
-		try {
-			String sql = "SELECT * FROM IMPIEGATO WHERE USERNAME=? AND PASSWORD=? ";
-			return jdbcTemplate.queryForObject(sql, new Object[] {username, password}, new BeanPropertyRowMapper<Impiegato>(Impiegato.class));
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-	}
-	
-
 }

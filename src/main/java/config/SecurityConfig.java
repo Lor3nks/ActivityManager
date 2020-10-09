@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {  
 		
 		http.authorizeRequests()
-		.antMatchers("/admin").hasAuthority("amministratore")
+		.antMatchers("/menuAmministratore", "/visualizzaListaImpiegati", "/formAttivitaDisponibili", "/modificaAttivitaDisponibili1", "/modificaImpAmm", "/visualizzaAttivitaDisponibili", "/visualizzaAttivitaSvolte").hasAuthority("amministratore")
 		.and()
 			.formLogin().loginPage("/login").failureUrl("/login?error")
 				.usernameParameter("username").passwordParameter("password")

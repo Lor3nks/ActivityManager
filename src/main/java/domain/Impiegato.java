@@ -33,6 +33,8 @@ public class Impiegato implements Serializable {
 
 	public Impiegato() {
 		super();
+		this.username = "";
+		this.password = "";
 	}
 	
 	
