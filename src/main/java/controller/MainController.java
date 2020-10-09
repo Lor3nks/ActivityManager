@@ -211,16 +211,9 @@ public class MainController {
 		
 	}
 
-	@RequestMapping(value = "/admin**", method = RequestMethod.GET)
-	public ModelAndView adminPage() {
-
-		ModelAndView model = new ModelAndView();
-		model.addObject("title", "Spring Security Login Form - Database Authentication");
-		model.addObject("message", "Pagina visibile solo all'AMMINISTRATORE");
-		model.setViewName("admin");
-
-		return model;
-
+	@RequestMapping(value="/formResetPassword")
+	public String formResetPassword() {
+	return "formResetPassword";
 	}
 
 	
@@ -626,29 +619,58 @@ public class MainController {
 	}	
 	
 	@RequestMapping(value = "/sendEmail")
-	public String sendEmail(@ModelAttribute Impiegato impiegato, Model model,
+	public ModelAndView sendEmail(@ModelAttribute Impiegato impiegato,
 			HttpServletRequest request) {
 		logger.info("-> sendEmail chiamata");
-
 		
+		ModelAndView model = new ModelAndView();
+		model.setViewName("menuAmministratore");
+		
+		// Generazione PWD casuale
 		String alph = new String("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
 		int n = alph.length();
-
 		String newPassword = new String(); 
 		SecureRandom r = new SecureRandom();
-
 		for (int i=0; i<10; i++) {
 		    newPassword = newPassword + alph.charAt(r.nextInt(n));
 		}
-		
 		final String mailMessage = "La tua nuova password è "+newPassword;
 		
+		// Controllo utente
+		
 		String user = request.getParameter("resetTo");
-		Impiegato imp = impiegatoServiceInt.recuperaImpiegatoByUser(user);
+		Impiegato i = impiegatoServiceInt.recuperaImpiegatoByUser(user);
 		
-		recipientMail = imp.getEmail();
+
+		// primo IF distingue tra "Password Dimenticata" e "Amministratore Reset"
+		if (request.getParameter("email")!=null) {
+			
+			model.setViewName("login");
+
+			if (i!=null) {
+				
+				if(i.getEmail().equals(request.getParameter("email"))) {
+					
+				} else {
+					model.addObject("error", "Mail errata");
+					model.setViewName("formResetPassword");
+					return model;
+				}
+				
+			}else {
+				System.out.println("Nessun utente con questo nome nel DB");
+				model.addObject("error", "Utente non trovato.");
+				model.setViewName("formResetPassword");
+				return model;
+			}
+		}
 		
-		impiegatoServiceInt.cambiaPwdImpiegato(user, newPassword);
+		recipientMail = i.getEmail();
+		System.out.println("RecipientMail: "+recipientMail);
+		
+		impiegatoServiceInt.cambiaPwdImpiegato(newPassword, user);
+		
+		System.out.println("Nuova pass per utente "+user+" è "+newPassword);
 		
 		mailSender.send(new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
@@ -661,7 +683,7 @@ public class MainController {
 			}
 		});
 		
-		return "menuAmministratore";
+		return model;
 	}
 	
 	private boolean verificaOre(String oraInzio, String oraFine) {

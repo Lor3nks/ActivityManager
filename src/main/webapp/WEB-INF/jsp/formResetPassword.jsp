@@ -11,14 +11,14 @@
 </head>
 <body>
 
-	<form:form modelAttribute="amministratore" action="resetPassword" method="post">
-		<form:label path="username">Username</form:label>
-		<form:input path="username" type="text"/>
+	<form action="sendEmail" method="post">
+		<label for="resetTo">Username</label>
+		<input name="resetTo" type="text"/>
 		
 		<br>
 		
-		<form:label path="email">Email</form:label>
-		<form:input path="email" type="text"/>
+		<label for="email">Email</label>
+		<input name="email" type="text"/>
 		
 		<br>
 		
@@ -26,6 +26,6 @@
 		
 		
 		
-	</form:form>
+	</form>
 </body>
 </html>
