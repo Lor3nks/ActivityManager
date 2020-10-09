@@ -10,6 +10,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -46,9 +47,13 @@ public class AttivitaSvolteDao implements AttivitaSvolteDaoInt{
 
 	@Override
 	public List<AttivitaSvolte> getAllAttivitaSvolte() {
+		try {
 			String sql="select * from attivita_svolte order by data_attivita desc";
 			return jdbcTemplate.query(sql, new BeanPropertyRowMapper<AttivitaSvolte>(AttivitaSvolte.class));
+		} catch (EmptyResultDataAccessException e) {
+			return null;
 		}
+	}
 
 	@Override
 	public List<AttivitaSvolte> getAttivitaSvolteByImpiegato(Impiegato i) {

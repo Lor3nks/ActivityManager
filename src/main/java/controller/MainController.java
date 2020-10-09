@@ -240,8 +240,9 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/tornaIndietro")
-	public String tornaIndietro(@ModelAttribute Impiegato impiegato,Model model,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
-		return "mainMenu";
+	public void tornaIndietro(@ModelAttribute Impiegato impiegato,Model model,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		RequestDispatcher rd=request.getRequestDispatcher("mainMenu");
+		rd.forward(request, response);
 		
 	}
 
@@ -359,6 +360,7 @@ public class MainController {
 	public String visuailzzaAttivitaSvolte(Model model,HttpServletRequest request, HttpSession session) {
 		logger.info("-> visualizzaAttivitaSvolteImpiegato chiamata");
 		List<AttivitaSvolte> attSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolte();
+		if(attSvolte!=null) {
 		for(AttivitaSvolte a: attSvolte) { 
 			logger.info("-> recupero attDisp");
 			String codAttDisp=attivitaSvolteServiceInt.getAttIdDispFromAttSvolte(a.getId_Trigg());
@@ -367,6 +369,7 @@ public class MainController {
 			Impiegato i = impiegatoServiceInt.recuperaImpiegatoByUser(usernameAttDisp);
 			a.setAtt_Disp(attDisponibile);
 			a.setImp(i);
+			}
 		}
 		model.addAttribute("attSvolte",attSvolte);
 		return "visualizzaAttivitaSvolte";
