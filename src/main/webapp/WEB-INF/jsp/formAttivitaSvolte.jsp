@@ -8,8 +8,40 @@
 <head> 
 <meta charset="ISO-8859-1">
 <title>Attività svolte</title>
+<style type="text/css"><%@include file="/css/bootstrap.min.css"%></style>
+<style type="text/css"><%@include file="/css/style.css"%></style>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href=""><img id="logo" src="./images/ATlogo_min1.png"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="visualizzaAttivitaSvolteImpiegato">Visualizza Attività</a>
+      </li>
+    
+        
+         </ul> 
+    <ul class="nav navbar-nav navbar-right">
+       <li class="nav-item">
+        <a class="nav-link" href="formCambiaPassword">Modifica Password</a>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link" href="logout">Logout</a>
+        </li>
+    </ul>
+      
+        </div>
+   
+ 
+</nav>
 <p>${errore}</p>
 <form:form modelAttribute="attivitaSvolte" action="salvaAttivitaSvolte"  method="post">
 	<p>
@@ -40,12 +72,12 @@
 	<form:textarea id="note" path="note" rows="4" cols="50"></form:textarea>
 	</p>
 			 
-	 <span id="buttons">
+	 <span id="buttons ">
 		<!-- <a href="salvaAttivitaS"><input type="button" value="Salva" style="color:black" /></a>  -->
-        <input id="submit" type="submit" value="Salva"/> 
+        <input class="btn btn-outline-primary" id="submit" type="submit" value="Salva"/> 
 	 </span>
 	  
 </form:form>
-<a href="tornaIndietro"><button>Torna Al Menu</button></a> 
+<a href="tornaIndietro"><button class="btn btn-outline-primary">Torna Al Menu</button></a> 
 </body>
 </html>

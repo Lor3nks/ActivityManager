@@ -10,25 +10,46 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Portale Dell'Impiegato</title>
+<style type="text/css"><%@include file="/css/bootstrap.min.css"%></style>
+<style type="text/css"><%@include file="/css/style.css"%></style>
 </head>
 <body>
-<h1>Menu Attivita</h1>
-<h2>Title : ${title}</h2>
-	<h2>Message : ${message}</h2>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href=""><img id="logo" src="./images/ATlogo_min1.png"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-	<c:url value="/logout" var="logoutUrl" />
-	<form action="${logoutUrl}" method="post" id="logoutForm">
-		<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" />
-	</form>
- <form >
- <ol>
- <li><a href="visualizzaAttivitaSvolteImpiegato">Visualizza Attività</a></li>
- <li><a href="formAttivitaSvolte">Gestione Attività Svolte</a></li>
- <li><a href="formCambiaPassword">Modifica Password</a></li>
- <li><a href="logout">Logout</a></li>
- </ol>
-</form>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="visualizzaAttivitaSvolteImpiegato">Visualizza Attività</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="formAttivitaSvolte">Gestione Attività Svolte</a>
+      </li>
+     
+      
+        
+         </ul> 
+    <ul class="nav navbar-nav navbar-right">
+       <li class="nav-item">
+        <a class="nav-link" href="formCambiaPassword">Modifica Password</a>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link" href="logout">Logout</a>
+        </li>
+    </ul>
+      
+        </div>
+   
+ 
+</nav>
+
+
 
 </body>
 </html> 

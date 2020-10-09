@@ -77,6 +77,7 @@ public class AppConfig implements WebMvcConfigurer{
 		registry.addResourceHandler("/js/**").addResourceLocations("/js/");
 		registry.addResourceHandler("/css/**").addResourceLocations("/css/");
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+		registry.addResourceHandler("/images/**").addResourceLocations("/images/");
 	}
 	
 	@Override

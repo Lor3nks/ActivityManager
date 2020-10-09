@@ -1,1 +1,23 @@
 @charset "ISO-8859-1";
+
+.rowLogin{
+	text-align:center;
+	padding-bottom: 5rem;
+	padding-top: 5rem;
+	
+}
+
+.lsd{text-align: center;}
+
+#logo{
+	width: 70%;
+	
+	margin-top: 0;
+	margin-bottom: 0;
+	
+}
+
+#logoL{
+	width: 20%;
+	
+}

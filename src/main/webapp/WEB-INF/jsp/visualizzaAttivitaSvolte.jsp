@@ -8,11 +8,10 @@
 <head> 
 <meta charset="ISO-8859-1">
 <title>Elenco delle attività svolte</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/Content/font-awesome/css/font-awesome.min.css" />
 
-<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<style type="text/css"><%@include file="/css/bootstrap.min.css"%></style>
+<style type="text/css"><%@include file="/css/style.css"%></style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
 <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/jszip.min.js"></script>
 
@@ -69,6 +68,39 @@
 </script>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href=""><img id="logo" src="./images/ATlogo_min1.png"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="visualizzaListaImpiegati">Visualizza lista impiegati</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="visualizzaAttivitaDisponibili">Visualizza attività disponibili</a>
+      </li>
+    
+      
+        
+         </ul> 
+    <ul class="nav navbar-nav navbar-right">
+       <li class="nav-item">
+        <a class="nav-link" href="formCambiaPassword">Modifica Password</a>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link" href="logout">Logout</a>
+        </li>
+    </ul>
+      
+        </div>
+   
+</nav>
 <div class="container">
 	<div class="row">
 		<h3>Elenco delle attività svolte</h3>
@@ -110,7 +142,7 @@
 	</table>
 	</div>
 	<div class="row">
-			<a href="tornaIndetro"><button>Torna al menù</button></a>
+			<a href="tornaIndietro"><button class="btn btn-outline-primary">Torna Al Menu</button></a> 
 		</div>
 	</div>
 </body>
