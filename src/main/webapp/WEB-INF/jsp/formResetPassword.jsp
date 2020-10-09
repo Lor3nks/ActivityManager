@@ -29,22 +29,20 @@
 <div class="row">
 <div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>
 <div class="col-lg-4 col-sm-6 col-xs-6 col-8">
-	<form:form modelAttribute="amministratore" action="resetPassword" method="post">
-		<form:label path="username">Username</form:label>
-		<form:input path="username" type="text"/>
+	<form action="sendEmail" method="post">
+		<label for="resetTo">Username</label>
+		<input name="resetTo" type="text"/>
 		
 		<br>
 		
-		<form:label path="email">Email</form:label>
-		<form:input path="email" type="text"/>
+		<label for="email">Email</label>
+		<input name="email" type="text"/>
 		
 		<br>
 		
 		<button type="submit">Resetta Password</button>
 		
-		
-		
-	</form:form>
+	</form>
 	</div>
 	</div>
 	

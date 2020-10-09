@@ -106,7 +106,7 @@ public class MainController {
 		}
 	}
 		
-	@RequestMapping(value = {"/placeholder", "/formRegistrazione"})
+	@RequestMapping(value = "/formRegistrazione")
 	public String formRegistrazione(Model model) {
 		model.addAttribute(new Impiegato());
 		return "formRegistrazione";
