@@ -66,6 +66,13 @@ public class AttivitaDisponibiliDao implements AttivitaDisponibiliDaoInt {
 		return jdbcTemplate.update(sql,new Object[] {idAd});
 	}
 
+
+	@Override
+	public List<AttivitaDisponibili> getAllAttivitaDisponibiliAbil() {
+		String sql = "SELECT * FROM ATTIVITA_DISPONIBILI WHERE ABILITAZIONE=1";
+		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<AttivitaDisponibili>(AttivitaDisponibili.class));
+	}
+
 	
 
 

@@ -11,4 +11,5 @@ public interface AttivitaDisponibiliDaoInt {
 	public List<AttivitaDisponibili> getAllAttivitaDisponibili();
 	public int cancellaAttivitaDisponibili(String idAd);
 	public int modificaAbilitazione(AttivitaDisponibili ad, boolean ab);
+	public List<AttivitaDisponibili> getAllAttivitaDisponibiliAbil();
 }

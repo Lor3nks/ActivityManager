@@ -11,4 +11,5 @@ public interface AttivitaDisponibiliServiceInt {
 	public AttivitaDisponibili recuperaAttivitaDisponibiliById(String id_disp);
 	public List<AttivitaDisponibili> RecuperaAttivitaDisponibili();
 	public int cancellaAttivitaDisponibili(String idAd);
+	public List<AttivitaDisponibili> RecuperaAttivitaDisponibiliAbil();
 }

@@ -44,4 +44,9 @@ public class AttivitaDisponibiliService implements AttivitaDisponibiliServiceInt
 	    return attivitaDisponibiliDao.cancellaAttivitaDisponibili(idAd);
 	}
 
+	@Override
+	public List<AttivitaDisponibili> RecuperaAttivitaDisponibiliAbil() {
+		return attivitaDisponibiliDao.getAllAttivitaDisponibiliAbil();
+	}
+
 }

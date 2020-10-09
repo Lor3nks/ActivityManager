@@ -84,62 +84,6 @@ public class MainController {
 
 	}
 	
-//	@RequestMapping(value = {"/", "/login"})
-//	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
-//			@RequestParam(value = "logout", required = false) String logout, HttpServletRequest request, HttpSession session) {
-//		
-//		ModelAndView model = new ModelAndView();
-//		
-//		if (error != null) {
-//			model.addObject("error", "Username o password errati!");
-//		}
-//
-//		if (logout != null) {
-//			model.addObject("msg", "Logout riuscito!");
-//		}
-//		model.setViewName("login");
-//
-//		return model;
-//
-//	}
-	
-	// VECCHIO LOGIN //
-//	@RequestMapping(value = "/login")
-//	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
-//			@RequestParam(value = "logout", required = false) String logout, HttpServletRequest request, HttpSession session) {
-//		logger.info("-> Login chiamata");
-//		
-//		ModelAndView model = new ModelAndView();
-//		
-//		Impiegato i = new Impiegato();
-//		String username = request.getParameter("username");
-//		String password = request.getParameter("password");
-//		i = impiegatoServiceInt.recuperaImpiegatoByUser(username);
-//		System.out.println(i.getUsername());
-//		if (error != null) {
-//
-//			model.addObject("error", "Username o password non validi.");
-//		}
-//
-//		if (logout != null) {
-//			model.addObject("msg", "Hai effettuato il logout.");
-//		}
-//		
-//		if (i != null) {
-//			if (i.getRuolo().equals("impiegato")) {
-//				model.addObject("impiegato", i);
-//				session.setAttribute("impiegato", i);
-//				model.setViewName("menuImpiegato");
-//
-//			} else {
-//				session.setAttribute("amministratore", i);
-//				model.addObject("amministratore", i);
-//				model.setViewName("menuAmministratore");
-//
-//			}
-//		}		
-//		return model;
-//	}
 	
 	@RequestMapping(value = "/mainMenu")
 	public String mainMenu(Model model, HttpServletRequest request, HttpSession session) {		
@@ -183,8 +127,7 @@ public class MainController {
 			return "formRegistrazione";
 		} else {
 			try {
-				String encrPwd = passwordEncoder.encode(impiegato.getPassword());
-				impiegato.setPassword(encrPwd);	
+				impiegato.setPassword(impiegato.getPassword());	
 				impiegatoServiceInt.inserisciImpiegato(impiegato);
 			} catch (Exception e) {
 				String errore = "Non è stato possibile aggiungere il tuo acccount.";
@@ -288,7 +231,7 @@ public class MainController {
 		session = request.getSession();
 		Impiegato imp = (Impiegato)session.getAttribute("impiegato");
 		System.out.println(imp.getUsername());
-		List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
+		List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibiliAbil();
 		model.addAttribute("att_Disp",att_Disp);
 		model.addAttribute(new AttivitaSvolte());
 		return "formAttivitaSvolte";
@@ -302,9 +245,9 @@ public class MainController {
 		System.out.println(imp.getUsername());
 		if (bindingResult.hasErrors()) {
 			FieldError fieldError = bindingResult.getFieldError();
-			String errore="Code:" + fieldError.getCode() + ", field:" + fieldError.getField();
+			String errore=""+fieldError.getField()+" "+ fieldError.getCode(); 
 			model.addAttribute("errore", errore);
-			List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
+			List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibiliAbil();
 			model.addAttribute("att_Disp",att_Disp);					
 			return "formAttivitaSvolte";
 		} else {
@@ -313,7 +256,7 @@ public class MainController {
 					String oraFine = request.getParameter("ora_Fine");
 					if(!verificaOre(oraInizio,oraFine)) {
 						String errore="La data di inzio deve essere antecedente alla data di fine!";
-						List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
+						List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibiliAbil();
 						model.addAttribute("errore", errore);
 						model.addAttribute("att_Disp",att_Disp);					
 						return "formAttivitaSvolte";						
@@ -713,73 +656,5 @@ public class MainController {
 		return ctrlOra;
 	}
 	
-//	
-	
-//	@RequestMapping(value ="/cancellaAttivitaDisponibili")
-//	public void cancellaAttivitaDisponibili(@RequestParam String id,Model model,
-//			HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-//		logger.info("-> cancellaAttivitaDisponibili chiamata");	
-//		attivitaDisponibiliServiceInt.cancellaAttivitaDisponibili(id);
-//		RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaDisponibili");
-//		rd.forward(request, response);
-//	}
 
-	
-//////////////////////////////////////////LOGIN VECCHIA	
-//	@RequestMapping(value="/login")
-//	public String login(Model model, HttpServletRequest request, HttpSession session) {
-//		logger.info("-> login chiamata");
-//		Impiegato i = new Impiegato();
-//		String username = request.getParameter("username");
-//		String password = request.getParameter("password");
-//		i = impiegatoServiceInt.checkLoginImpiegato(username, password);
-//		if (i != null) {
-//			if (i.getRuolo().equals("impiegato")) {
-//				model.addAttribute("impiegato", i);
-//				session.setAttribute("impiegato", i);
-//				return "menuImpiegato";
-//			} else {
-//				session.setAttribute("amministratore", i);
-//				model.addAttribute("amministratore", i);
-//				return "menuAmministratore";
-//			}
-//		} else {
-//			String errore = "Utente non registrato.";
-//			model.addAttribute("errore", errore);
-//			model.addAttribute(new Impiegato());
-//			return "formRegistrazione";
-//		}
-//	}
-	
-	
-//	@RequestMapping(value = "/formRegistrazione")
-//	public String formRegistrazione(Model model) {
-//		logger.info("-> form registrazione chiamata");
-//		model.addAttribute(new Impiegato());
-//		return "formRegistrazione";
-//	}
-//
-//	@RequestMapping(value = "/registrazione")
-//	public String registrazione(@ModelAttribute Impiegato impiegato, BindingResult bindingResult, Model model,
-//			HttpServletRequest request) {
-//		logger.info("-> registrazione chiamata");
-//		if (bindingResult.hasErrors()) {
-//			FieldError fieldError = bindingResult.getFieldError();
-//			System.out.println("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
-//			return "formRegistrazione";
-//		} else if (!impiegato.getPassword().equals(request.getParameter("confermaPassword"))) {
-//			String errore = "Le password non coincidono.";
-//			model.addAttribute("errore", errore);
-//			return "formRegistrazione";
-//		} else {
-//			try { 
-//				impiegatoServiceInt.inserisciImpiegato(impiegato);
-//			} catch (Exception e) {
-//				String errore = "Non è stato possibile aggiungere il tuo acccount.";
-//				model.addAttribute("errore", errore);
-//				return "formRegistrazione";
-//			}
-//		}
-//		return "menuImpiegato";
-//	}
 }
