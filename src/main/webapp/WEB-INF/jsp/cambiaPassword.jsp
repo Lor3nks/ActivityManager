@@ -10,38 +10,45 @@
 <title>Cambia Password</title>
 </head>
 <body>
+	<h3>${errore}</h3>
 	<h1>Cambia Password</h1>
-	<form:form modelAttribute="impiegato" action="cambiaPassword"
-		method="post">
-
-		<label>
-			<p>${impiegato.nome}</p>
-		</label>
-
-		<label>
-			<p>${impiegato.cognome}</p>
-		</label>
-
-		<label>
-			<p>${impiegato.dataNascita}</p>
-
-		</label>
-		<label for="password"> Vecchia Password</label>
-		<input name="password" type="text" />
-		</p>
-		<p>
-			<label for="password"> Nuova Password</label> <input name="password"
-				type="text" />
-		</p>
-		<p>
-			<label for="password"> Conferma Password</label> <input
-				name="password" type="text" />
-		</p>
-	</form:form>
-			<span><button type="submit">Submit</button></span>
-			
-			<a href="tornaIndietro"><button>Torna Al Menu</button></a> 
 	
-</body>
+		
+		
+			<p> ${impiegato.username}</p>
+		
 
+		
+			<p>Nome: ${impiegato.nome}</p>
+		
+
+		
+			<p>Cognome: ${impiegato.cognome}</p>
+		
+
+		
+			<p>Data di Nascita: ${impiegato.dataNascita}</p>
+
+		
+		<form action="cambiaPassword"
+		method="post">
+		<p>
+		<label for="password"> Vecchia Password</label>
+		<input  name="password" type="text" />
+		</p>
+		<p>
+			<label for="password"> Nuova Password</label> 
+			<input  name="nuovaPassword"	type="text" />
+		</p>
+		<p>
+			<label for="password"> Conferma Password</label>
+			 <input  name="confermaPassword" type="text" />
+		</p>
+		<p>
+		
+		<!-- <p id="error" class="error"><form:errors path="data_Attivita" /></p>  -->
+			<button type="submit">Submit</button>
+			<button><a href="tornaIndietro">Menu</a> </button>
+	</form>
+	</body>
 </html>
