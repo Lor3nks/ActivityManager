@@ -156,8 +156,7 @@ public class MainController {
 	
 	
 
-@RequestMapping(value = "/cambiaPassword")
-
+	@RequestMapping(value = "/cambiaPassword")
 	public String cambiaPassword(@ModelAttribute Impiegato impiegato, BindingResult bindingResult, Model model,
 			HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		logger.info("-> cambiaPassword chiamata");
@@ -168,19 +167,36 @@ public class MainController {
 		String passwordDB = i.getPassword();
 
 		
-		 if(!password.equals("") && password.equals(passwordDB)){
-			 if(!nuovaPassword.equals("") && !nuovaPassword.equals(password)) {	
-				 if(!confermaPassword.equals("") && confermaPassword.equals(nuovaPassword)) {
-						impiegatoServiceInt.cambiaPwdImpiegato(i.getUsername(), nuovaPassword);		
-				 }}}else {
-			String errore = "i campi inseriti non sono corretti";
+		 if(!password.equals("") || !nuovaPassword.equals("") || !confermaPassword.equals("")) {
+			 if (password.equals(passwordDB)){
+				 if (nuovaPassword.equals(confermaPassword)) {
+					 if (impiegatoServiceInt.cambiaPwdImpiegato(nuovaPassword, i.getUsername()) > 0) {
+						 model.addAttribute("errore", "Password cambiata correttamente");
+						 model.addAttribute("impiegato", i);
+						 return "cambiaPassword";
+					 } else {
+						 model.addAttribute("errore", "Non è stato possibile cambiare la password");
+						 model.addAttribute("impiegato", i);
+						 return "cambiaPassword";
+					 }
+				 } else {
+					 String errore = "Le password non corrispondono.";
+					 model.addAttribute("errore", errore);
+					 model.addAttribute("impiegato", i);
+					 return "cambiaPassword"; 
+				 }
+			 } else {
+				 String errore = "La password vecchia non corrisponde.";
+					model.addAttribute("errore", errore);
+					 model.addAttribute("impiegato", i);
+					return "cambiaPassword"; 
+			 }		
+		} else {
+			String errore = "Tutti i campi sono obbligatori";
 			model.addAttribute("errore", errore);
-			return "cambiaPassword";
-		
+			 model.addAttribute("impiegato", i);
+			return "cambiaPassword"; 
 		}
-		 
-		model.addAttribute("errore", "Password cambiata correttamente");
-		return "cambiaPassword";
 	}
 	
 	@RequestMapping(value="/formCambiaPassword")

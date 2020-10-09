@@ -8,7 +8,7 @@ public interface ImpiegatoDaoInt {
 	
 	public int inserisci (Impiegato i);
 	public int modifica (Impiegato i);
-	public int cambiaPwd (String username, String newPassword);
+	public int cambiaPwd (String newPassword, String username);
 	public Boolean checkAbilitazione (Impiegato i);
 	public List <Impiegato> getAllImpiegati ();
 	public Impiegato getImpiegatoByUser (String username);

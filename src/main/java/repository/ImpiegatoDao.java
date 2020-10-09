@@ -36,7 +36,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInt {
 	}
 
 	@Override
-	public int cambiaPwd(String username, String newPassword) {
+	public int cambiaPwd(String newPassword, String username) {
 		String sql = "UPDATE IMPIEGATO SET PASSWORD=? WHERE USERNAME=?";
 		return jdbcTemplate.update(sql, new Object[] {newPassword, username});
 	}

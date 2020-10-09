@@ -8,7 +8,7 @@ public interface ImpiegatoServiceInt {
 
 	public int inserisciImpiegato(Impiegato i);
 	public int modificaImpiegato(Impiegato i);
-	public int cambiaPwdImpiegato(String username,String newPassword);
+	public int cambiaPwdImpiegato(String newPassword,String username);
 	public Boolean checkAbilitazioneImpiegato(Impiegato i);
 	public List<Impiegato> recuperaImpiegati();
 	public Impiegato recuperaImpiegatoByUser(String username);
