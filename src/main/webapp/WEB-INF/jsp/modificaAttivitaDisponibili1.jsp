@@ -29,9 +29,7 @@
       <li class="nav-item">
         <a class="nav-link" href="formAttivitaSvolte">Gestione Attività Svolte</a>
       </li>
-     
-      
-        
+    
          </ul> 
     <ul class="nav navbar-nav navbar-right">
        <li class="nav-item">
@@ -43,9 +41,18 @@
     </ul>
       
         </div>
-   
- 
 </nav>
+
+<div class="container">
+<div class="rowLogin row">
+<div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>
+<div class="col-lg-4 col-sm-6 col-xs-6 col-8">
+
+<h3>Modifica descrizione attività</h3>
+
+<div class="error">${errore}</div>
+
+
 <form:form modelAttribute="attDisp" action="modificaAttivitaDisponibili2" method="post">
 	        <p>
 				<label for="descrizione">Descrizione:</label>	
@@ -53,7 +60,15 @@
 				<form:input name="id_Disp" type="hidden" path="id_Disp" />
 				<form:input name="abilitazione" type="hidden" path="abilitazione" />
 			</p>
-        	<p><button class="btn btn-outline-primary" type="submit">Salva</a></p> 
+        	<p><button class="btn btn-outline-primary" type="submit">Salva</button></p> 
 </form:form>
+
+	<p><a href="tornaIndietro"><button style="margin-top:15px;" class="btn btn-outline-primary">Torna Al Menu</button></a></p>
+
+	</div>
+	<div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>
+	</div>
+</div>
+
 </body>
 </html>
