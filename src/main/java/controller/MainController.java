@@ -167,35 +167,36 @@ public class MainController {
 		String passwordDB = i.getPassword();
 
 		
-		 if(!password.equals("") || !nuovaPassword.equals("") || !confermaPassword.equals("")) {
-			 if (password.equals(passwordDB)){
-				 if (nuovaPassword.equals(confermaPassword)) {
-					 if (impiegatoServiceInt.cambiaPwdImpiegato(nuovaPassword, i.getUsername()) > 0) {
-						 model.addAttribute("errore", "Password cambiata correttamente");
-						 model.addAttribute("impiegato", i);
-						 return "cambiaPassword";
-					 } else {
-						 model.addAttribute("errore", "Non è stato possibile cambiare la password");
-						 model.addAttribute("impiegato", i);
-						 return "cambiaPassword";
-					 }
-				 } else {
-					 String errore = "Le password non corrispondono";
-					 model.addAttribute("errore", errore);
-					 model.addAttribute("impiegato", i);
-					 return "cambiaPassword"; 
-				 }
-			 } else {
-				 String errore = "La password vecchia non corrisponde";
-					model.addAttribute("errore", errore);
-					 model.addAttribute("impiegato", i);
-					return "cambiaPassword"; 
-			 }		
-		} else {
+		if(password.equals("") || nuovaPassword.equals("") || confermaPassword.equals("") || (password.equals("") && nuovaPassword.equals("")) ||
+			(nuovaPassword.equals("") && confermaPassword.equals("")) || (confermaPassword.equals("") && password.equals(""))) {
 			String errore = "Tutti i campi sono obbligatori";
 			model.addAttribute("errore", errore);
-			 model.addAttribute("impiegato", i);
-			return "cambiaPassword"; 
+			model.addAttribute("impiegato", i);
+			return "cambiaPassword";
+		} else {
+			if (password.equals(passwordDB)){
+				if (nuovaPassword.equals(confermaPassword)) {
+					if (impiegatoServiceInt.cambiaPwdImpiegato(nuovaPassword, i.getUsername()) > 0) {
+						model.addAttribute("successo", "Password cambiata correttamente");
+						model.addAttribute("impiegato", i);
+						return "cambiaPassword";
+					} else {
+						model.addAttribute("errore", "Non è stato possibile cambiare la password");
+						model.addAttribute("impiegato", i);
+						return "cambiaPassword";
+					}
+				} else {
+					String errore = "Le password non corrispondono";
+					model.addAttribute("errore", errore);
+					model.addAttribute("impiegato", i);
+					return "cambiaPassword"; 
+				}
+			} else {
+				String errore = "La password vecchia non corrisponde";
+				model.addAttribute("errore", errore);
+				model.addAttribute("impiegato", i);
+				return "cambiaPassword"; 
+			}
 		}
 	}
 	
