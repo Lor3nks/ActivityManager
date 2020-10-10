@@ -84,6 +84,8 @@
 
 
 <a href="aggiungiAttivitaDisponibili1"><button class="btn btn-outline-primary">Aggiungi</button></a>
-<a href="tornaIndietro"><button style="margin-left:15px;" class="btn btn-outline-primary">Torna Al Menu</button></a> 
+<a href="tornaIndietro"><button style="margin-left:15px;" class="btn btn-outline-primary">Torna al Menù</button></a>
+</div>
+</div> 
 </body>
 </html> 

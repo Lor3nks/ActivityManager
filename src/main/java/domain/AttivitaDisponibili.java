@@ -11,7 +11,7 @@ public class AttivitaDisponibili {
 	private String id_Disp;
 	@NotEmpty
 	private String descrizione;
-	@NotEmpty
+	@NotNull
 	private int abilitazione;
 	
 	private List<Impiegato> impiegato;

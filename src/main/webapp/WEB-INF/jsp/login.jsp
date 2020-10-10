@@ -32,10 +32,10 @@
 			
 		
 		<c:if test="${not empty error}">
-		<div class="error">${error}</div>
+		<div class="error text-danger">${error}</div>
 		</c:if>
 		<c:if test="${not empty msg}">
-			<div class="msg">${msg}</div>
+			<div class="msg text-success">${msg}</div>
 		</c:if>
 		<p class="text-success">${successo}</p>
 			

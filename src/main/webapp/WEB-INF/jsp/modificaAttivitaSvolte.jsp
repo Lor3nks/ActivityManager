@@ -53,14 +53,14 @@
 <div class="col-lg-4 col-sm-6 col-xs-6 col-8">
 
 <h3>Modifica le attività svolte</h3>
-<div class="error">${errore}</div>
+<div class="error text-danger">${errore}</div>
 
 	<form:form modelAttribute="attivitaSvolte"
 		action="aggiornaSuDBAttivitaSvolte" method="post">
 		<label for="data_Attivita">Data attività: </label>
 			<p><form:input type="hidden" id="id_Trigg" path="id_Trigg"
 				autocomplete="off" />
-			<form:input type="text" id="data_Attivita" path="data_Attivita"
+			<form:input type="date" id="data_Attivita" path="data_Attivita"
 				autocomplete="off" /></p>
 		<p id="error" class="error">
 			<form:errors path="data_Attivita" />

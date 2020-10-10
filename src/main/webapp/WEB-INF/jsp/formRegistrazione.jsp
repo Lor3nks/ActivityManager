@@ -138,7 +138,7 @@
 						    <form:label path="dataNascita">Data di nascita</form:label>
 					   </div>
 					   <div class="col-xl-8 col-lg-6 col-md-8 col-sm-6 col-xs-6 col-8 center">
-						    <form:input path="dataNascita" type="text"
+						    <form:input path="dataNascita" type="date"
 							placeholder="GG/MM/AAAA" />
 					   </div>
 					   <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11 col-11 center">

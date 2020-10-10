@@ -51,7 +51,7 @@
 	<table id="exportTable" class="table table-hover table-striped">
 	<thead>
 		<tr>
-			<th>Impiegato</th><th>Data</th><th>Ora inizio</th><th>Ora fine</th><th>Attività</th><th>Note</th><th>DEL </th><th>MOD </th>
+			<th>Impiegato</th><th>Data</th><th>Ora inizio</th><th>Ora fine</th><th>Attività</th><th>Note</th><th>Elimina</th><th>Modifica</th>
 		</tr>
 		</thead>
 		<tbody>

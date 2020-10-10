@@ -17,14 +17,14 @@ public class Impiegato implements Serializable {
 	@NotEmpty(message = "Campo obbligatorio")
 	private String password;
 	@NotEmpty(message = "Campo obbligatorio")
-	@Email(message = "Email non in formato corretto.")
+	@Email(message = "Email non in formato corretto")
 	private String email;
 	@NotEmpty(message = "Campo obbligatorio")
 	private String nome;
 	@NotEmpty(message = "Campo obbligatorio")
 	private String cognome;
 	@NotNull(message = "Campo obbligatorio")
-	@Past(message = "Inserire data corrente o antecedente")
+	@Past(message = "Data non valida")
 	private LocalDate dataNascita;
 	private boolean abilitazione;
 	@NotNull

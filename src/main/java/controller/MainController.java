@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -115,7 +116,6 @@ public class MainController {
 	@RequestMapping(value = "/registrazione")
 	public String registrazione(@Valid @ModelAttribute Impiegato impiegato, BindingResult bindingResult, Model model,
 			HttpServletRequest request) {
-		
 		if (bindingResult.hasErrors()) {
 			FieldError fieldError = bindingResult.getFieldError();
 			System.out.println("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
@@ -196,7 +196,15 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/formCambiaPassword")
-	public String formCambiaPassword() {
+	public String formCambiaPassword(Model model, HttpSession session) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		Impiegato impiegato = (Impiegato) session.getAttribute("impiegato");
+		if (impiegato == null) {
+			impiegato = (Impiegato) session.getAttribute("amministratore"); 
+		}
+		System.out.println(impiegato.getUsername());
+		String dataNascita = impiegato.getDataNascita().format(formatter);
+		model.addAttribute("dataNascita", dataNascita);
 	return "cambiaPassword";
 	}
 	
@@ -493,7 +501,6 @@ public class MainController {
 	public String modificaAttivitaDisponibili2(@Valid @ModelAttribute AttivitaDisponibili attDisp,
 			Model model,BindingResult bindingResult, HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		logger.info("-> modificaAttivitaDisponibili2 chiamata");
-		
 		if (bindingResult.hasErrors()) {
 			FieldError fieldError = bindingResult.getFieldError();
 			String errore="Code:" + fieldError.getCode() + ", field:" + fieldError.getField();

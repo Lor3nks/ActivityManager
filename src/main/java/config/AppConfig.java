@@ -82,7 +82,7 @@ public class AppConfig implements WebMvcConfigurer{
 	
 	@Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addFormatter(new LocalDateFormatter("dd/MM/yyyy"));
+        registry.addFormatter(new LocalDateFormatter("yyyy-MM-dd"));
     }
 	
 //	@Bean(name = "messageSource")

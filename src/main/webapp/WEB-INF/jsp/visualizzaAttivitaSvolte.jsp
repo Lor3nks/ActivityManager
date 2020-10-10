@@ -103,7 +103,7 @@
 		<h3>Elenco delle attività svolte</h3>
 	</div>
 	<div class="row">
-		<p>${error}</p>
+		<p class="text-danger">${error}</p>
 	</div>
 	<div class="row">
 <!-- 	<div class="col-sm-10 col-10"> -->

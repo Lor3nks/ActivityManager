@@ -23,12 +23,27 @@
       <li class="nav-item active">
         <a class="nav-link" href="tornaIndietro">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="visualizzaAttivitaSvolteImpiegato">Visualizza Attività</a>
+      <c:choose>
+      	<c:when test="${amministratore ne null}">
+	      <li class="nav-item">
+	         <a class="nav-link" href="visualizzaListaImpiegati">Visualizza lista impiegati</a>
+	      </li>
+	      <li class="nav-item">
+        <a class="nav-link" href="visualizzaAttivitaDisponibili">Visualizza attività disponibili</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="formAttivitaSvolte">Gestione Attività Svolte</a>
+       <li class="nav-item">
+        <a class="nav-link" href="visualizzaAttivitaSvolte">Visualizza attività svolte</a>
       </li>
+      	</c:when>
+      	<c:otherwise>
+      		<li class="nav-item">
+	        <a class="nav-link" href="visualizzaAttivitaSvolteImpiegato">Visualizza Attività</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="formAttivitaSvolte">Gestione Attività Svolte</a>
+	      </li>
+      	</c:otherwise>
+      </c:choose>
     </ul> 
     <ul class="nav navbar-nav navbar-right">
       <li class="nav-item">
@@ -71,7 +86,7 @@
 					
 					<p>${impiegato.cognome} ${amministratore.cognome}</p>
 					
-					<p>${impiegato.dataNascita} ${amministratore.dataNascita}</p>
+					<p>${dataNascita}</p>
 				</div>
 			</div>
 			<form action="cambiaPassword" method="post">
