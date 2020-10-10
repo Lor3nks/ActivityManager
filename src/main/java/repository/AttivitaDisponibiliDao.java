@@ -55,7 +55,7 @@ public class AttivitaDisponibiliDao implements AttivitaDisponibiliDaoInt {
 
 	@Override
 	public List<AttivitaDisponibili> getAllAttivitaDisponibili() {
-		String sql = "SELECT * FROM ATTIVITA_DISPONIBILI";
+		String sql = "SELECT * FROM ATTIVITA_DISPONIBILI ORDER BY ID_DISP";
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<AttivitaDisponibili>(AttivitaDisponibili.class));		
 	}
 
