@@ -323,7 +323,7 @@ public class MainController {
 		return "modificaAttivitaSvolte";
 	}
 	
-
+ 
 	@RequestMapping(value ="/visualizzaAttivitaSvolte")
 	public String visuailzzaAttivitaSvolte(Model model,HttpServletRequest request, HttpSession session) {
 		logger.info("-> visualizzaAttivitaSvolteImpiegato chiamata");
