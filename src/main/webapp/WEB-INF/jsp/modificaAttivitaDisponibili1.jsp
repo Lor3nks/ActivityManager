@@ -54,12 +54,12 @@
 
 
 <form:form modelAttribute="attDisp" action="modificaAttivitaDisponibili2" method="post">
-	        <p>
+	        
 				<label for="descrizione">Descrizione:</label>	
-				<form:input name="descrizione" type="text" path="descrizione" />
+				<p><form:input name="descrizione" type="text" path="descrizione" /></p>
 				<form:input name="id_Disp" type="hidden" path="id_Disp" />
 				<form:input name="abilitazione" type="hidden" path="abilitazione" />
-			</p>
+			
         	<p><button class="btn btn-outline-primary" type="submit">Salva</button></p> 
 </form:form>
 

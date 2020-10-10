@@ -59,21 +59,17 @@
 
 <form:form modelAttribute="attDisp" action="aggiungiAttivitaDisponibili2" method="post" >
  
+ 	<label  for="data_Attivita">Id Attività: </label>
  	<p>
-	    <label  for="data_Attivita">Id Attività: </label>
-	    <form:input placeholder ="ID" maxlength="4" type="text" id="id_Disp" path="id_Disp" autocomplete="off"/>
+	    <form:input placeholder ="ID" maxlength="4" type="text" id="id_Disp" path="id_Disp" autocomplete="off"/></p>
 	    <p id="error" class="error"><form:errors path="id_Disp" /></p>
 	</p>
 	
-	<p>
 	    <label  for="data_Attivita">Descrizione: </label>
-	    <form:input placeholder ="descrizione" maxlength="20" type="text" id="descrizione" path="descrizione" autocomplete="off"/>
+	    <p><form:input placeholder ="descrizione" maxlength="20" type="text" id="descrizione" path="descrizione" autocomplete="off"/></p>
 	    <p id="error" class="error"><form:errors path="descrizione" /></p>
-	</p>
-	 
-	<p> 
+	  
 		<form:input  type="hidden" id="abilitazione" path="abilitazione" autocomplete="off" value="1"/>
-	</p>
 	
 	<button class="btn btn-outline-primary" type="submit">Salva Attività</button>
         

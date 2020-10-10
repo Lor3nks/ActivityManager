@@ -26,15 +26,13 @@
 
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link" href="#">Home
+				<li class="nav-item active"><a class="nav-link" href="tornaIndietro">Home
 						<span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="visualizzaAttivitaSvolteImpiegato">Visualizza Attività</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="formAttivitaSvolte">Gestione Attività Svolte</a></li>
-
-
 
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -49,48 +47,51 @@
 
 	</nav>
 
-	<p>${errore}</p>
+<div class="container">
+<div class="rowLogin row">
+<div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>
+<div class="col-lg-4 col-sm-6 col-xs-6 col-8">
+
+<h3>Modifica le attività svolte</h3>
+<div class="error">${errore}</div>
+
 	<form:form modelAttribute="attivitaSvolte"
 		action="aggiornaSuDBAttivitaSvolte" method="post">
-		<p>
-			<label for="data_Attivita">Data attività: </label>
-			<form:input type="hidden" id="id_Trigg" path="id_Trigg"
+		<label for="data_Attivita">Data attività: </label>
+			<p><form:input type="hidden" id="id_Trigg" path="id_Trigg"
 				autocomplete="off" />
 			<form:input type="text" id="data_Attivita" path="data_Attivita"
-				autocomplete="off" />
+				autocomplete="off" /></p>
 		<p id="error" class="error">
 			<form:errors path="data_Attivita" />
 		</p>
-		</p>
+	
+		<label for="ora_Inizio">Ora inizio: </label>
 		<p>
-			<label for="ora_Inizio">Ora inizio: </label>
-			<form:input type="text" id="ora_Inizio" path="ora_Inizio"
-				autocomplete="off" />
-		<p class="error">
-			<form:errors path="ora_Inizio" />
+			<form:input type="time" id="ora_Inizio" path="ora_Inizio"
+				autocomplete="off" /></p>
+		<p class="error"><form:errors path="ora_Inizio" />
 		</p>
-		</p>
-		<p>
+	
+	
 			<label for="ora_Fine">Ora fine: </label>
-			<form:input type="text" id="ora_Fine" path="ora_Fine"
-				autocomplete="off" />
+			<p><form:input type="time" id="ora_Fine" path="ora_Fine"
+				autocomplete="off" /></p>
 		<p class="error">
 			<form:errors path="ora_Fine" />
 		</p>
-		</p>
 
-		<p>
 			<label for="att_Disp">Attività disponibili: </label>
+		<p>
 			<form:select id="att_Disp" path="att_Disp.id_Disp"
 				items="${att_Disp}" itemValue="id_Disp" itemLabel="descrizione">
-			</form:select>
+			</form:select></p>
 		<p class="error">
 			<form:errors path="att_Disp.id_Disp" />
 		</p>
-		</p>
 
+		<label for="ora_Fine">Note:</label>
 		<p>
-			<label for="ora_Fine">Note:</label>
 			<form:textarea id="note" path="note" rows="4" cols="50"></form:textarea>
 		</p>
 
@@ -99,8 +100,11 @@
 			<input class="btn btn-outline-primary" id="submit" type="submit"
 				value="Salva" />
 		</p>
-
 	</form:form>
-	
+	<p><a href="tornaIndietro"><button style="margin-top:15px;" class="btn btn-outline-primary">Torna Al Menu</button></a></p>
+	</div>
+	<div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>
+	</div>
+</div>
 </body>
 </html>
