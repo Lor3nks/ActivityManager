@@ -65,13 +65,13 @@
 				</div>
 				
 				<div class="col-xl-8 col-lg-6 col-md-8 col-sm-6 col-xs-6 col-8 center">
-					<p>${impiegato.username}</p>
+					<p>${impiegato.username} ${amministratore.username}</p>
 		
-					<p>${impiegato.nome}</p>
+					<p>${impiegato.nome} ${amministratore.nome}</p>
 					
-					<p>${impiegato.cognome}</p>
+					<p>${impiegato.cognome} ${amministratore.cognome}</p>
 					
-					<p>${impiegato.dataNascita}</p>
+					<p>${impiegato.dataNascita} ${amministratore.dataNascita}</p>
 				</div>
 			</div>
 			<form action="cambiaPassword" method="post">

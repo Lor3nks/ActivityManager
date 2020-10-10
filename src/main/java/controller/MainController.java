@@ -141,9 +141,9 @@ public class MainController {
 				return "formRegistrazione";
 			}
 		}
-		model.addAttribute("title", "Registrazione Riuscita");
+		model.addAttribute("successo", "Registrazione Riuscita");
 		model.addAttribute("message", "Benvenuto, "+impiegato.getUsername()+"!");
-		return "menuImpiegato";
+		return "login";
 	}
 
 	
@@ -164,40 +164,35 @@ public class MainController {
 		String nuovaPassword = request.getParameter("nuovaPassword");
 		String confermaPassword = request.getParameter("confermaPassword");
 		Impiegato i = (Impiegato) session.getAttribute("impiegato");
+		if (i == null) {
+			i = (Impiegato) session.getAttribute("amministratore");
+		}
 		String passwordDB = i.getPassword();
-
 		
 		if(password.equals("") || nuovaPassword.equals("") || confermaPassword.equals("") || (password.equals("") && nuovaPassword.equals("")) ||
 			(nuovaPassword.equals("") && confermaPassword.equals("")) || (confermaPassword.equals("") && password.equals(""))) {
-			String errore = "Tutti i campi sono obbligatori";
-			model.addAttribute("errore", errore);
-			model.addAttribute("impiegato", i);
-			return "cambiaPassword";
+			model.addAttribute("errore", "Tutti i campi sono obbligatori");
 		} else {
 			if (password.equals(passwordDB)){
 				if (nuovaPassword.equals(confermaPassword)) {
 					if (impiegatoServiceInt.cambiaPwdImpiegato(nuovaPassword, i.getUsername()) > 0) {
 						model.addAttribute("successo", "Password cambiata correttamente");
-						model.addAttribute("impiegato", i);
-						return "cambiaPassword";
 					} else {
 						model.addAttribute("errore", "Non è stato possibile cambiare la password");
-						model.addAttribute("impiegato", i);
-						return "cambiaPassword";
 					}
 				} else {
-					String errore = "Le password non corrispondono";
-					model.addAttribute("errore", errore);
-					model.addAttribute("impiegato", i);
-					return "cambiaPassword"; 
+					model.addAttribute("errore", "Le password non corrispondono");
 				}
 			} else {
-				String errore = "La password vecchia non corrisponde";
-				model.addAttribute("errore", errore);
-				model.addAttribute("impiegato", i);
-				return "cambiaPassword"; 
+				model.addAttribute("errore", "La password vecchia non corrisponde");
 			}
 		}
+		if (i.getRuolo().equals("impiegato")) {
+			model.addAttribute("impiegato", i);
+		} else {
+			model.addAttribute("amministratore", i);
+		}
+		return "cambiaPassword";
 	}
 	
 	@RequestMapping(value="/formCambiaPassword")

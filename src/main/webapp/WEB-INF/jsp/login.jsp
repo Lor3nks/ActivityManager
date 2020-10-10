@@ -37,6 +37,7 @@
 		<c:if test="${not empty msg}">
 			<div class="msg">${msg}</div>
 		</c:if>
+		<p class="text-success">${successo}</p>
 			
 			<p>
 				<label for="username">Username</label>	
