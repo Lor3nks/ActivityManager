@@ -21,7 +21,7 @@
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="tornaIndietro">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="visualizzaAttivitaDisponibili">Visualizza attività disponibili</a>
@@ -57,7 +57,8 @@
 							<th>Data di Nascita</th>
 							<th>Abilitazione</th>
 							<th>Ruolo</th>
-							<th>Modifica</th>
+							<th>Modifica Dati</th>
+							<th>Modifica Abilitazione</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -78,7 +79,7 @@
 							</c:choose>
 							<td>${impiegato.ruolo}</td>
 							<td><a href="modificaDatiImpStep1?userName=${impiegato.username}">Modifica</a></td>
-							<td><a href="modificaAbilitazioneImp?userName=${impiegato.username}">Abilita Si/No</a></td>
+							<td><a href="modificaAbilitazioneImp?userName=${impiegato.username}">Abilitato/Disabilitato</a></td>
 						</tr>
 						</c:forEach>
 					</tbody>
@@ -86,7 +87,7 @@
 	
 		</div>
 		<div class="row">
-			<a href="tornaIndietro"><button class="btn btn-outline-primary">Torna Al Menu</button></a> 
+			<a href="tornaIndietro"><button class="btn btn-outline-primary">Torna al Menù</button></a> 
 		</div>
 		<div class="row">
 			<div style="margin-top: 50px">
@@ -94,7 +95,7 @@
 				<form id="sendEmailForm" method="post" action="sendEmail">
 					<label for="resetTo">Reset password dell'utente: </label> <input id="resetTo"
 						type="text" name="resetTo" size="25"
-						placeholder="Username" /> <input id="sendEmailBtn"
+						placeholder="Username" /> <input class="btn btn-sm btn-primary id="sendEmailBtn"
 						type="submit" value="Invia" />
 
 				</form>

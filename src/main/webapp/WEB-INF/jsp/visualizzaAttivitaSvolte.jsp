@@ -77,7 +77,7 @@
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="tornaIndietro">Home</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="visualizzaListaImpiegati">Visualizza lista impiegati</a>
@@ -85,10 +85,7 @@
       <li class="nav-item">
         <a class="nav-link" href="visualizzaAttivitaDisponibili">Visualizza attività disponibili</a>
       </li>
-    
-      
-        
-         </ul> 
+    </ul> 
     <ul class="nav navbar-nav navbar-right">
        <li class="nav-item">
         <a class="nav-link" href="formCambiaPassword">Modifica Password</a>
@@ -109,20 +106,21 @@
 		<p>${error}</p>
 	</div>
 	<div class="row">
+<!-- 	<div class="col-sm-10 col-10"> -->
 		<form action="aggiornaListaIntervallo" method="get">
 			<label for="dataInizio">Da: </label>
-			<input type="date" name="dataInizio"/>
+			<input class="dataInput" type="date" name="dataInizio"/>
 			<label for="dataFine">a: </label>
-			<input type="date" name="dataFine"/>
-			<button type="submit" class="btn btn-success">Aggiorna</button>
+			<input class="dataInput" type="date" name="dataFine"/>
+			<button type="submit" class="btn btn-sm btn-success">Aggiorna</button>
+			<button id="exportButton" class="btn btn-sm btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> Stampa PDF</button>
 		</form>
-		<button id="exportButton" class="btn btn-sm btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> Stampa PDF</button>
-	</div>
+		</div>
 	<div class="row">
 	<table id="exportTable" class="table table-hover table-striped">
 	<thead>
 		<tr>
-			<th>Impiegato</th><th>Data</th><th>Ora inizio</th><th>Ora fine</th><th>Attività</th><th>Note</th><th>DEL </th><th>MOD </th>
+			<th>Impiegato</th><th>Data</th><th>Ora inizio</th><th>Ora fine</th><th>Attività</th><th>Note</th><th>Elimina </th><th>Modifica </th>
 		</tr>
 		</thead>
 		<tbody>

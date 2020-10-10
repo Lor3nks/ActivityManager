@@ -21,7 +21,7 @@
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="tornaIndietro">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="visualizzaAttivitaSvolteImpiegato">Visualizza Attività</a>
@@ -29,62 +29,84 @@
       <li class="nav-item">
         <a class="nav-link" href="formAttivitaSvolte">Gestione Attività Svolte</a>
       </li>
-     
-      
-        
-         </ul> 
+    </ul> 
     <ul class="nav navbar-nav navbar-right">
       <li class="nav-item">
         <a class="nav-link" href="logout">Logout</a>
         </li>
-    </ul>
-      
-        </div>
-   
- 
+    </ul>   
+   </div>
 </nav>
-	<h3>${errore}</h3>
-	<h1>Cambia Password</h1>
-	
+<div class="container">
+	<div class="row center">
+		<div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>
+		<div class="col-lg-4 col-sm-6 col-xs-6 col-8">
+			<h3>Cambia Password</h3>
+		</div>
+		<div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>
+	</div>
+	<div class="row center">
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-2"></div>
+		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-8">
+			<h5 class="text-danger">${errore}</h5>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-2"></div>
+	</div>
+	<div class="row">
+		<div class="col-xl-4 col-lg-4 col-sm-3 col-xs-3 col-3"></div>
+		<div class="col-xl-4 col-lg-4 col-sm-6 col-xs-6 col-7">
+			<div class="row">
+				<div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-xs-6 col-4">
+					<p class="badge badge-warning">Username</p>
+					<p class="badge badge-warning">Nome</p>
+					<p class="badge badge-warning">Cognome</p>
+					<p class="badge badge-warning">Data di nascita</p>
+				</div>
+				
+				<div class="col-xl-8 col-lg-6 col-md-8 col-sm-6 col-xs-6 col-8 center">
+					<p>${impiegato.username}</p>
 		
-		
-			<p> ${impiegato.username}</p>
-		
+					<p>${impiegato.nome}</p>
+					
+					<p>${impiegato.cognome}</p>
+					
+					<p>${impiegato.dataNascita}</p>
+				</div>
+			</div>
+			<form action="cambiaPassword" method="post">
+				<div class="row">
+					<div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11 col-11 center">
+					
+						<label class="badge badge-primary" for="password"> Vecchia Password</label>
+						<p>
+							<input name="password" type="password" />
+						</p>
+						
+						<label class="badge badge-primary" for="nuovaPassword"> Nuova Password</label> 
+						<p>
+							<input  name="nuovaPassword" type="password" />
+						</p>
 
+						<label class="badge badge-primary" for="confermaPassword"> Conferma Password</label>
+						<p>
+							 <input  name="confermaPassword" type="password" />
+						</p>
+						
+						 <span id="buttons">
+				        <input class="btn btn-success btn-sm" id="submit" type="submit" value="Salva"/> 
+					 	</span>
+					</div>
+				</div>
+			</form>
 		
-			<p>Nome: ${impiegato.nome}</p>
-		
-
-		
-			<p>Cognome: ${impiegato.cognome}</p>
-		
-
-		
-			<p>Data di Nascita: ${impiegato.dataNascita}</p>
-
-		
-		<form action="cambiaPassword"
-		method="post">
-		<p>
-		<label for="password"> Vecchia Password</label>
-		<input  name="password" type="text" />
-		</p>
-		<p>
-			<label for="password"> Nuova Password</label> 
-			<input  name="nuovaPassword"	type="text" />
-		</p>
-		<p>
-			<label for="password"> Conferma Password</label>
-			 <input  name="confermaPassword" type="text" />
-		</p>
-		<p>
-		
-		 <span id="buttons ">
-		<!-- <a href="salvaAttivitaS"><input type="button" value="Salva" style="color:black" /></a>  -->
-        <input class="btn btn-outline-primary" id="submit" type="submit" value="Salva"/> 
-	 </span>
-			
-	</form>
-	<a href="tornaIndietro"><button class="btn btn-outline-primary">Torna Al Menu</button></a> 
-	</body>
+			<div class="row spazioSu">
+				<div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11 col-11 center">
+					<a href="tornaIndietro"><button class="btn btn-outline-primary">Torna al menù</button></a>
+				</div>
+			</div>
+		</div>
+		<div class="col-xl-4 col-lg-4 col-sm-3 col-xs-3 col-2"></div>
+	</div>
+</div> 
+</body>
 </html>

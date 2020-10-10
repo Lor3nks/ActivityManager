@@ -180,13 +180,13 @@ public class MainController {
 						 return "cambiaPassword";
 					 }
 				 } else {
-					 String errore = "Le password non corrispondono.";
+					 String errore = "Le password non corrispondono";
 					 model.addAttribute("errore", errore);
 					 model.addAttribute("impiegato", i);
 					 return "cambiaPassword"; 
 				 }
 			 } else {
-				 String errore = "La password vecchia non corrisponde.";
+				 String errore = "La password vecchia non corrisponde";
 					model.addAttribute("errore", errore);
 					 model.addAttribute("impiegato", i);
 					return "cambiaPassword"; 

@@ -11,12 +11,17 @@
 
 #logo{
 	width: 70%;
-	margin-top: 0;
-	margin-bottom: 50px;
-	
 }
 
 #logoL{
-	width: 20%;
-	
+	width: 20%;	
+}
+.dataInput{
+	width: 28%;
+}
+.center {
+	text-align: center;	
+}
+.spazioSu{
+	margin-top: 2em;
 }
