@@ -145,7 +145,7 @@
 					     
 					<h7 class="text-danger"><p class="error">
 						<form:errors path="dataNascita" />
-					</p><
+					</p>
 					   </div>
                    </div>
 
