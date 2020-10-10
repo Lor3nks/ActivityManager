@@ -65,7 +65,7 @@
 		<p id="error" class="error">
 			<form:errors path="data_Attivita" />
 		</p>
-	
+	 
 		<label for="ora_Inizio">Ora inizio: </label>
 		<p>
 			<form:input type="time" id="ora_Inizio" path="ora_Inizio"

@@ -5,7 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
 <meta charset="ISO-8859-1">  
 <title>Aggiungi Attivita Disponibili</title>
 <style type="text/css"><%@include file="/css/bootstrap.min.css"%></style>
