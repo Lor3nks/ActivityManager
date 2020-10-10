@@ -31,6 +31,13 @@
 			</div>
 			<div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>
 		</div>
+		<div class="row center">
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-2"></div>
+		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-8">
+			<h5 class="text-danger">${errore}</h5>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-2"></div>
+	</div>
 		<div class="row">
 			<div class="col-xl-3 col-lg-3 col-sm-2 col-xs-2 col-2"></div>
 			<div class="col-xl-6 col-lg-6 col-sm-8 col-xs-8 col-7">
@@ -76,9 +83,7 @@
 						    <input type="password" name="confermaPassword">
 					   </div>
 					   <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11 col-11 center">
-					   <h7 class="text-danger"> <p id="error" class="error">
-						    <form:errors path="password" />
-					      </p> </h7>
+					      <p></p>
 					   </div>
                    </div>
                    
@@ -140,7 +145,7 @@
 					     
 					<h7 class="text-danger"><p class="error">
 						<form:errors path="dataNascita" />
-					</p></h7>
+					</p><
 					   </div>
                    </div>
 
