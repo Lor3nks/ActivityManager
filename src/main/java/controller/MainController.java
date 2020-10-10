@@ -495,12 +495,20 @@ public class MainController {
 		}
 	
 	@RequestMapping(value ="/modificaAttivitaDisponibili2")
-	public String modificaAttivitaDisponibili2( @ModelAttribute AttivitaDisponibili attivitaDisponibili,
-			Model model,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
-		logger.info("-> modificaAttivitaDisponibili1 chiamata");
-		attivitaDisponibiliServiceInt.modificaAttivitaDisponibili(attivitaDisponibili);
-		RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaDisponibili");
-		rd.forward(request, response);
+	public String modificaAttivitaDisponibili2(@Valid @ModelAttribute AttivitaDisponibili attDisp,
+			Model model,BindingResult bindingResult, HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		logger.info("-> modificaAttivitaDisponibili2 chiamata");
+		
+		if (bindingResult.hasErrors()) {
+			FieldError fieldError = bindingResult.getFieldError();
+			String errore="Code:" + fieldError.getCode() + ", field:" + fieldError.getField();
+			model.addAttribute("errore", errore);
+			return "modificaAttivitaDisponibili1";
+		}else {
+			attivitaDisponibiliServiceInt.modificaAttivitaDisponibili(attDisp);
+			RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaDisponibili");
+			rd.forward(request, response);	
+		}
 		return "";
 		}
 	
@@ -513,7 +521,7 @@ public class MainController {
 	
 	@RequestMapping(value ="/aggiungiAttivitaDisponibili2")
 	public String aggiungiAttivitaDisponibili2( 
-			@ModelAttribute AttivitaDisponibili attivitaDisponibili,
+			@Valid @ModelAttribute AttivitaDisponibili attivitaDisponibili,
 			Model model,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		logger.info("-> aggiungiAttivitaDisponibili2 chiamata");
 		AttivitaDisponibili attD=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(attivitaDisponibili.getid_Disp());
