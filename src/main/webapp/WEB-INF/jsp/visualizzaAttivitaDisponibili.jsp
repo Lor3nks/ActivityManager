@@ -45,28 +45,45 @@
         </div>
    
 </nav>
-<form:form modelAttribute="attDisp" action="visualizzaAttivitaDisponibili" method="post" >
- <table border="1" cellspacing="0" cellpadding="10">
-	
-        <tr>
-          <th>Id</th>
-          <th>Descrizione</th>
-          <th>Abilitazione</th>
-          <th>Modifica Abilitazione</th>
-           <th>Modifica Attività</th>   
-        </tr>
+
+	<div class="container">
+	<h3>Attività disponibili</h3>
+		<div class="row">
+				<table class="table table-hover table-striped">
+					<thead>
+						<tr>
+			          <th>Id</th>
+			          <th>Descrizione</th>
+			          <th>Abilitazione</th>
+			          <th>Modifica Abilitazione</th>
+			           <th>Modifica Attività</th>   
+        			</tr>
+        		</thead>
+			<tbody>
+  
 	<c:forEach items="${attDisp}" var="attDisp">
         <tr>
-          <th>${attDisp.id_Disp}</th>
-          <th>${attDisp.descrizione}</th>
-          <th>${attDisp.abilitazione}</th>
-          <th><a href="aggiornaAbilitazioneAttivitaDisponibili?id=${attDisp.id_Disp}">Abilita/Disabilita</a></th>
-          <th><a href="modificaAttivitaDisponibili1?id=${attDisp.id_Disp}">Modifica</a></th>    
+          <td>${attDisp.id_Disp}</td>
+          <td>${attDisp.descrizione}</td>
+
+		<c:choose>
+		<c:when test="${attDisp.abilitazione==1}">
+		<td>Abilitato</td>
+		</c:when>
+		<c:otherwise>
+		<td>Disabilitato</td>
+		</c:otherwise>
+		</c:choose>
+          
+          <td><a href="aggiornaAbilitazioneAttivitaDisponibili?id=${attDisp.id_Disp}">Abilita/Disabilita</a></td>
+          <td><a href="modificaAttivitaDisponibili1?id=${attDisp.id_Disp}">Modifica</a></td>    
         </tr>
-     </c:forEach>       
+     </c:forEach>    
+     </tbody>   
     </table>
-    <a href="aggiungiAttivitaDisponibili1"><button class="btn btn-outline-primary">Aggiungi</button></a>
-</form:form>
+
+
+<a href="aggiungiAttivitaDisponibili1"><button class="btn btn-outline-primary">Aggiungi</button></a>
 <a href="tornaIndietro"><button class="btn btn-outline-primary">Torna Al Menu</button></a> 
 </body>
 </html> 
