@@ -43,75 +43,65 @@
  
 </nav>
 <div class="container">
-<div class="row center">
-		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-2"></div>
-		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-8">
-			<h3>Inserisci un'attività svolta</h3>
-		</div>
-		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-2"></div>
+
+<div class="rowLogin row">
+<div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>
+<div class="col-lg-4 col-sm-6 col-xs-6 col-8">
+
+<h3>Inserisci un'attività svolta</h3>
+<!-- <div class="error text-danger">${errore}</div>  -->
+
+	<form:form modelAttribute="attivitaSvolte"
+		action="salvaAttivitaSvolte" method="post">
+		<label for="data_Attivita">Data attività: </label>
+			<p><form:input type="hidden" id="id_Trigg" path="id_Trigg"
+				autocomplete="off" />
+			<form:input type="date" id="data_Attivita" path="data_Attivita"
+				autocomplete="off" /></p>
+		<p id="error" class="text-danger">
+			<form:errors path="data_Attivita" />
+		</p>
+	 
+		<label for="ora_Inizio">Ora inizio: </label>
+		<p>
+			<form:input type="time" id="ora_Inizio" path="ora_Inizio"
+				autocomplete="off" /></p>
+		<p class="text-danger"><form:errors path="ora_Inizio" />
+		</p>
+	
+	
+			<label for="ora_Fine">Ora fine: </label>
+			<p><form:input type="time" id="ora_Fine" path="ora_Fine"
+				autocomplete="off" /></p>
+		<p class="text-danger">
+			<form:errors path="ora_Fine" />
+		</p>
+
+			<label for="att_Disp">Attività disponibili: </label>
+		<p>
+			<form:select id="att_Disp" path="att_Disp.id_Disp"
+				items="${att_Disp}" itemValue="id_Disp" itemLabel="descrizione">
+			</form:select></p>
+		<p class="text-danger">
+			<form:errors path="att_Disp.id_Disp" />
+		</p>
+
+		<label for="note">Note:</label>
+		<p>
+			<form:textarea id="note" path="note" rows="3" cols="20"></form:textarea>
+		</p>
+
+		<p id="buttons">
+			<!-- <a href="salvaAttivitaS"><input type="button" value="Salva" style="color:black" /></a>  -->
+			<input class="btn btn-outline-primary" id="submit" type="submit"
+				value="Salva" />
+		</p>
+	</form:form>
+	<p><a href="tornaIndietro"><button style="margin-top:15px;" class="btn btn-outline-primary">Torna Al Menu</button></a></p>
 	</div>
-	<div class="row center">
-		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-2"></div>
-		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-8">
-			<h5 class="text-danger">${errore}</h5>
-		</div>
-		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-2"></div>
+	<div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>
 	</div>
-	<div class="row"> 
-		<div class="col-xl-4 col-lg-4 col-md-3 col-sm-2 col-xs-2 col-1"></div>
-		<div class="col-xl-4 col-lg-4 col-md-6 col-sm-8 col-xs-8 col-10">
-			<form:form modelAttribute="attivitaSvolte" action="salvaAttivitaSvolte"  method="post">
-				<div class="row">
-					<div class="col-xl-5 col-lg-6 col-md-5 col-sm-5 col-xs-5 col-5">
-						<label for="data_Attivita">Data attività: </label>
-						<p id="error" class="error"><form:errors path="data_Attivita" /></p>	
-						 
-						<label for="ora_Inizio">Ora inizio: </label>
-						<p class="error"><form:errors path="ora_Inizio" /></p>
-						 
-						<label for="ora_Fine">Ora fine: </label>
-						<p class="error"><form:errors path="ora_Fine" /></p>
-						
-						<p><label for="att_Disp">Attività disponibili:</label></p>
-						
-						<p><label for="ora_Fine">Note:</label></p>
-					</div>
-					
-					<div class="col-xl-7 col-lg-6 col-md-7 col-sm-7 col-xs-7 col-7">
-						<p>
-							<form:input type="date" id="data_Attivita" path="data_Attivita" autocomplete="off"/>
-						</p>
-						<p>
-				   			<form:input type="time" id="ora_Inizio" path="ora_Inizio" autocomplete="off"/>
-						</p>
-						<p>
-				   			 <form:input type="time" id="ora_Fine" path="ora_Fine" autocomplete="off"/>
-						</p>
-						<p>
-							<form:select  id="att_Disp" path="att_Disp.id_Disp" items="${att_Disp}" itemValue="id_Disp" itemLabel="descrizione" >
-					</form:select>
-						</p>
-						<p>
-							<form:textarea id="note" path="note" rows="4" cols="25"></form:textarea>
-						</p>
-					</div>
-	 			</div>
-	 			<div class="row">
-	 				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12 center">
-					<span id="buttons ">
-				        <input class="btn btn-outline-success" id="submit" type="submit" value="Salva"/> 
-					</span>
-					</div>
-				</div>
-			</form:form>
-		</div>
-		<div class="col-xl-4 col-lg-4 col-md-3 col-sm-2 col-xs-2 col-1"></div>
-	</div>
-	<div class="row spazioSu">
-		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12 center">
-			<a href="tornaIndietro"><button class="btn btn-outline-primary">Torna al menù</button></a>
-		</div>
-	</div> 
+ 
 </div>
 </body>
 </html>

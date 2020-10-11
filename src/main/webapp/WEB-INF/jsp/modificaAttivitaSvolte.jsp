@@ -52,8 +52,8 @@
 <div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>
 <div class="col-lg-4 col-sm-6 col-xs-6 col-8">
 
-<h3>Modifica le attività svolte</h3>
-<div class="error text-danger">${errore}</div>
+<h3>Modifica l'attività svolta</h3>
+<!-- <div class="error text-danger">${errore}</div>  -->
 
 	<form:form modelAttribute="attivitaSvolte"
 		action="aggiornaSuDBAttivitaSvolte" method="post">
@@ -62,7 +62,7 @@
 				autocomplete="off" />
 			<form:input type="date" id="data_Attivita" path="data_Attivita"
 				autocomplete="off" /></p>
-		<p id="error" class="error">
+		<p id="error" class="text-danger">
 			<form:errors path="data_Attivita" />
 		</p>
 	 
@@ -70,14 +70,14 @@
 		<p>
 			<form:input type="time" id="ora_Inizio" path="ora_Inizio"
 				autocomplete="off" /></p>
-		<p class="error"><form:errors path="ora_Inizio" />
+		<p class="text-danger"><form:errors path="ora_Inizio" />
 		</p>
 	
 	
 			<label for="ora_Fine">Ora fine: </label>
 			<p><form:input type="time" id="ora_Fine" path="ora_Fine"
 				autocomplete="off" /></p>
-		<p class="error">
+		<p class="text-danger">
 			<form:errors path="ora_Fine" />
 		</p>
 
@@ -86,13 +86,13 @@
 			<form:select id="att_Disp" path="att_Disp.id_Disp"
 				items="${att_Disp}" itemValue="id_Disp" itemLabel="descrizione">
 			</form:select></p>
-		<p class="error">
+		<p class="text-danger">
 			<form:errors path="att_Disp.id_Disp" />
 		</p>
 
 		<label for="ora_Fine">Note:</label>
 		<p>
-			<form:textarea id="note" path="note" rows="4" cols="50"></form:textarea>
+			<form:textarea id="note" path="note" rows="4" cols="20"></form:textarea>
 		</p>
 
 		<p id="buttons">
