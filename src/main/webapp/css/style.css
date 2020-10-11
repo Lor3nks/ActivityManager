@@ -25,3 +25,8 @@
 .spazioSu{
 	margin-top: 2em;
 }
+
+.topText {
+	font-weight: bold;
+	margin-left: 3px;
+}

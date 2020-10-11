@@ -15,7 +15,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarColor01">
+  <div class="collapse navbar-collapse topText" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -29,10 +29,7 @@
        <li class="nav-item">
         <a class="nav-link" href="visualizzaAttivitaSvolte">Visualizza attività</a>
       </li>
-     
-      
-        
-         </ul> 
+    </ul> 
     <ul class="nav navbar-nav navbar-right">
        <li class="nav-item">
         <a class="nav-link" href="formCambiaPassword">Modifica password</a>
@@ -40,11 +37,19 @@
       <li class="nav-item">
         <a class="nav-link" href="logout">Logout</a>
         </li>
-    </ul>
-      
-        </div>
-   
+    </ul>   
+   </div>
 </nav>
- <h1>lsd</h1>
+
+<div class="container">
+	<div class="col-lg-3 col-sm-3 col-xs-3 col-2"></div>
+	<div class="col-lg-6 col-sm-6 col-xs-6 col-8">
+		<h1 class="spazioSu">Benvenuto, ${nomeUtente}</h1>
+		
+		
+	</div>
+	<div class="col-lg-3 col-sm-3 col-xs-3 col-2"></div>
+</div>
+
 </body>
 </html>

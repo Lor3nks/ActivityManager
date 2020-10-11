@@ -14,7 +14,8 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href=""><img id="logoL" src="./images/ATlogo_min1.png">Activity Tracker</a>
+  <a class="navbar-brand" href=""><img id="logoL" src="./images/ATlogo_min1.png">
+  	<span class="topText">Activity Tracker</span></a>
   	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     	<span class="navbar-toggler-icon"></span>
   	</button>
@@ -28,14 +29,14 @@
 
 	<form action="login" method="post">
 			
-		<img id="logo" src="./images/ATlogo.png">
+		<img class="mb-4" id="logo" src="./images/ATlogo.png">
 			
 		
 		<c:if test="${not empty error}">
-		<div class="error text-danger">${error}</div>
+		<div class="error text-danger topText">${error}</div>
 		</c:if>
 		<c:if test="${not empty msg}">
-			<div class="msg text-success">${msg}</div>
+			<div class="msg text-success topText">${msg}</div>
 		</c:if>
 		<p class="text-success">${successo}</p>
 			

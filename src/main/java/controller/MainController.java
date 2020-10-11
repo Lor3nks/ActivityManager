@@ -95,8 +95,10 @@ public class MainController {
 		String username = ((UserDetails) o).getUsername();  
 
 		Impiegato i = impiegatoServiceInt.recuperaImpiegatoByUser(username);
+		String nomeUtente = i.getNome();
 		model.addAttribute("impiegato", i);
 		session = request.getSession();
+		session.setAttribute("nomeUtente", nomeUtente);
 		if(isAdmin) {
 			session.setAttribute("amministratore", i);
 			return "menuAmministratore";

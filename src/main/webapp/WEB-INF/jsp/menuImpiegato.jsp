@@ -23,31 +23,38 @@
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#"><span class="topText">Home </span><span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="visualizzaAttivitaSvolteImpiegato">Visualizza attività</a>
+        <a class="nav-link" href="visualizzaAttivitaSvolteImpiegato"><span class="topText">Visualizza attività</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="formAttivitaSvolte">Gestione attività</a>
+        <a class="nav-link" href="formAttivitaSvolte"><span class="topText">Gestione attività</span></a>
       </li>
-     
-      
-        
-         </ul> 
+    </ul>      
+         
+         
     <ul class="nav navbar-nav navbar-right">
        <li class="nav-item">
-        <a class="nav-link" href="formCambiaPassword">Modifica password</a>
+        <a class="nav-link" href="formCambiaPassword"><span class="topText">Modifica password</span></a>
         </li>
       <li class="nav-item">
-        <a class="nav-link" href="logout">Logout</a>
+        <a class="nav-link" href="logout"><span class="topText">Logout</span></a>
         </li>
     </ul>
-      
-        </div>
-   
- 
+  </div>
 </nav>
+
+<div class="container">
+	<div class="col-lg-3 col-sm-3 col-xs-3 col-2"></div>
+	<div class="col-lg-6 col-sm-6 col-xs-6 col-8">
+		<h1 class="spazioSu">Benvenuto, ${nomeUtente}</h1>
+		
+		
+	</div>
+	<div class="col-lg-3 col-sm-3 col-xs-3 col-2"></div>
+</div>
+
 
 
 
