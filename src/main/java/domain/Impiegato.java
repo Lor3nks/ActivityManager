@@ -24,7 +24,7 @@ public class Impiegato implements Serializable {
 	@NotEmpty(message = "Campo obbligatorio")
 	private String cognome;
 	@NotNull(message = "Campo obbligatorio")
-	@Past(message = "Data non valida")
+	@Past(message = "La data deve essere odierna o antecedente!")
 	private LocalDate dataNascita;
 	private boolean abilitazione;
 	@NotNull

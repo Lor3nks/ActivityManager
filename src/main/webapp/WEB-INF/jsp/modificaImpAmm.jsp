@@ -45,34 +45,37 @@
         </div>
    
 </nav>
-	<div class="container">
-		<div class="row">
-			<div class="col">
-			<h3>${errore}</h3>
+<div class="container">
+<div class="rowLogin row">
+<div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>
+<div class="col-lg-4 col-sm-6 col-xs-6 col-8">
+
+<h3>Modifica i dati dell'Impiegato</h3>
+<div class="error text-danger">${errore}</div>
 				<form:form modelAttribute="impiegato" action="modificaDatiImpStep2" method="post">
 					<form:input path="username" type="hidden"/>
 					<form:input path="password" type="hidden"/>
 					<form:input path="abilitazione" type="hidden"/>
 														
-					<p><form:label path="nome">Nome</form:label>
-					<form:input path="nome" type="text"/></p>
-					<p id="error" class="error"><form:errors path="nome" /></p>
+					<form:label path="nome">Nome</form:label>
+					<p><form:input path="nome" type="text"/></p>
+					<p id="error" class="text-danger"><form:errors path="nome" /></p>
 					
-					<p><form:label path="cognome">Cognome</form:label>
-					<form:input path="cognome" type="text"/></p>
-					<p id="error" class="error"><form:errors path="cognome" /></p>
+					<form:label path="cognome">Cognome</form:label>
+					<p><form:input path="cognome" type="text"/></p>
+					<p id="error" class="text-danger"><form:errors path="cognome" /></p>
 					
-					<p><form:label path="dataNascita">Data di nascita</form:label>
-					<form:input path="dataNascita" type="text" placeholder="GG/MM/AAAA"/></p>
-					 <p class="error"><form:errors path="dataNascita" /></p>
+					<form:label path="dataNascita">Data di nascita</form:label>
+					<p><form:input path="dataNascita" type="date" placeholder="GG/MM/AAAA"/></p>
+					 <p class="text-danger"><form:errors path="dataNascita" /></p>
 					
-					<p><form:label path="email">Email</form:label>
-					<form:input path="email" type="text"/></p>
-					<p id="error" class="error"><form:errors path="email" /></p>					
+					<form:label path="email">Email</form:label>
+					<p><form:input path="email" type="text"/></p>
+					<p id="error" class="text-danger"><form:errors path="email" /></p>					
 
-					<p>
+					
 						<label for="ruolo">Ruolo: </label>
-						<form:select name="ruolo" path="ruolo">
+						<p><form:select name="ruolo" path="ruolo">
 						<c:forEach items="${ruoloList}" var="ruolo">
 						<c:choose>
 						<c:when test="${impiegato.ruolo.equals(ruolo)}">
@@ -87,7 +90,7 @@
 
 					</p>
 
-					<button class="btn btn-outline-primary" type="submit">Salva modifiche</button>
+					<p><button class="btn btn-outline-primary" type="submit">Salva modifiche</button></p>
 				</form:form>
 			</div>
 		</div>
