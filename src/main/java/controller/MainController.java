@@ -265,7 +265,7 @@ public class MainController {
 		if (bindingResult.hasErrors()) {
 			FieldError fieldError = bindingResult.getFieldError();
 			String errore=""+fieldError.getField()+" "+ fieldError.getCode(); 
-			model.addAttribute("errore", errore);
+			//model.addAttribute("errore", errore);
 			List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibiliAbil();
 			model.addAttribute("att_Disp",att_Disp);					
 			return "formAttivitaSvolte";
@@ -406,7 +406,7 @@ public class MainController {
 		if (bindingResult.hasErrors()) {
 			FieldError fieldError = bindingResult.getFieldError();
 			String errore="Code:" + fieldError.getCode() + ", field:" + fieldError.getField();
-			model.addAttribute("errore", errore);
+			//model.addAttribute("errore", errore);
 			List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
 			model.addAttribute("att_Disp",att_Disp);			
 			return "modificaAttivitaSvolte";

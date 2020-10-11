@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 
   
 public class AttivitaSvolte implements Serializable {
-
+ 
 	private static final long serialVersionUID = 4261989059440444174L;
 	private int id_Trigg;
 	private Impiegato imp;
@@ -22,10 +22,10 @@ public class AttivitaSvolte implements Serializable {
 	@NotNull(message = "Data inizio attività obbligatoria")
 	private LocalDate data_Attivita;
 	@NotEmpty(message = "Ora inizio attività obbligatoria")
-	@Pattern(message ="Formattazione errata",regexp ="(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?")
+	//@Pattern(message ="Formattazione errata",regexp ="(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?")
 	private String ora_Inizio;
 	@NotEmpty(message = "Ora fine attività obbligatoria")
-	@Pattern(message ="Formattazione errata",regexp ="(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?")
+	//@Pattern(message ="Formattazione errata",regexp ="(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?")
 	private String ora_Fine;
 	private String note;
 	

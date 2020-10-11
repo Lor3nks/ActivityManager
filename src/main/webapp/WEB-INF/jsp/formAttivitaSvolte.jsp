@@ -49,7 +49,7 @@
 <div class="col-lg-4 col-sm-6 col-xs-6 col-8">
 
 <h3>Inserisci un'attività svolta</h3>
-<!-- <div class="error text-danger">${errore}</div>  -->
+<div class="error text-danger">${errore}</div>
 
 	<form:form modelAttribute="attivitaSvolte"
 		action="salvaAttivitaSvolte" method="post">
