@@ -57,7 +57,7 @@
 		</div>
 		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-2"></div>
 	</div>
-	<div class="row">
+	<div class="row"> 
 		<div class="col-xl-4 col-lg-4 col-md-3 col-sm-2 col-xs-2 col-1"></div>
 		<div class="col-xl-4 col-lg-4 col-md-6 col-sm-8 col-xs-8 col-10">
 			<form:form modelAttribute="attivitaSvolte" action="salvaAttivitaSvolte"  method="post">
