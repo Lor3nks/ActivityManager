@@ -23,11 +23,14 @@
       <li class="nav-item active">
         <a class="nav-link" href="tornaIndietro">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="visualizzaAttivitaSvolteImpiegato">Visualizza Attività</a>
+     <li class="nav-item">
+        <a class="nav-link" href="visualizzaListaImpiegati">Visualizza lista impiegati</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="formAttivitaSvolte">Gestione Attività Svolte</a>
+        <a class="nav-link" href="visualizzaAttivitaDisponibili">Visualizza attività disponibili</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="visualizzaAttivitaSvolte">Visualizza attività svolte</a>
       </li>
     
          </ul> 
@@ -53,18 +56,18 @@
 <div class="error">${errore}</div>
 
 
-<form:form modelAttribute="attDisp" action="modificaAttivitaDisponibili2" method="post">
+<form:form modelAttribute="attivitaDisponibili" action="modificaAttivitaDisponibili2" method="post">
 	        
 				<label for="descrizione">Descrizione:</label>	
 				<p><form:input name="descrizione" type="text" path="descrizione" /></p>
-				<p class="error"><form:errors path="descrizione" /></p>
+				<p class="error text-danger"><form:errors path="descrizione" /></p>
 				<form:input name="id_Disp" type="hidden" path="id_Disp"/>
 				<form:input name="abilitazione" type="hidden" path="abilitazione" value="${attDisp.abilitazione}" />
 			
-        	<p><button class="btn btn-outline-primary" type="submit">Salva</button></p> 
+        	<p><button class="btn btn-outline-success" type="submit">Salva</button></p> 
 </form:form>
 
-	<p><a href="tornaIndietro"><button style="margin-top:15px;" class="btn btn-outline-primary">Torna Al Menu</button></a></p>
+	<p><a href="tornaIndietro"><button style="margin-top:15px;" class="btn btn-outline-primary">Torna al menù</button></a></p>
 
 	</div>
 	<div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>

@@ -1,15 +1,18 @@
 package domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
    
-public class AttivitaDisponibili {
-  
-	@NotEmpty
+public class AttivitaDisponibili implements Serializable{
+
+	private static final long serialVersionUID = 2864231931811739616L;
+	
+	@NotEmpty(message = "Campo obbligatorio")
 	private String id_Disp;
-	@NotEmpty
+	@NotEmpty(message = "Campo obbligatorio")
 	private String descrizione;
 	@NotNull
 	private int abilitazione;
@@ -22,10 +25,10 @@ public class AttivitaDisponibili {
 	}
 
 
-	public AttivitaDisponibili(String descrizione) {
-		super();
-		this.descrizione = descrizione;
-	}
+//	public AttivitaDisponibili(String descrizione) {
+//		super();
+//		this.descrizione = descrizione;
+//	}
 
 	public AttivitaDisponibili(String id_Disp, String descrizione, int abilitazione) {
 		super();

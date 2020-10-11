@@ -29,10 +29,27 @@
 				<li class="nav-item active"><a class="nav-link" href="tornaIndietro">Home
 						<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="visualizzaAttivitaSvolteImpiegato">Visualizza Attività</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="formAttivitaSvolte">Gestione Attività Svolte</a></li>
+				<c:choose>
+			      	<c:when test="${amministratore ne null}">
+				      <li class="nav-item">
+				         <a class="nav-link" href="visualizzaListaImpiegati">Visualizza lista impiegati</a>
+				      </li>
+				      <li class="nav-item">
+			        <a class="nav-link" href="visualizzaAttivitaDisponibili">Visualizza attività disponibili</a>
+			      </li>
+			       <li class="nav-item">
+			        <a class="nav-link" href="visualizzaAttivitaSvolte">Visualizza attività svolte</a>
+			      </li>
+			      	</c:when>
+			      	<c:otherwise>
+			      		<li class="nav-item">
+				        <a class="nav-link" href="visualizzaAttivitaSvolteImpiegato">Visualizza Attività</a>
+				      </li>
+				      <li class="nav-item">
+				        <a class="nav-link" href="formAttivitaSvolte">Gestione Attività Svolte</a>
+				      </li>
+			      	</c:otherwise>
+			     </c:choose>
 
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -97,11 +114,11 @@
 
 		<p id="buttons">
 			<!-- <a href="salvaAttivitaS"><input type="button" value="Salva" style="color:black" /></a>  -->
-			<input class="btn btn-outline-primary" id="submit" type="submit"
+			<input class="btn btn-outline-success" id="submit" type="submit"
 				value="Salva" />
 		</p>
 	</form:form>
-	<p><a href="tornaIndietro"><button style="margin-top:15px;" class="btn btn-outline-primary">Torna Al Menu</button></a></p>
+	<p><a href="tornaIndietro"><button style="margin-top:15px;" class="btn btn-outline-primary">Torna al menù</button></a></p>
 	</div>
 	<div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>
 	</div>

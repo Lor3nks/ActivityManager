@@ -24,6 +24,9 @@
         <a class="nav-link" href="tornaIndietro">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="#">Visualizza lista impiegati</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="visualizzaAttivitaDisponibili">Visualizza attività disponibili</a>
       </li>
        <li class="nav-item">
@@ -87,7 +90,7 @@
 	
 		</div>
 		<div class="row">
-			<a href="tornaIndietro"><button class="btn btn-outline-primary">Torna al Menù</button></a> 
+			<a href="tornaIndietro"><button class="btn btn-outline-primary">Torna al menù</button></a> 
 		</div>
 		<div class="row">
 			<div style="margin-top: 50px">

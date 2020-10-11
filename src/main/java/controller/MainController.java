@@ -72,7 +72,7 @@ public class MainController {
 	
 	@RequestMapping(value = {"/", "/login"})
 	public String login(@RequestParam(value = "error", required = false) String error,
-			@RequestParam(value = "logout", required = false) String logout, HttpServletRequest request, HttpSession session, Model model) {
+			@RequestParam(value = "logout", required = false) String logout, HttpServletRequest request, Model model) {
 		
 		if (error != null) {
 			model.addAttribute("error", "Username o password errati!");
@@ -141,14 +141,14 @@ public class MainController {
 				return "formRegistrazione";
 			}
 		}
-		model.addAttribute("successo", "Registrazione Riuscita");
-		model.addAttribute("message", "Benvenuto, "+impiegato.getUsername()+"!");
+//		model.addAttribute("successo", "Registrazione Riuscita");
+//		model.addAttribute("message", "Benvenuto, "+impiegato.getUsername()+"!");
 		return "login";
 	}
 
 	
 	@RequestMapping(value="/logout")
-	public String logout( HttpServletRequest request, HttpSession session) {
+	public String logout(HttpSession session) {
 		logger.info("-> logout chiamata");
 		session.invalidate();
 		return "logout";
@@ -158,7 +158,7 @@ public class MainController {
 
 	@RequestMapping(value = "/cambiaPassword")
 	public String cambiaPassword(@ModelAttribute Impiegato impiegato, BindingResult bindingResult, Model model,
-			HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+			HttpServletRequest request, HttpSession session) {
 		logger.info("-> cambiaPassword chiamata");
 		String password = request.getParameter("password");
 		String nuovaPassword = request.getParameter("nuovaPassword");
@@ -209,7 +209,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/tornaIndietro")
-	public void tornaIndietro(@ModelAttribute Impiegato impiegato,Model model,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+	public void tornaIndietro(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		RequestDispatcher rd=request.getRequestDispatcher("mainMenu");
 		rd.forward(request, response);
 		
@@ -260,12 +260,11 @@ public class MainController {
 	public String salvaAttivitaSvolte(@Valid @ModelAttribute AttivitaSvolte attivitaSvolte, BindingResult bindingResult, Model model,
 			HttpServletRequest request, HttpSession session) {
 		logger.info("-> salvaAttivitaSvolte chiamata");
-		Impiegato imp = (Impiegato)session.getAttribute("impiegato");
-		System.out.println(imp.getUsername());
+//		Impiegato imp = (Impiegato)session.getAttribute("impiegato");
+//		System.out.println(imp.getUsername());
 		if (bindingResult.hasErrors()) {
 			FieldError fieldError = bindingResult.getFieldError();
-			String errore=""+fieldError.getField()+" "+ fieldError.getCode(); 
-			//model.addAttribute("errore", errore);
+			System.out.println("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
 			List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibiliAbil();
 			model.addAttribute("att_Disp",att_Disp);					
 			return "formAttivitaSvolte";
@@ -274,7 +273,7 @@ public class MainController {
 					String oraInizio = request.getParameter("ora_Inizio");
 					String oraFine = request.getParameter("ora_Fine");
 					if(!verificaOre(oraInizio,oraFine)) {
-						String errore="La data di inzio deve essere antecedente alla data di fine!";
+						String errore="L'orario di inzio deve essere antecedente all'orario di fine!";
 						List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibiliAbil();
 						model.addAttribute("errore", errore);
 						model.addAttribute("att_Disp",att_Disp);					
@@ -297,8 +296,7 @@ public class MainController {
 	
 	
 	@RequestMapping(value ="/cancellaAttivitaSvolte")
-	public void cancellaAttivitaSvolte(@RequestParam int id,Model model,
-		HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+	public void cancellaAttivitaSvolte(@RequestParam int id, Model model, HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		logger.info("-> cancellaAttivitaSvolte chiamata");	
 		attivitaSvolteServiceInt.eliminaAttivitaSvolte(id);
 		if (session.getAttribute("amministratore") == null) {
@@ -314,7 +312,7 @@ public class MainController {
 
 	
 	@RequestMapping(value ="/aggiornaAttivitaSvolte")
-	public String aggiornaAttivitaSvolte(@RequestParam int id,@ModelAttribute AttivitaSvolte attivitaSvolte,Model model,HttpServletRequest request, HttpSession session) {
+	public String aggiornaAttivitaSvolte(@RequestParam int id, @ModelAttribute AttivitaSvolte attivitaSvolte, Model model) {
 		logger.info("-> aggiornaAttivitaSvolte chiamata");
 		attivitaSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolteById(id);
 		String codAttDisp=attivitaSvolteServiceInt.getAttIdDispFromAttSvolte(attivitaSvolte.getId_Trigg());
@@ -328,7 +326,7 @@ public class MainController {
 	
   
 	@RequestMapping(value ="/visualizzaAttivitaSvolte")
-	public String visuailzzaAttivitaSvolte(Model model,HttpServletRequest request, HttpSession session) {
+	public String visuailzzaAttivitaSvolte(Model model) {
 		logger.info("-> visualizzaAttivitaSvolteImpiegato chiamata");
 		List<AttivitaSvolte> attSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolte();
 		if(attSvolte!=null) {
@@ -348,7 +346,7 @@ public class MainController {
 	
 	
 	@RequestMapping(value="/aggiornaListaIntervallo")
-	public String aggiornaListaIntervallo(Model model, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String aggiornaListaIntervallo(Model model, HttpServletRequest request) {
 		logger.info("-> aggiornaListaIntervallo chiamata");
 		String dInizio = request.getParameter("dataInizio");
 		String dFine = request.getParameter("dataFine");
@@ -369,7 +367,6 @@ public class MainController {
 				String error = "Data non valida.";
 				model.addAttribute("error", error);
 			}
-			
 			
 			if (dataFine.isAfter(LocalDate.now()) || dataInizio.isAfter(LocalDate.now())) {
 				String error = "Inserire una data precedente o uguale a quella odierna.";
@@ -401,12 +398,11 @@ public class MainController {
 	
 	@RequestMapping(value ="/aggiornaSuDBAttivitaSvolte")
 	public String aggiornaSuDBAttivitaSvolte(@Valid @ModelAttribute AttivitaSvolte attivitaSvolte, BindingResult bindingResult, 
-			Model model,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException  {
+			Model model, HttpServletRequest request, HttpSession session) {
 		logger.info("-> aggiornaSuDBAttivitaSvolte chiamata");
 		if (bindingResult.hasErrors()) {
 			FieldError fieldError = bindingResult.getFieldError();
-			String errore="Code:" + fieldError.getCode() + ", field:" + fieldError.getField();
-			//model.addAttribute("errore", errore);
+			System.out.println("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
 			List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
 			model.addAttribute("att_Disp",att_Disp);			
 			return "modificaAttivitaSvolte";
@@ -465,7 +461,7 @@ public class MainController {
 
 	
 	@RequestMapping(value ="/visualizzaAttivitaDisponibili")
-	public String visuailzzaAttivitaDisponibili(Model model,HttpServletRequest request, HttpSession session) {
+	public String visuailzzaAttivitaDisponibili(Model model) {
 		logger.info("-> visualizzaAttivitaDisponibili chiamata");
 		List<AttivitaDisponibili> attDisp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
 		model.addAttribute("attDisp", attDisp);
@@ -473,72 +469,72 @@ public class MainController {
 	}
 	
 	@RequestMapping(value ="/aggiornaAbilitazioneAttivitaDisponibili")
-	public void aggiornaAbilitazioneAttivitaDisponibili(@RequestParam String id,@ModelAttribute AttivitaDisponibili attivitaDisponibili, Model model,HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+	public void aggiornaAbilitazioneAttivitaDisponibili(@RequestParam String id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info("-> aggiornaAbilitazioneAttivitaDisponibili chiamata");
 		AttivitaDisponibili attDisp =attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(id);
 		attDisp.getAbilitazione();
 		if(attDisp.getAbilitazione()==1) {
 			attivitaDisponibiliServiceInt.modificaAbilitazioneAttivitaDisponibili(attDisp, false);
-			 
-			
 		}else {
 			attivitaDisponibiliServiceInt.modificaAbilitazioneAttivitaDisponibili(attDisp, true);
 		}
 		RequestDispatcher rd= request.getRequestDispatcher("visualizzaAttivitaDisponibili");
 		rd.forward(request, response);
-		}
+		return;
+	}
 	
 	@RequestMapping(value ="/modificaAttivitaDisponibili1")
-	public String modificaAttivitaDisponibili(@RequestParam String id,@ModelAttribute AttivitaDisponibili attivitaDisponibili,Model model,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+	public String modificaAttivitaDisponibili(@RequestParam String id, Model model) {
 		logger.info("-> modificaAttivitaDisponibili1 chiamata");
-		AttivitaDisponibili attDisp=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(id);
-		//attDisp.setDescrizione(request.getParameter("descrizione"));
-		model.addAttribute("attDisp",attDisp);
-		return "modificaAttivitaDisponibili1";
+		AttivitaDisponibili attivitaDisponibili=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(id);
+		model.addAttribute("attivitaDisponibili",attivitaDisponibili);
+		return "modificaAttivitaDisponibili";
 		}
 	
 	@RequestMapping(value ="/modificaAttivitaDisponibili2")
-	public String modificaAttivitaDisponibili2(@Valid @ModelAttribute AttivitaDisponibili attDisp,
-			Model model,BindingResult bindingResult, HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+	public String modificaAttivitaDisponibili2(@Valid @ModelAttribute AttivitaDisponibili attivitaDisponibili, BindingResult bindingResult, Model model) {
 		logger.info("-> modificaAttivitaDisponibili2 chiamata");
 		if (bindingResult.hasErrors()) {
 			FieldError fieldError = bindingResult.getFieldError();
-			String errore="Code:" + fieldError.getCode() + ", field:" + fieldError.getField();
-			model.addAttribute("errore", errore);
-			return "modificaAttivitaDisponibili1";
+			System.out.println("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
+			return "modificaAttivitaDisponibili";
 		}else {
-			attivitaDisponibiliServiceInt.modificaAttivitaDisponibili(attDisp);
-			RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaDisponibili");
-			rd.forward(request, response);	
+			attivitaDisponibiliServiceInt.modificaAttivitaDisponibili(attivitaDisponibili);
+			List<AttivitaDisponibili> attDisp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
+			model.addAttribute("attDisp", attDisp);
+			return "visualizzaAttivitaDisponibili";
 		}
-		return "";
-		}
+	}
 	
 	@RequestMapping(value ="/aggiungiAttivitaDisponibili1")
-	public String aggiungiAttivitaDisponibili1(@ModelAttribute AttivitaDisponibili attivitaDisponibili,Model model,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+	public String aggiungiAttivitaDisponibili1(Model model) {
 		logger.info("-> aggiungiAttivitaDisponibili1 chiamata");
-		model.addAttribute("attDisp",new AttivitaDisponibili());
+		model.addAttribute(new AttivitaDisponibili());
 		return "aggiungiAttivitaDisponibili"; 
-		}
+	}
 	
 	@RequestMapping(value ="/aggiungiAttivitaDisponibili2")
-	public String aggiungiAttivitaDisponibili2( 
-			@Valid @ModelAttribute AttivitaDisponibili attivitaDisponibili,
-			Model model,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+	public String aggiungiAttivitaDisponibili2(@Valid @ModelAttribute AttivitaDisponibili attivitaDisponibili, BindingResult bindingResult, Model model){
 		logger.info("-> aggiungiAttivitaDisponibili2 chiamata");
-		AttivitaDisponibili attD=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(attivitaDisponibili.getid_Disp());
-		if(attD==null) {
-			attivitaDisponibiliServiceInt.salvaAttivitaDisponibili(attivitaDisponibili);
-			RequestDispatcher rd=request.getRequestDispatcher("visualizzaAttivitaDisponibili");
-			rd.forward(request, response);
-		}else {
-			String errore="Codice attività già presente";			
-			model.addAttribute("errore", errore);
-			model.addAttribute("attDisp", attivitaDisponibili);
-			return "aggiungiAttivitaDisponibili";	
+		if (bindingResult.hasErrors()) {
+			FieldError fieldError = bindingResult.getFieldError();
+			System.out.println("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
+			return "aggiungiAttivitaDisponibili";
+		} else {
+			AttivitaDisponibili attD=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(attivitaDisponibili.getid_Disp());
+			if(attD==null) {
+				attivitaDisponibiliServiceInt.salvaAttivitaDisponibili(attivitaDisponibili);
+				List<AttivitaDisponibili> attDisp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
+				model.addAttribute("attDisp", attDisp);
+				return "visualizzaAttivitaDisponibili";
+			}else {
+				String errore="Codice attività già presente";			
+				model.addAttribute("errore", errore);
+				model.addAttribute("attDisp", attivitaDisponibili);
+				return "aggiungiAttivitaDisponibili";	
+			}
 		}
-		return "";
-		}
+	}
 	
 	
 	
@@ -563,18 +559,16 @@ public class MainController {
 	  
 
 	@RequestMapping(value= "/visualizzaListaImpiegati")
-	public String visualizzaListaImpiegati(Model model, HttpSession session) {
+	public String visualizzaListaImpiegati(Model model) {
 		logger.info("-> visListaImpiegati chiamata");
-		Impiegato imp = (Impiegato)session.getAttribute("amministratore");
-		System.out.println(imp.getUsername());
 		List<Impiegato> lista = impiegatoServiceInt.recuperaImpiegati();
 		model.addAttribute("listaImpiegati", lista);
 		return "visualizzaListaImpiegati";
 	}
 	
 	@RequestMapping(value= "/modificaAbilitazioneImp")
-	public void modificaAbilitazioneImp(@RequestParam String userName,Model model,HttpServletRequest request,
-			HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+	public void modificaAbilitazioneImp(@RequestParam String userName, Model model, HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		logger.info("-> modificaAbilitazioneImp chiamata");
 		boolean impBoolAbil=impiegatoServiceInt.recuperaImpiegatoByUser(userName).isAbilitazione();
 		if(impBoolAbil) impiegatoServiceInt.modificaAbilitazioneImpiegato(userName, false);
@@ -584,8 +578,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value= "/modificaDatiImpStep1")
-	public String modificaDatiImpStep1(@RequestParam String userName, @ModelAttribute Impiegato impiegato, Model model,HttpServletRequest request,
-			HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+	public String modificaDatiImpStep1(@RequestParam String userName, @ModelAttribute Impiegato impiegato, Model model) {
 		logger.info("-> modificaDatiImpStep1 chiamata");
 		Impiegato imp=impiegatoServiceInt.recuperaImpiegatoByUser(userName);
 		List<String> ruoloList=new ArrayList<>();
@@ -597,17 +590,16 @@ public class MainController {
 	}
 
 	@RequestMapping(value= "/modificaDatiImpStep2")
-	public String modificaDatiImpStep2(@Valid @ModelAttribute Impiegato impiegato,BindingResult bindingResult, Model model,HttpServletRequest request,
+	public String modificaDatiImpStep2(@Valid @ModelAttribute Impiegato impiegato, BindingResult bindingResult, Model model, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		logger.info("-> modificaDatiImpStep2 chiamata");
 		if (bindingResult.hasErrors()) {
 			FieldError fieldError = bindingResult.getFieldError();
-			String errore="Code:" + fieldError.getCode() + ", field:" + fieldError.getField();
+			System.out.println("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
 			List<String> ruoloList=new ArrayList<>();
 			ruoloList.add("amministratore");
 			ruoloList.add("impiegato");
 			model.addAttribute("ruoloList",ruoloList);
-			model.addAttribute("errore", errore);
 			return "modificaImpAmm";
 		} else {
 				try {
@@ -624,14 +616,13 @@ public class MainController {
 					return "modificaImpAmm";
 				}
 			}		
-		RequestDispatcher rd=request.getRequestDispatcher("visualizzaListaImpiegati");
-		rd.forward(request, response);		
-		return "";
+		List<Impiegato> lista = impiegatoServiceInt.recuperaImpiegati();
+		model.addAttribute("listaImpiegati", lista);
+		return "visualizzaListaImpiegati";
 	}	
 	
 	@RequestMapping(value = "/sendEmail")
-	public ModelAndView sendEmail(@ModelAttribute Impiegato impiegato,
-			HttpServletRequest request) {
+	public ModelAndView sendEmail(@ModelAttribute Impiegato impiegato, HttpServletRequest request) {
 		logger.info("-> sendEmail chiamata");
 		
 		ModelAndView model = new ModelAndView();

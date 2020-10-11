@@ -93,11 +93,11 @@
 
 		<p id="buttons">
 			<!-- <a href="salvaAttivitaS"><input type="button" value="Salva" style="color:black" /></a>  -->
-			<input class="btn btn-outline-primary" id="submit" type="submit"
+			<input class="btn btn-outline-success" id="submit" type="submit"
 				value="Salva" />
 		</p>
 	</form:form>
-	<p><a href="tornaIndietro"><button style="margin-top:15px;" class="btn btn-outline-primary">Torna Al Menu</button></a></p>
+	<p><a href="tornaIndietro"><button style="margin-top:15px;" class="btn btn-outline-primary">Torna al menù</button></a></p>
 	</div>
 	<div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>
 	</div>

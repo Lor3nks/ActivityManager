@@ -21,10 +21,13 @@
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="tornaIndietro">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="visualizzaListaImpiegati">Visualizza lista impiegati</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="visualizzaAttivitaDisponibili">Visualizza attività disponibili</a>
       </li>
        <li class="nav-item">
         <a class="nav-link" href="visualizzaAttivitaSvolte">Visualizza attività svolte</a>
@@ -90,7 +93,7 @@
 
 					</p>
 
-					<p><button class="btn btn-outline-primary" type="submit">Salva modifiche</button></p>
+					<p><button class="btn btn-outline-success" type="submit">Salva modifiche</button></p>
 				</form:form>
 			</div>
 		</div>

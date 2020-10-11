@@ -55,27 +55,25 @@
 
 <h3>Inserisci attività disponibili</h3>
 
-<div class="error">${errore}</div>
+<div class="error text-danger">${errore}</div>
 
-<form:form modelAttribute="attDisp" action="aggiungiAttivitaDisponibili2" method="post" >
+	<form:form modelAttribute="attivitaDisponibili" action="aggiungiAttivitaDisponibili2" method="post" >
  
- 	<label  for="data_Attivita">Id Attività: </label>
- 	<p>
-	    <form:input placeholder ="ID" maxlength="4" type="text" id="id_Disp" path="id_Disp" autocomplete="off"/></p>
-	    <p id="error" class="error"><form:errors path="id_Disp" /></p>
-	</p>
+ 		<label  for="id_Disp">Id Attività: </label>
+ 		<p><form:input placeholder ="ID" maxlength="4" type="text" id="id_Disp" path="id_Disp" autocomplete="off"/></p>
+	    <p id="error" class="error text-danger"><form:errors path="id_Disp" /></p>
 	
-	    <label  for="data_Attivita">Descrizione: </label>
+	    <label  for="descrizione">Descrizione: </label>
 	    <p><form:input placeholder ="descrizione" maxlength="20" type="text" id="descrizione" path="descrizione" autocomplete="off"/></p>
-	    <p id="error" class="error"><form:errors path="descrizione" /></p>
+	    <p id="error" class="error text-danger"><form:errors path="descrizione" /></p>
 	  
-		<form:input  type="hidden" id="abilitazione" path="abilitazione" autocomplete="off" value="1"/>
+		<form:hidden id="abilitazione" path="abilitazione" autocomplete="off" value="1"/>
 	
-	<button class="btn btn-outline-primary" type="submit">Salva Attività</button>
-        
-</form:form>
+		<input class="btn btn-outline-success" type="submit" value="Salva"/>
+      
+	</form:form>
 
-	<p><a href="tornaIndietro"><button style="margin-top:15px;" class="btn btn-outline-primary">Torna Al Menu</button></a></p>
+	<p><a href="tornaIndietro"><button style="margin-top:15px;" class="btn btn-outline-primary">Torna al menù</button></a></p>
 
 	</div>
 	<div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>
