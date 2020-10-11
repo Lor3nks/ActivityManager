@@ -26,27 +26,25 @@
 
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link" href="tornaIndietro">Home
-						<span class="sr-only">(current)</span>
-				</a></li>
+				<li class="nav-item"><a class="nav-link" href="tornaIndietro">Home</a></li>
 				<c:choose>
 			      	<c:when test="${amministratore ne null}">
 				      <li class="nav-item">
-				         <a class="nav-link" href="visualizzaListaImpiegati">Visualizza lista impiegati</a>
+				         <a class="nav-link" href="visualizzaListaImpiegati">Lista impiegati</a>
 				      </li>
 				      <li class="nav-item">
-			        <a class="nav-link" href="visualizzaAttivitaDisponibili">Visualizza attività disponibili</a>
+			        <a class="nav-link" href="visualizzaAttivitaDisponibili">Attività disponibili</a>
 			      </li>
 			       <li class="nav-item">
-			        <a class="nav-link" href="visualizzaAttivitaSvolte">Visualizza attività svolte</a>
+			        <a class="nav-link active" href="visualizzaAttivitaSvolte">Visualizza attività <span class="sr-only">(current)</span></a>
 			      </li>
 			      	</c:when>
 			      	<c:otherwise>
 			      		<li class="nav-item">
-				        <a class="nav-link" href="visualizzaAttivitaSvolteImpiegato">Visualizza Attività</a>
+				        <a class="nav-link active" href="visualizzaAttivitaSvolteImpiegato">Visualizza attività</a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="formAttivitaSvolte">Gestione Attività Svolte</a>
+				        <a class="nav-link" href="formAttivitaSvolte">Gestione attività</a>
 				      </li>
 			      	</c:otherwise>
 			     </c:choose>
@@ -54,7 +52,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="nav-item"><a class="nav-link"
-					href="formCambiaPassword">Modifica Password</a></li>
+					href="formCambiaPassword">Modifica password</a></li>
 				<li class="nav-item"><a class="nav-link" href="logout">Logout</a>
 				</li>
 			</ul>

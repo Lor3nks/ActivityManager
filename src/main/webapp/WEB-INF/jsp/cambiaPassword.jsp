@@ -20,8 +20,8 @@
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="tornaIndietro">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" href="tornaIndietro">Home</a>
       </li>
       <c:choose>
       	<c:when test="${amministratore ne null}">
@@ -46,8 +46,11 @@
       </c:choose>
     </ul> 
     <ul class="nav navbar-nav navbar-right">
-      <li class="nav-item">
-        <a class="nav-link" href="logout">Logout</a>
+    	<li class="nav-item">
+    		<a class="nav-link active" href="formCambiaPassword">Modifica password <span class="sr-only">(current)</span></a>
+		</li>
+      	<li class="nav-item">
+        	<a class="nav-link" href="logout">Logout</a>
         </li>
     </ul>   
    </div>

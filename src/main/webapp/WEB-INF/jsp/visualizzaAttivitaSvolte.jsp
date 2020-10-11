@@ -80,15 +80,18 @@
         <a class="nav-link" href="tornaIndietro">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="visualizzaListaImpiegati">Visualizza lista impiegati</a>
+        <a class="nav-link" href="visualizzaListaImpiegati">Lista impiegati</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="visualizzaAttivitaDisponibili">Visualizza attività disponibili</a>
+        <a class="nav-link" href="visualizzaAttivitaDisponibili">Attività disponibili</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Visualizza attività <span class="sr-only">(current)</span></a>
       </li>
     </ul> 
     <ul class="nav navbar-nav navbar-right">
        <li class="nav-item">
-        <a class="nav-link" href="formCambiaPassword">Modifica Password</a>
+        <a class="nav-link" href="formCambiaPassword">Modifica password</a>
         </li>
       <li class="nav-item">
         <a class="nav-link" href="logout">Logout</a>
@@ -124,17 +127,22 @@
 		</tr>
 		</thead>
 		<tbody>
+		
 		<c:forEach items="${attSvolte}" var="attSv">
+		<c:forEach items="${data_Attivita}" var="data">
 		<tr>
+		
 		<td>${attSv.imp.username}</td>
-		<td>${attSv.data_Attivita}</td>
+		<td>${data}</td>
 		<td>${attSv.ora_Inizio}</td>
 		<td>${attSv.ora_Fine}</td>
 		<td>${attSv.getAtt_Disp().getDescrizione()}</td>
 		<td>${attSv.note}</td>
 		<td><a type="submit"  href="cancellaAttivitaSvolte?id=${attSv.id_Trigg}">elimina</a></td>
 		<td><a type="submit"  href="aggiornaAttivitaSvolte?id=${attSv.id_Trigg}">modifica</a></td>
+		
 		</tr>
+		</c:forEach>
 		</c:forEach>
 		</tbody> 
 	</table>

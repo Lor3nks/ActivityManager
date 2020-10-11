@@ -202,7 +202,6 @@ public class MainController {
 		if (impiegato == null) {
 			impiegato = (Impiegato) session.getAttribute("amministratore"); 
 		}
-		System.out.println(impiegato.getUsername());
 		String dataNascita = impiegato.getDataNascita().format(formatter);
 		model.addAttribute("dataNascita", dataNascita);
 	return "cambiaPassword";

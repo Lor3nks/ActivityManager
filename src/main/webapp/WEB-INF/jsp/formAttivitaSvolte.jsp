@@ -20,18 +20,21 @@
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="tornaIndietro">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" href="tornaIndietro">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="visualizzaAttivitaSvolteImpiegato">Visualizza Attività</a>
+        <a class="nav-link" href="visualizzaAttivitaSvolteImpiegato">Visualizza attività</a>
       </li>
+      <li class="nav-item">
+		<a class="nav-link active" href="#">Gestione attività <span class="sr-only">(current)</span></a>
+	  </li>
     
         
          </ul> 
     <ul class="nav navbar-nav navbar-right">
        <li class="nav-item">
-        <a class="nav-link" href="formCambiaPassword">Modifica Password</a>
+        <a class="nav-link" href="formCambiaPassword">Modifica password</a>
         </li>
       <li class="nav-item">
         <a class="nav-link" href="logout">Logout</a>

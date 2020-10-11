@@ -21,13 +21,13 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="visualizzaListaImpiegati">Visualizza lista impiegati</a>
+        <a class="nav-link" href="visualizzaListaImpiegati">Lista impiegati</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="visualizzaAttivitaDisponibili">Visualizza attività disponibili</a>
+        <a class="nav-link" href="visualizzaAttivitaDisponibili">Attività disponibili</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="visualizzaAttivitaSvolte">Visualizza attività svolte</a>
+        <a class="nav-link" href="visualizzaAttivitaSvolte">Visualizza attività</a>
       </li>
      
       
@@ -35,7 +35,7 @@
          </ul> 
     <ul class="nav navbar-nav navbar-right">
        <li class="nav-item">
-        <a class="nav-link" href="formCambiaPassword">Modifica Password</a>
+        <a class="nav-link" href="formCambiaPassword">Modifica password</a>
         </li>
       <li class="nav-item">
         <a class="nav-link" href="logout">Logout</a>

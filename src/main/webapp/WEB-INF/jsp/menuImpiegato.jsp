@@ -29,7 +29,7 @@
         <a class="nav-link" href="visualizzaAttivitaSvolteImpiegato">Visualizza Attività</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="formAttivitaSvolte">Gestione Attività Svolte</a>
+        <a class="nav-link" href="formAttivitaSvolte">Gestione attività</a>
       </li>
      
       
@@ -37,7 +37,7 @@
          </ul> 
     <ul class="nav navbar-nav navbar-right">
        <li class="nav-item">
-        <a class="nav-link" href="formCambiaPassword">Modifica Password</a>
+        <a class="nav-link" href="formCambiaPassword">Modifica password</a>
         </li>
       <li class="nav-item">
         <a class="nav-link" href="logout">Logout</a>
