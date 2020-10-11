@@ -37,10 +37,10 @@
       	</c:when>
       	<c:otherwise>
       		<li class="nav-item">
-	        <a class="nav-link" href="visualizzaAttivitaSvolteImpiegato">Visualizza Attività</a>
+	        <a class="nav-link" href="visualizzaAttivitaSvolteImpiegato">Visualizza attività</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="formAttivitaSvolte">Gestione Attività Svolte</a>
+	        <a class="nav-link" href="formAttivitaSvolte">Gestione attività</a>
 	      </li>
       	</c:otherwise>
       </c:choose>
