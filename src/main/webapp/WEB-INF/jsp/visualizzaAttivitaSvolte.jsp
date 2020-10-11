@@ -129,9 +129,7 @@
 		<tbody>
 		
 		<c:forEach items="${attSvolte}" var="attSv">
-		<c:forEach items="${data_Attivita}" var="data">
 		<tr>
-		
 		<td>${attSv.imp.username}</td>
 		<td>${data}</td>
 		<td>${attSv.ora_Inizio}</td>
@@ -140,9 +138,7 @@
 		<td>${attSv.note}</td>
 		<td><a type="submit"  href="cancellaAttivitaSvolte?id=${attSv.id_Trigg}">elimina</a></td>
 		<td><a type="submit"  href="aggiornaAttivitaSvolte?id=${attSv.id_Trigg}">modifica</a></td>
-		
 		</tr>
-		</c:forEach>
 		</c:forEach>
 		</tbody> 
 	</table>
