@@ -27,7 +27,7 @@
         <a class="nav-link active" href="visualizzaAttivitaSvolteImpiegato">Visualizza attività <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="formAttivitaSvolte">Gestione Attività</a>
+        <a class="nav-link" href="formAttivitaSvolte">Gestione attività</a>
       </li>
      
       
