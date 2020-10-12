@@ -12,17 +12,13 @@
 <style type="text/css"><%@includefile="/css/style.css"%></style>
 </head> 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-		<a class="navbar-brand" href=""><img id="logo"
-			src="./images/ATlogo_min1.png"></a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarColor01" aria-controls="navbarColor01"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-
-
-	</nav>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href=""><img id="logoL" src="./images/ATlogo_min1.png">
+  	<span class="topText">Activity Tracker</span></a>
+  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    	<span class="navbar-toggler-icon"></span>
+  	</button>
+</nav>
 	<div class="container">
 		<div class="row center">
 			<div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>
