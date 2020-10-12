@@ -47,14 +47,16 @@
 
 <div class="container">
 	<div class="jumbotron,opacity-2 mt-5">
-  <h1 class="display-3">Benvenuto/a, ${nomeUtente}</h1>
-  <p class="lead">Questo è un applicativo di Activity Tracker creato dai ragazzi del corso AKT APJ07 per monitorare le attività di un impiegato.
-		Con Activity Tracker potrete inserire, modificare o visualizzare le attività a proprio piacimento.
-		Si potrà inoltre accedere all'applicativo come amministratore, avendo la possibilità di stampare in pdf la lista delle attività svolte dagli impiegati.</p>
- 
-  
- 
-</div>
+ 		<h1 class="display-3">Benvenuto/a, ${nomeUtente}</h1>
+  		<p class="lead"><u>Hai eseguito l'accesso come Amministratore</u></p>
+ 		<hr class="my-2">
+  		<p>Questo è un applicativo di Activity Tracker creato dai ragazzi del corso AKT APJ07 per monitorare le attività di un <i>Impiegato</i>.</p>
+		<p>Con Activity Tracker è possibile inserire, modificare o visualizzare le attività a proprio piacimento.
+		É possibile accedere all'applicativo come <i>Amministratore</i>, avendo la possibilità di stampare in PDF la lista delle attività svolte dagli impiegati.</p>
+ 		<p>É previsto inoltre il reset delle password attraverso l'invio tramite email di una password generata casualmente.</p>
+ 		<p class="lead">
+ 			<hr class="my-3">Tutte le funzioni sono accessibili dal menu in alto.</p>
+	</div>
 </div>
 
 </body>
