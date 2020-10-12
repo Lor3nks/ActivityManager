@@ -130,9 +130,11 @@ public class MainController {
 			return "formRegistrazione";
 		} else {
 			try {
-//				impiegato.setPassword(impiegato.getPassword());	
+//				impiegato.setPassword(impiegato.getPassword());
+			//Controllo Username esistente
 				Impiegato im=impiegatoServiceInt.recuperaImpiegatoByUser(impiegato.getUsername());
 				if(im==null) {
+			//Aggiungo impiegato
 					impiegatoServiceInt.inserisciImpiegato(impiegato);
 				}else {
 					String errore = "Username esistente!";
@@ -160,13 +162,13 @@ public class MainController {
 	
 
 	@RequestMapping(value = "/cambiaPassword")
-	public String cambiaPassword(@ModelAttribute Impiegato impiegato, BindingResult bindingResult, Model model,
-			HttpServletRequest request, HttpSession session) {
+	public String cambiaPassword(Model model, HttpServletRequest request, HttpSession session) {
 		logger.info("-> cambiaPassword chiamata");
 		String password = request.getParameter("password");
 		String nuovaPassword = request.getParameter("nuovaPassword");
 		String confermaPassword = request.getParameter("confermaPassword");
 		Impiegato i = (Impiegato) session.getAttribute("impiegato");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		if (i == null) {
 			i = (Impiegato) session.getAttribute("amministratore");
 		}
@@ -195,6 +197,8 @@ public class MainController {
 		} else {
 			model.addAttribute("amministratore", i);
 		}
+		String dataNascita = i.getDataNascita().format(formatter);
+		model.addAttribute("dataNascita", dataNascita);
 		return "cambiaPassword";
 	}
 	
@@ -210,6 +214,7 @@ public class MainController {
 	return "cambiaPassword";
 	}
 	
+	
 	@RequestMapping(value="/tornaIndietro")
 	public void tornaIndietro(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		RequestDispatcher rd=request.getRequestDispatcher("mainMenu");
@@ -217,6 +222,7 @@ public class MainController {
 		
 	}
 
+	
 	@RequestMapping(value="/formResetPassword")
 	public String formResetPassword() {
 	return "formResetPassword";
