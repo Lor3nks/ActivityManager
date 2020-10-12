@@ -50,14 +50,20 @@
 </nav>
 
 <div class="container">
-	<div class="col-lg-3 col-sm-3 col-xs-3 col-2"></div>
-	<div class="col-lg-6 col-sm-6 col-xs-6 col-8">
-		<h1 class="spazioSu">Benvenuto/a, ${nomeUtente}</h1>
+	
 		
-		
-	</div>
-	<div class="col-lg-3 col-sm-3 col-xs-3 col-2"></div>
+	<div class="jumbotron,opacity-2 mt-5">
+  <h1 class="display-3">Benvenuto/a, ${nomeUtente}</h1>
+  <p class="lead">Salve questo è un applicativo di Activity Tracker creato dai ragazzi di APJ07 per mappare tutte le attività di un impiegato e di un amministratore.
+		All'interno di questo applicativo potrete trovare le gestioni delle attività di un impiegato e anche visualizzarle o modificarle a proprio piacimento.
+		Oltre all'aspetto riguardante l'impiegato, si potrà inoltre accedere all'applicativo anche come amministratore e quindi avere possibilità di stampare in pdf tutte le attività.</p>
+ 
+  
+ 
 </div>
+	</div>
+	
+
 
 
 
