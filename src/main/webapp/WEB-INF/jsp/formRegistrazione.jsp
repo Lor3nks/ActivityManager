@@ -166,8 +166,7 @@
 				<div class="row">
 					<div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11 col-11 center">
 						<p>
-							Se sei già registrato, effettua il <a href="login"><button
-									class="btn btn-outline-primary">login</button></a>
+							Se sei già registrato, effettua il <a href="login">login</a>
 						</p>
 					</div>
 				</div>
