@@ -13,7 +13,7 @@
 <style type="text/css"><%@include file="/css/bootstrap.min.css"%></style>
 <style type="text/css"><%@include file="/css/style.css"%></style>
 </head>
-<body>
+<body class="ATbackground">
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href=""><img id="logo" src="./images/ATlogo_min1.png"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
