@@ -54,9 +54,9 @@
 		
 	<div class="jumbotron,opacity-2 mt-5">
   <h1 class="display-3">Benvenuto/a, ${nomeUtente}</h1>
-  <p class="lead">Salve questo è un applicativo di Activity Tracker creato dai ragazzi di APJ07 per mappare tutte le attività di un impiegato e di un amministratore.
-		All'interno di questo applicativo potrete trovare le gestioni delle attività di un impiegato e anche visualizzarle o modificarle a proprio piacimento.
-		Oltre all'aspetto riguardante l'impiegato, si potrà inoltre accedere all'applicativo anche come amministratore e quindi avere possibilità di stampare in pdf tutte le attività.</p>
+  <p class="lead">Questo è un applicativo di Activity Tracker creato dai ragazzi del corso AKT APJ07 per monitorare le attività di un impiegato.
+		Con Activity Tracker potrete inserire, modificare o visualizzare le attività a proprio piacimento.
+		Si potrà inoltre accedere all'applicativo come amministratore, avendo la possibilità di stampare in pdf la lista delle attività svolte dagli impiegati.</p>
  
   
  
