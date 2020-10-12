@@ -48,7 +48,7 @@ public class AttivitaSvolteDao implements AttivitaSvolteDaoInt{
 	@Override
 	public List<AttivitaSvolte> getAllAttivitaSvolte() {
 		try {
-			String sql="select * from attivita_svolte order by data_attivita desc";
+			String sql="select * from attivita_svolte order by data_attivita, ora_inizio desc";
 			return jdbcTemplate.query(sql, new BeanPropertyRowMapper<AttivitaSvolte>(AttivitaSvolte.class));
 		} catch (EmptyResultDataAccessException e) {
 			return null;
@@ -57,7 +57,7 @@ public class AttivitaSvolteDao implements AttivitaSvolteDaoInt{
 
 	@Override
 	public List<AttivitaSvolte> getAttivitaSvolteByImpiegato(Impiegato i) {
-		String sql="select * from attivita_svolte where username=? order by data_attivita desc";
+		String sql="select * from attivita_svolte where username=? order by data_attivita, ora_inizio desc";
 		return jdbcTemplate.query(sql,new BeanPropertyRowMapper<AttivitaSvolte>(AttivitaSvolte.class),i.getUsername()); 
 		
 	}
