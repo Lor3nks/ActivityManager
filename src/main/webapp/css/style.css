@@ -1,5 +1,13 @@
 @charset "ISO-8859-1";
 
+.ATbackground {
+	background-image: url(./images/AT_bg.png);
+	background-repeat: no-repeat;
+	background-size: 50%;
+	background-position: 50% 15%;
+	background-attachment: fixed;
+}
+
 .rowLogin{
 	text-align:center;
 	padding-bottom: 5rem;
