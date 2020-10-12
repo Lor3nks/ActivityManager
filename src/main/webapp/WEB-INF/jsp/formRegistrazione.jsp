@@ -20,7 +20,7 @@
   	</button>
 </nav>
 	<div class="container">
-		<div class="row center">
+		<div class="row center rowLogin">
 			<div class="col-lg-4 col-sm-3 col-xs-3 col-2"></div>
 			<div class="col-lg-4 col-sm-6 col-xs-6 col-8">
 				<h3>Registrazione</h3>
