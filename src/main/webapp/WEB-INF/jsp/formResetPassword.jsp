@@ -10,7 +10,7 @@
 <title>Reset Password</title>
 <style type="text/css"><%@include file="/css/bootstrap.min.css"%></style>
 <style type="text/css"><%@include file="/css/style.css"%></style>
-</head>
+</head> 
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href=""><img id="logo" src="./images/ATlogo_min1.png"></a>

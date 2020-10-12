@@ -10,7 +10,7 @@
 <title>Registrazione</title>
 <style type="text/css"><%@includefile="/css/bootstrap.min.css"%></style>
 <style type="text/css"><%@includefile="/css/style.css"%></style>
-</head>
+</head> 
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<a class="navbar-brand" href=""><img id="logo"
