@@ -30,7 +30,7 @@
 		<div class="row center">
 		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-2"></div>
 		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-8">
-			<h5 class="text-danger">${errore}</h5>
+			<h5 class="text-danger"> <b>${errore}</b></h5>
 		</div>
 		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-2"></div>
 	</div>

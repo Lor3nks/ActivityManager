@@ -115,6 +115,7 @@ public class MainController {
 		return "formRegistrazione";
 	}
 	
+	
 	@RequestMapping(value = "/registrazione")
 	public String registrazione(@Valid @ModelAttribute Impiegato impiegato, BindingResult bindingResult, Model model,
 			HttpServletRequest request) {
@@ -122,13 +123,14 @@ public class MainController {
 			FieldError fieldError = bindingResult.getFieldError();
 			System.out.println("Code:" + fieldError.getCode() + ", field:" + fieldError.getField());
 			return "formRegistrazione";
+	//Controllo password
 		} else if (!impiegato.getPassword().equals(request.getParameter("confermaPassword"))) {
 			String errore = "Le password non coincidono.";
 			model.addAttribute("errore", errore);
 			return "formRegistrazione";
 		} else {
 			try {
-				impiegato.setPassword(impiegato.getPassword());	
+//				impiegato.setPassword(impiegato.getPassword());	
 				Impiegato im=impiegatoServiceInt.recuperaImpiegatoByUser(impiegato.getUsername());
 				if(im==null) {
 					impiegatoServiceInt.inserisciImpiegato(impiegato);
@@ -143,8 +145,7 @@ public class MainController {
 				return "formRegistrazione";
 			}
 		}
-//		model.addAttribute("successo", "Registrazione Riuscita");
-//		model.addAttribute("message", "Benvenuto, "+impiegato.getUsername()+"!");
+		model.addAttribute("successo", "Registrazione riuscita!");
 		return "login";
 	}
 
