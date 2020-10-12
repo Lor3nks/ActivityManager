@@ -292,7 +292,17 @@ public class MainController {
 					return "formAttivitaSvolte";
 				}
 			}
-		return "menuImpiegato";
+		List<AttivitaSvolte> attSvolte=attivitaSvolteServiceInt.recuperaAttivitaSvolteDaImpiegato((Impiegato)session.getAttribute("impiegato"));
+		//Recupero oggetto AttDisponibili e lo inserisco in AttSvolte
+		for(AttivitaSvolte a: attSvolte) { 
+			logger.info("-> recupero attDisp");
+			String codAttDisp=attivitaSvolteServiceInt.getAttIdDispFromAttSvolte(a.getId_Trigg());
+			AttivitaDisponibili attDispo=attivitaDisponibiliServiceInt.recuperaAttivitaDisponibiliById(codAttDisp);
+			//System.out.println(attDispo.getid_Disp()+" "+attDispo.getDescrizione());
+			a.setAtt_Disp(attDispo);
+		}
+		model.addAttribute("attSvolte",attSvolte);
+		return "visualizzaAttivitaSvolteImpiegato";
 	}
 	
 	
