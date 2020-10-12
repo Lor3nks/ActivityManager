@@ -49,9 +49,9 @@
 						<form:input path="username" type="text" />
 					   </div>
 					   <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11 col-11 center">
-					    <h7 class="text-danger"> <p id="error" class="error">
+					    <p class="text-danger">
 						    <form:errors path="username" />
-					     </p></h7>
+					     </p>
 					   </div>
                    </div>
                    
@@ -64,9 +64,9 @@
 						    <form:input path="password" type="password" />
 					   </div>
 					   <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11 col-11 center">
-					     <h7 class="text-danger"> <p id="error" class="error">
+					     <p class="text-danger"> 
 						    <form:errors path="password" />
-					      </p> </h7>
+					      </p>
 					   </div>
                    </div>
                    
@@ -92,9 +92,9 @@
 						    <form:input path="email" type="text" />
 					   </div>
 					   <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11 col-11 center">
-					    <h7 class="text-danger"> <p id="error" class="error">
+					    <p class="text-danger">
 						 <form:errors path="email" />
-					    </p></h7>
+					    </p>
 					   </div>
                    </div>
                    
@@ -107,9 +107,9 @@
 						    <form:input path="nome" type="text" />
 					   </div>
 					   <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11 col-11 center">
-					  <h7 class="text-danger">   <p id="error" class="error">
+					  <p class="text-danger">
 						<form:errors path="nome" />
-					     </p></h7>
+					     </p>
 					   </div>
                    </div>
                    
@@ -122,9 +122,9 @@
 						    <form:input path="cognome" type="text" />
 					   </div>
 					   <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11 col-11 center">
-					   <h7 class="text-danger">  <p id="error" class="error">
+					   <p class="text-danger">
 						<form:errors path="cognome" />
-				     	</p></h7>
+				     	</p>
 					   </div>
                    </div>
                    
@@ -139,7 +139,7 @@
 					   </div>
 					   <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11 col-11 center">
 					     
-					<h7 class="text-danger"><p class="error">
+					<p class="text-danger">
 						<form:errors path="dataNascita" />
 					</p>
 					   </div>
