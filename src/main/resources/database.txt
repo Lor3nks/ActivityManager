@@ -36,7 +36,7 @@ BEGIN
     END;
 
 
-insert into IMPIEGATO values('ADMIN', 'ADMIN', 'ADMIN@MAIL.COM', 'ADMIN', 'ADMIN', TO_DATE('01-01-1900', 'DD-MM-YYYY'), 1, 'amministratore';
+insert into IMPIEGATO values('ADMIN', 'ADMIN', 'ADMIN@MAIL.COM', 'ADMIN', 'ADMIN', TO_DATE('01-01-1900', 'DD-MM-YYYY'), 1, 'amministratore');
 
 Insert into ATTIVITA_DISPONIBILI (ID_DISP,DESCRIZIONE,ABILITAZIONE) values ('Att1','Attività 1','1');
 Insert into ATTIVITA_DISPONIBILI (ID_DISP,DESCRIZIONE,ABILITAZIONE) values ('Att2','Attività 2','1');
