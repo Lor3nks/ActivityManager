@@ -131,7 +131,7 @@
 		<c:forEach items="${attSvolte}" var="attSv">
 		<tr>
 		<td>${attSv.imp.username}</td>
-		<td>${data}</td>
+		<td>${attSv.data_Attivita}</td>
 		<td>${attSv.ora_Inizio}</td>
 		<td>${attSv.ora_Fine}</td>
 		<td>${attSv.getAtt_Disp().getDescrizione()}</td>
@@ -144,7 +144,7 @@
 	</table>
 	</div>
 	<div class="row">
-			<a href="tornaIndietro"><button class="btn btn-outline-primary">Torna Al Menu</button></a> 
+			<a href="tornaIndietro"><button class="btn btn-outline-primary">Torna al menù</button></a> 
 		</div>
 	</div>
 </body>

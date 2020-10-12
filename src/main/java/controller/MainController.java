@@ -412,7 +412,7 @@ public class MainController {
 				String oraInizio = request.getParameter("ora_Inizio");
 				String oraFine = request.getParameter("ora_Fine");
 				if(!verificaOre(oraInizio,oraFine)) {
-					String errore="La data di inzio deve essere antecedente alla data di fine!";
+					String errore="L'orario di inzio deve essere antecedente all'orario di fine!";
 					List<AttivitaDisponibili> att_Disp=attivitaDisponibiliServiceInt.RecuperaAttivitaDisponibili();
 					model.addAttribute("errore", errore);
 					model.addAttribute("att_Disp",att_Disp);					

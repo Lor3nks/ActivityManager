@@ -4,12 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
   
 public class AttivitaSvolte implements Serializable {
@@ -21,12 +17,12 @@ public class AttivitaSvolte implements Serializable {
 	@PastOrPresent(message = "Inserire data del giorno o antecendente")
 	@NotNull(message = "Data inizio attività obbligatoria")
 	private LocalDate data_Attivita;
-	@NotEmpty(message = "Ora inizio attività obbligatoria")
+	@NotNull(message = "Ora inizio attività obbligatoria")
 	//@Pattern(message ="Formattazione errata",regexp ="(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?")
-	private String ora_Inizio;
-	@NotEmpty(message = "Ora fine attività obbligatoria")
+	private LocalTime ora_Inizio;
+	@NotNull(message = "Ora fine attività obbligatoria")
 	//@Pattern(message ="Formattazione errata",regexp ="(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?")
-	private String ora_Fine;
+	private LocalTime ora_Fine;
 	private String note;
 	
 	public AttivitaSvolte() {
@@ -35,7 +31,7 @@ public class AttivitaSvolte implements Serializable {
 	}
 
 	public AttivitaSvolte(int id_Trigg, Impiegato imp, AttivitaDisponibili att_Disp, LocalDate data_Attivita,
-			String ora_Inizio, String ora_Fine, String note) {
+			LocalTime ora_Inizio, LocalTime ora_Fine, String note) {
 		super();
 		this.id_Trigg = id_Trigg;
 		this.imp = imp;
@@ -47,7 +43,7 @@ public class AttivitaSvolte implements Serializable {
 	}
 
 	public AttivitaSvolte(Impiegato imp, AttivitaDisponibili att_Disp, LocalDate data_Attivita,
-			String ora_Inizio, String ora_Fine, String note) {
+			LocalTime ora_Inizio, LocalTime ora_Fine, String note) {
 		super();
 		this.imp = imp;
 		this.att_Disp = att_Disp;
@@ -89,19 +85,19 @@ public class AttivitaSvolte implements Serializable {
 		this.data_Attivita = data_Attivita;
 	}
 
-	public String getOra_Inizio() {
+	public LocalTime getOra_Inizio() {
 		return ora_Inizio;
 	}
 
-	public void setOra_Inizio(String ora_Inizio) {
+	public void setOra_Inizio(LocalTime ora_Inizio) {
 		this.ora_Inizio = ora_Inizio;
 	}
 
-	public String getOra_Fine() {
+	public LocalTime getOra_Fine() {
 		return ora_Fine;
 	}
 
-	public void setOra_Fine(String ora_Fine) {
+	public void setOra_Fine(LocalTime ora_Fine) {
 		this.ora_Fine = ora_Fine;
 	}
 

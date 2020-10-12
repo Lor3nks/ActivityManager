@@ -59,7 +59,7 @@
 <form:form modelAttribute="attivitaDisponibili" action="modificaAttivitaDisponibili2" method="post">
 	        
 				<label for="descrizione">Descrizione:</label>	
-				<p><form:input name="descrizione" type="text" path="descrizione" /></p>
+				<p><form:input name="descrizione" type="text" path="descrizione" maxlength="20"/></p>
 				<p class="error text-danger"><form:errors path="descrizione" /></p>
 				<form:input name="id_Disp" type="hidden" path="id_Disp"/>
 				<form:input name="abilitazione" type="hidden" path="abilitazione" value="${attDisp.abilitazione}" />

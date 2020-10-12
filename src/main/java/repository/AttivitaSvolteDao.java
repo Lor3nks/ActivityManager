@@ -15,7 +15,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import domain.AttivitaDisponibili;
 import domain.AttivitaSvolte;
 import domain.Impiegato;
 
@@ -32,16 +31,17 @@ public class AttivitaSvolteDao implements AttivitaSvolteDaoInt{
 	@Override
 	public int salva(AttivitaSvolte as) {
 		String sql="insert into attivita_svolte (USERNAME,ID_DISP,DATA_ATTIVITA,ORA_INIZIO,ORA_FINE,NOTE) values(?,?,?,?,?,?)";
-		//return jdbcTemplate.update(sql,new Object[] { as.getImp().getUsername(),as.getAtt_Disp().getid_Disp(),Date.valueOf(as.getData_Attivita()), Time.valueOf(as.getOra_Inizio()), Time.valueOf(as.getOra_Fine()),as.getNote()});
+		return jdbcTemplate.update(sql,new Object[] { as.getImp().getUsername(),as.getAtt_Disp().getid_Disp(),Date.valueOf(as.getData_Attivita()), Time.valueOf(as.getOra_Inizio()), Time.valueOf(as.getOra_Fine()),as.getNote()});
 		//return jdbcTemplate.update(sql,new Object[] { as.getImp().getUsername(),as.getAtt_Disp().getid_Disp(),Date.valueOf(as.getData_Attivita()), as.getOra_Inizio().toString(), as.getOra_Fine().toString(),as.getNote()});
-		return jdbcTemplate.update(sql,new Object[] { as.getImp().getUsername(),as.getAtt_Disp().getid_Disp(),Date.valueOf(as.getData_Attivita()), as.getOra_Inizio(), as.getOra_Fine(),as.getNote()});
+		//return jdbcTemplate.update(sql,new Object[] { as.getImp().getUsername(),as.getAtt_Disp().getid_Disp(),Date.valueOf(as.getData_Attivita()), as.getOra_Inizio(), as.getOra_Fine(),as.getNote()});
 	}
 	 
 
 	@Override
 	public int modifica(AttivitaSvolte as) {
 		String sql="update attivita_svolte set ID_DISP=?,DATA_ATTIVITA=?,ORA_INIZIO=?,ORA_FINE=?,NOTE=? where ID_TRIGG=?";
-		 return jdbcTemplate.update(sql,new Object[] {as.getAtt_Disp().getid_Disp(),Date.valueOf(as.getData_Attivita()), as.getOra_Inizio(), as.getOra_Fine(),as.getNote(),as.getId_Trigg()});
+		 //return jdbcTemplate.update(sql,new Object[] {as.getAtt_Disp().getid_Disp(),Date.valueOf(as.getData_Attivita()), as.getOra_Inizio(), as.getOra_Fine(),as.getNote(),as.getId_Trigg()});
+		 return jdbcTemplate.update(sql,new Object[] { as.getAtt_Disp().getid_Disp(),Date.valueOf(as.getData_Attivita()), Time.valueOf(as.getOra_Inizio()), Time.valueOf(as.getOra_Fine()),as.getNote(), as.getId_Trigg()});
 		
 	}
 

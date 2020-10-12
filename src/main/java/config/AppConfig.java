@@ -21,6 +21,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import formatter.LocalDateFormatter;
+import formatter.LocalTimeFormatter;
 
 @EnableWebMvc
 @Configuration
@@ -83,6 +84,7 @@ public class AppConfig implements WebMvcConfigurer{
 	@Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new LocalDateFormatter("yyyy-MM-dd"));
+        registry.addFormatter(new LocalTimeFormatter("HH:mm"));
     }
 	
 //	@Bean(name = "messageSource")

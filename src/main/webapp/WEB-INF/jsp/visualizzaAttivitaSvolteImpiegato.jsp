@@ -72,7 +72,7 @@
 		</c:forEach>
 		</tbody> 
 	</table>
-	<a href="tornaIndietro"><button class="btn btn-outline-primary">Torna Al Menu</button></a> 
+	<a href="tornaIndietro"><button class="btn btn-outline-primary">Torna al menù</button></a> 
 	</div>
 </div>
 </body>

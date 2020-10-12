@@ -91,7 +91,7 @@
 
 		<label for="note">Note:</label>
 		<p>
-			<form:textarea id="note" path="note" rows="3" cols="20"></form:textarea>
+			<form:textarea id="note" path="note" rows="3" cols="20" maxlength="50"></form:textarea>
 		</p>
 
 		<p id="buttons">

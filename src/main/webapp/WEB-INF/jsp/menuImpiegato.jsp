@@ -48,7 +48,7 @@
 <div class="container">
 	<div class="col-lg-3 col-sm-3 col-xs-3 col-2"></div>
 	<div class="col-lg-6 col-sm-6 col-xs-6 col-8">
-		<h1 class="spazioSu">Benvenuto, ${nomeUtente}</h1>
+		<h1 class="spazioSu">Benvenuto/a, ${nomeUtente}</h1>
 		
 		
 	</div>

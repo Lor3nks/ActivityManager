@@ -11,7 +11,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import domain.AttivitaDisponibili;
-import domain.Impiegato;
 
 @Repository
 public class AttivitaDisponibiliDao implements AttivitaDisponibiliDaoInt {
